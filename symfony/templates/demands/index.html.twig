@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demands index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row white">
+            <h1>Demands index</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numref</th>
+                    <th>Datedemand</th>
+                    <th>Message</th>
+                    <th>Address</th>
+                    <th>Linkgg</th>
+                    <th>Status</th>
+                    <th>Datedemanded</th>
+                    <th>Created_at</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for demand in demands %}
+                    <tr>
+                        <td>{{ demand.id }}</td>
+                        <td>{{ demand.numref }}</td>
+                        <td>{{ demand.datedemand ? demand.datedemand|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ demand.message }}</td>
+                        <td>{{ demand.address }}</td>
+                        <td>{{ demand.linkgg }}</td>
+                        <td>{{ demand.status }}</td>
+                        <td>{{ demand.datedemanded ? demand.datedemanded|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ demand.createdAt ? demand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('demands_show', {'id': demand.id}) }}">show</a>
+                            <a href="{{ path('demands_edit', {'id': demand.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('demands_new') }}">Create new</a>
+        </div>
+    </div>
+
+{% endblock %}

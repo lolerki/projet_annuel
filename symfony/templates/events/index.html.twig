@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events index{% endblock %}
+
+{% block body %}
+    <div class=" white bordrad10 margtop pad20">
+        <div class="row">
+            <h1 class="titlehun">Gestions des Events</h1>
+            <div class="col s12">
+                <table class="table striped col s12">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>DateEvent</th>
+                        <th>Address</th>
+                        <th>Linkgg</th>
+                        <th>StyleEvent</th>
+                        <th>Status</th>
+                        <th>Price</th>
+                        <th>Created_at</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for event in events %}
+                        <tr>
+                            <td>{{ event.id }}</td>
+                            <td>{{ event.name }}</td>
+                            <td>{{ event.description }}</td>
+                            <td>{{ event.dateEvent ? event.dateEvent|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ event.address }}</td>
+                            <td><p class="truncate">{{ event.linkgg }}</p></td>
+                            <td>{{ event.styleEvent }}</td>
+                            <td>{{ event.status }}</td>
+                            <td>{{ event.price }}</td>
+                            <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('events_show', {'id': event.id}) }}">show</a>
+                                <a href="{{ path('events_edit', {'id': event.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <a href="{{ path('events_new') }}">Create new</a>
+        </div>
+    </div>
+
+{% endblock %}

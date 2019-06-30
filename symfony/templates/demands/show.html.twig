@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demands{% endblock %}
+
+{% block body %}
+    <h1>Demands</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ demand.id }}</td>
+            </tr>
+            <tr>
+                <th>Numref</th>
+                <td>{{ demand.numref }}</td>
+            </tr>
+            <tr>
+                <th>Datedemand</th>
+                <td>{{ demand.datedemand ? demand.datedemand|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ demand.message }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ demand.address }}</td>
+            </tr>
+            <tr>
+                <th>Linkgg</th>
+                <td>{{ demand.linkgg }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ demand.status }}</td>
+            </tr>
+            <tr>
+                <th>Datedemanded</th>
+                <td>{{ demand.datedemanded ? demand.datedemanded|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ demand.createdAt ? demand.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('demands_index') }}">back to list</a>
+
+    <a href="{{ path('demands_edit', {'id': demand.id}) }}">edit</a>
+
+    {{ include('demands/_delete_form.html.twig') }}
+{% endblock %}

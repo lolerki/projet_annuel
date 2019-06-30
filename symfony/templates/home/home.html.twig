@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sooonr - Accueil{% endblock %}
+
+{% block body %}
+
+<section>
+
+
+    <div class="carousel carousel-slider heightsoixante">
+        <div class="carousel-item ">
+            <a href="#one!"><img class="imagecaroussel" src="{{ asset('build/medias/piano.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Chanteurs</h2>
+        </div>
+        <div class="carousel-item">
+            <a href="#two!"><img class="imagecaroussel" src="{{ asset('build/medias/drummer.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Batteurs</h2>
+        </div>
+        <div class="carousel-item">
+            <a href="#three!"><img class="imagecaroussel" src="{{ asset('build/medias/drummers.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Groupe de batteurs</h2>
+        </div>
+        <div class="carousel-item">
+            <a href="#four!"><img class="imagecaroussel" src="{{ asset('build/medias/guitar.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Guitar</h2>
+        </div>
+        <div class="carousel-item">
+            <a href="#five!"><img class="imagecaroussel" src="{{ asset('build/medias/guitarist.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Guitariste</h2>
+        </div>
+        <div class="carousel-item">
+            <a href="#six!"><img class="imagecaroussel" src="{{ asset('build/medias/harp.jpg') }}"></a>
+            <h2 class="titlehun cah2 white-text">Harp</h2>
+        </div>
+    </div>
+
+</section>
+    <section class="container">
+        <h1 class="typosizecinquante center typologo"> SOOONR</h1>
+        <p class="typotext typosizevingt center">Le site de booking d'artiste Amateur et professionnel !</p>
+        <div class='mouse-container'>
+            <div class='mouse'>
+                <span class='scroll-down'></span>
+            </div>
+        </div>
+    </section>
+    <section class="heightquatrevingt blue darken-4">
+        <div class="container">
+            <div class="row">
+                <article class="col l6 white-text valign-wrapper">
+                    <h2 class="titlehun typosizequarante white-text">Vous etes un artiste amateur?</h2>
+                    <p class="typotext typosizequize">
+                        Vous etes amateur ou un jeune artiste, n'hésiter plus et créer votre compte sur notre plateforme SOOONR afin de trouver des clients interressés par vos prestations.
+                        Vous animez des évènements, des cours à domiciles ou dans votre propre studio? vous pourrez trouvés les clients intérrésés et ainsi constitué votre booking!
+
+                    </p>
+                </article>
+                <article class="col l6 white-text">
+                    <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/chamber-music.jpg') }}"></a>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="heightquatrevingt">
+        <div class="container">
+            <h2 class="titlehun typosizequarante right-align">Vous etes un artiste professionel?</h2>
+            <div class="row">
+                <article class="col l6">
+                    <a href="#six!"><img class="imagehomeleft" src="{{ asset('build/medias/music-guitar.jpg') }}"></a>
+                </article>
+                <article class="col l6">
+                    <p class="typotext typosizequize">
+                        Vous etes un professionel ou un artiste confirmé, créer votre compte sur notre plateforme SOOONR afin de trouver des clients interressés par vos prestations.
+                        Vous animez des évènements, des cours à domiciles ou dans votre propre studio? vous pourrez trouvés les clients intérrésés et ainsi constitué votre booking!
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="heightquatrevingt blue darken-2">
+        <div class="container">
+            <h2 class="titlehun typosizequarante white-text">Vous recherchez une prestation?</h2>
+            <div class="row">
+                <article class="col l6 white-text">
+                    <p class="typotext typosizequize">
+                        Vous souhaitez aprendre un instrument de musique? Vous avez besoin  d'une prestation pour un évènement? N'hésiter plus et inscrivez-vous sur notre plateforme SOOONR afin de trouver les artiste qui vous interresses.
+                    </p>
+                </article>
+                <article class="col l6 white-text">
+                    <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/musician-2.jpg') }}"></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel();
+            autoplay();
+            function autoplay() {
+                $('.carousel').carousel('next');
+                setTimeout(autoplay, 4500);
+            }
+        });
+    </script>
+{% endblock %}

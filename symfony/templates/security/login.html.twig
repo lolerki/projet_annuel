@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'menu.login'|trans }}{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col s6 white z-depth-4 bordrad10 pad20 margtop">
+            <h1 class="h3 mb-3 font-weight-normal typosizequarante titlehun">{{ 'please sign in'|trans }}</h1>
+            <form method="post">
+                <label for="inputEmail" class="sr-only">{{ 'label.email'|trans }}</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+                       placeholder="{{ 'label.email'|trans }}" required autofocus>
+                <label for="inputPassword" class="sr-only">{{ 'label.password'|trans }}</label>
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       placeholder="{{ 'label.password'|trans }}" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" class="filled-in" name="_remember_me">
+                        <span>{{ 'remember'|trans }}</span>
+                    </label>
+                </div>
+
+
+                <button class="btn btn-lg bgblur" type="submit">
+                    {{ 'action.sign_in'|trans }}
+                </button>
+            </form>
+            <p class="center"> ou </p>
+            <div class="center">
+                <a href="{{ path('connect_facebook_start') }}" class="loginBtn loginBtn--facebook waves-effect waves-light btn social facebook">{{ 'social.facebook'|trans }}</a>
+            </div>
+        </div>
+        <div class="col l6 bordrad10 pad20 margtop  center">
+            <p class="white-text titlehun typosizequarante">
+                Vous n'avez pas encore de compte ?
+            </p>
+            <p class="white-text titlehun">
+                Créer votre compte maintenant !
+            </p>
+            <button class="btn btn-lg bgblur">
+                <a href="{{ path('app_register') }}" class="grey-text text-lighten-4">{{ 'register'|trans }}</a>
+            </button>
+        </div>
+
+    </div></div>
+{% endblock %}

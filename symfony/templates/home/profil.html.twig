@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Sooonr - Profil{% endblock %}
+
+{% block body %}
+    <div class="container margtop margbot greatvibes pad white bordrad10">
+
+
+
+
+
+
+                        <section class="container">
+                                <div class="row ">
+                                    <div class="col-lg-6 off-screen off-screen--from-left">
+                                        <div class="">
+                                                <h1 class=" titlehun">Espace personnel</span></h1>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 grey lighten-2 bordrad10">
+                                            <p>Informations personnelles</p>
+                                    </div>
+                                    <div class="col s2 offset-s5">
+                                        <p>
+                                            <img class=" bordrad50" src="{{ asset('build/medias/harp.jpg') }}" alt="">
+                                        </p>
+                                    </div>
+                                    <article class="col s6">
+                                        <p>Joël SYLVIUS</p>
+                                        <p>Homme</p>
+                                        <p>18/04/1991</p>
+                                    </article>
+                                    <article class="col s6">
+                                        <p>Adresse ligne 1</p>
+                                        <p>adresse ligne 2</p>
+                                        <p>Numéro de tel :</p>
+                                    </article>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 grey lighten-2 bordrad10">
+                                        <p>Informations complémentaires</p>
+                                    </div>
+                                    <article class="col s4">
+                                        <p>Dicipline</p>
+                                    </article>
+                                    <article class="col s4">
+                                        <p>Events Types</p>
+                                    </article>
+                                    <article class="col s4">
+                                        <p><i class="material-icons">verified_user</i></p>
+                                    </article>
+                                </div>
+                        </section>
+                        <section>
+                            <div class="row">
+                                <div class="col s12 grey lighten-2 bordrad10">
+                                    <p>Listes des demandes</p>
+                                </div>
+                                <table class="striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Référence</th>
+                                            <th>Date</th>
+                                            <th>status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for demand in demands %}
+                                        <tr>
+                                            <td>{{ demand.numref }}</td>
+                                            <td>{{ demand.datedemand ? demand.datedemand|date('Y-m-d H:i:s') : '' }}</td>
+                                            <td>{{ demand.status }}</td>
+                                            <td>
+                                                <a href="{{ path('demands_show', {'id': demand.id}) }}"><i></i></a>
+                                                <a href="{{ path('demands_edit', {'id': demand.id}) }}">edit</a>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="10">no records found</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="col s6">
+
+                                </div>
+                            </div>
+                        </section>
+
+    </div>
+
+{% endblock %}

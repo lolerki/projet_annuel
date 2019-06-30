@@ -1,0 +1,6 @@
+ewz_recaptcha:
+    public_key:  '%env(string:GOOGLE_RECAPTCHA_PUBLIC_KEY)%'
+    private_key: '%env(string:GOOGLE_RECAPTCHA_SECRET)%'
+    locale_key:  '%kernel.default_locale%'
+    enabled: true
+    ajax: false

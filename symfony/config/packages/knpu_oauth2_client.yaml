@@ -1,0 +1,12 @@
+knpu_oauth2_client:
+    clients:
+        facebook_main:
+            # must be "facebook" - it activates that type!
+            type: facebook
+            # add and configure client_id and client_secret in parameters.yml
+            client_id: '%env(resolve:OAUTH_FACEBOOK_CLIENT_ID)%'
+            client_secret: '%env(resolve:OAUTH_FACEBOOK_CLIENT_SECRET)%'
+            # a route name you'll create
+            redirect_route: connect_facebook_check
+            redirect_params: {}
+            graph_api_version: v2.12

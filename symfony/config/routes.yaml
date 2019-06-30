@@ -1,0 +1,11 @@
+app_logout:
+    path: /{_locale}/logout
+
+app_index:
+    path: /{_locale}
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        template: home/home.html.twig
+        _locale: '%locale%'

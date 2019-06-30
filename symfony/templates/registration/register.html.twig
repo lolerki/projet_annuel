@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm '@EWZRecaptcha/Form/ewz_recaptcha_widget.html.twig' %}
+
+{% block title %}{{ 'register'|trans }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col l8 s8 offset-l2 white z-depth-4 bordrad10 pad20 margtop">
+            <h1 class="h3 mb-3 font-weight-normal typosizequarante titlehun">{{ 'register'|trans }}</h1>
+
+        {{ form_start(registrationForm) }}
+
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword.first) }}
+        {{ form_row(registrationForm.plainPassword.second) }}
+        {{ form_widget(registrationForm.recaptcha) }}
+
+             <button class="btn bgblur">{{ 'register'|trans }}</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

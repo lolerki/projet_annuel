@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Customers</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ customer.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ customer.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ customer.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Fullname</th>
+                <td>{{ customer.fullname }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ customer.status }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ customer.gender }}</td>
+            </tr>
+            <tr>
+                <th>DateOfBirth</th>
+                <td>{{ customer.dateOfBirth ? customer.dateOfBirth|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ customer.description }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ customer.address }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ customer.city }}</td>
+            </tr>
+            <tr>
+                <th>CountryCode</th>
+                <td>{{ customer.countryCode }}</td>
+            </tr>
+            <tr>
+                <th>Numberfix</th>
+                <td>{{ customer.numberfix }}</td>
+            </tr>
+            <tr>
+                <th>Numbermob</th>
+                <td>{{ customer.numbermob }}</td>
+            </tr>
+            <tr>
+                <th>Discipline</th>
+                <td>{{ customer.discipline }}</td>
+            </tr>
+            <tr>
+                <th>EventType</th>
+                <td>{{ customer.eventType }}</td>
+            </tr>
+            <tr>
+                <th>ArtistVerify</th>
+                <td>{{ customer.artistVerify }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ customer.createdAt ? customer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('customers_index') }}">back to list</a>
+
+        <a href="{{ path('customers_edit', {'id': customer.id}) }}">edit</a>
+
+        {{ include('customers/_delete_form.html.twig') }}
+    </div>
+
+{% endblock %}

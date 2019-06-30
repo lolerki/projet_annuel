@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sancreek&display=swap" rel="stylesheet">
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('css/app') }}
+            {{ encore_entry_link_tags('css/style') }}
+            {{ encore_entry_link_tags('css/arrowdown') }}
+        {% endblock %}
+    </head>
+    <body class="noScroll">
+    <div class="navbar-fixed">
+        <nav class="transparent bgblur">
+            <div class="nav-wrapper">
+                <a href="{{ path('app_index') }}" class="brand-logo mleft typologo">SOOONR</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a class='dropdown-trigger' href='#!' data-target='dropdown2'>{{ 'booking'|trans }}</a></li>
+                        <li><a href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
+                        <li><a href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
+                        <li><a class='dropdown-trigger' href='#!' data-target='dropdownfirst'><i class="material-icons" color="white-text">person</i></a></li>
+                    {% else %}
+                        <li><a class='dropdown-trigger' href='#!' data-target='dropdown2'>{{ 'booking'|trans }}</a></li>
+                        <li><a href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
+                        <li><a href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
+                        <li><a href="{{ path('app_login') }}" class="white-text">{{ 'menu.login'|trans }}</a></li>
+                    {% endif %}
+
+                </ul>
+                <!-- Dropdown Structure -->
+                <ul id='dropdownfirst' class='dropdown-content dropdownmenu bgblur'>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('app_booking') }}" class="white-text">{{ 'bonjour'|trans }} {{ app.user.email }}</a></li>
+                        <li><a href="{{ path('app_profil') }}" class="white-text">{{ 'profil'|trans }} </a></li>
+                        <li><a href="{{ path('app_logout') }}" class="white-text"><i class="material-icons">lock</i>{{ 'menu.logout'|trans }}</a></li>
+                    {% else %}
+                        test
+                    {% endif %}
+                </ul>
+
+                <ul id='dropdown2' class='dropdown-content dropdownmenu2 bgblur'>
+                    <li><a href="{{ path('app_bookingartists') }}" class="white-text">{{ 'bookingartists'|trans }}</a></li>
+                    <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    {% block body %}{% endblock %}
+    <footer class="page-footer transparent z-depth-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l2 s12">
+                    <h5 class="white-text typologo">SOOONR</h5>
+                </div>
+                <div class="col l3 offset-l1 s12">
+                    <h5 class="white-text">Liens rapides</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-4"href="{{ path('app_mentions-legales') }}">Mentions Légales</a></li>
+                        <li><a class="grey-text text-lighten-4 "href="{{ path('app_cgv') }}">CGV</a></li>
+                        <li><a href="#!" class="grey-text text-lighten-4">Inscription</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">FAQS</a></li>
+                    </ul>
+                </div>
+                <div class="col l3  s12">
+                    <h5 class="white-text">Nos services</h5>
+                    <ul>
+                        <li><a href="{{ path('app_bookingartists') }}" class="white-text">{{ 'bookingartists'|trans }}</a></li>
+                        <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Contacts</h5>
+                    <div class="col-sm-6">
+                        <div class="sub-title">UK Office</div>
+                        <address>The Ministry<br>
+                            79-81 Borough Road<br>
+                            London<br>
+                            SE1 1DN<br>
+                            <a href="tel:442073787321">+44 207 378 7321</a></address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container center">
+                © 2019 Tous droits réservés <span class="typologo">SOOONR</span>
+            </div>
+        </div>
+    </footer>
+        {% block javascripts %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            {{ encore_entry_script_tags('js/app') }}
+            <script>M.AutoInit();</script>
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 white margtop pad20 bordrad10">
+                <h1>{{ event.name }}</h1>
+
+                <p>Créer le : {{ event.createdAt ? event.createdAt|date('Y-m-d') : '' }}</p>
+                <section>
+                    <article>
+                        <h2>Description de l'événement:</h2>
+                        <p>{{ event.description }}</p>
+                    </article>
+                </section>
+                <section>
+                    <div class="row">
+
+                        <h2>Rejoindre l'événement</h2>
+                        <article class="col s4">
+                            <iframe src="{{ event.linkgg }}"></iframe>
+                        </article>
+                        <article class="col s8">
+                            <h3>Adresse de l'évènement</h3>
+                            <p>{{ event.address }}</p>
+                            <h3>Horaire et date de l'évènement</h3>
+                            <p>{{ event.dateEvent ? event.dateEvent|date(' H:i') : '' }}</p>
+                            <p>{{ event.dateEvent ? event.dateEvent|date('d-m-Y') : '' }}</p>
+                        </article>
+                    </div>
+                </section>
+                <section>
+                    <h2>Genre de l'évènement</h2>
+                    <article class="col s6">
+                        <p>Style d'artiste recherché pour l'évènement :  {{ event.styleEvent }}</p>
+                    </article>
+                    <article class="col s6">
+                        <p>Prix proposé pour la presation : {{ event.price }}</p>
+                    </article>
+                </section>
+                <section>
+                    <p>Status de la recherche: {{ event.status }}</p>
+                </section>
+                <a href="{{ path('events_index') }}">back to list</a>
+
+                <a href="{{ path('events_edit', {'id': event.id}) }}">edit</a>
+
+                {{ include('events/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

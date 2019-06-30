@@ -1,0 +1,19 @@
+### JetBrains
+.idea/*
+
+# Yarn
+yarn.lock
+
+.DS_Store
+**/.DS_Store
+
+npm-debug.log
+yarn-error.log
+
+docker/elasticsearch/.esdata1/*
+!docker/elasticsearch/.esdata1/.gitkeep
+
+node_modules/
+
+composer.phar
+.env
