@@ -3,12 +3,12 @@ version: '3.4'
 services:
     php:
         build:
-            context: ./symfony
+            context: symfony
         container_name: php
         depends_on:
         - postgres
         env_file:
-        - ./symfony/.env
+        - symfony/.env
         # Comment out these volumes in production
         volumes:
         - ./symfony:/srv/symfony:rw,cached
@@ -18,14 +18,12 @@ services:
             # If you develop on Windows change this to remote_host=docker.for.win.localhost
             # If you develop on Linux change this to remote_host=172.17.0.1
             XDEBUG_CONFIG: "remote_host=docker.for.mac.localhost idekey=IDE_XDEBUG"
-            BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
-            BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
             OAUTH_FACEBOOK_CLIENT_ID: ${OAUTH_FACEBOOK_CLIENT_ID}
             OAUTH_FACEBOOK_CLIENT_SECRET: ${OAUTH_FACEBOOK_CLIENT_SECRET}
 
     symfony:
         build:
-            context: ./symfony
+            context: symfony
             dockerfile: Dockerfile.nginx
         container_name: symfony
         depends_on:
@@ -51,21 +49,6 @@ services:
         ports:
         - "5432:5432"
 
-# Optional mysql database - uncomment and replace "depends_on: [ postgres ] with mysql
-#   mysql:
-#      # In production, you may want to use a managed database service
-#      image: mariadb
-#      container_name: mysql
-#      environment:
-#          MYSQL_ROOT_PASSWORD: root
-#          MYSQL_USER: symfony
-#          MYSQL_PASSWORD: symfony
-#      command: --log-bin=/var/lib/mysql/mysql-bin.log --binlog-format=ROW --server-id=1 --init-file /var/mysql/data/init.sql
-#      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-#      volumes:
-#      - ./symfony/docker/mysql:/var/mysql/data:ro
-#      - db-data:/var/lib/mysql:rw
-
     adminer:
         image: adminer
         container_name: adminer
@@ -74,18 +57,6 @@ services:
         restart: always
         ports:
         - 2000:8080
-
-#    blackfire:
-#        image: blackfire/blackfire
-#        container_name: blackfire
-#        depends_on:
-#        - php
-#        environment:
-#            BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
-#            BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
-#            BLACKFIRE_LOG_LEVEL: 4
-#        ports:
-#        - "8707:8707"
 
     h2-proxy:
         # Don't use this proxy in prod

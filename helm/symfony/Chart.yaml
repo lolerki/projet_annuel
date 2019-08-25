@@ -1,5 +1,0 @@
-apiVersion: v1
-description: A Helm chart for Symfony 4 Minimal Runtime Enviroment
-name: symfony
-version: 0.1.0
-icon: https://symfony-platform.com/logo-250x250.png

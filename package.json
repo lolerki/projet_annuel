@@ -1,11 +1,24 @@
 {
+  "scripts": {
+  "dev-server": "encore dev-server",
+  "dev": "encore dev",
+  "watch": "encore dev --watch",
+  "build": "encore production --progress"
+  },
   "devDependencies": {
-    "jquery": "^3.3.1",
+    "@symfony/webpack-encore": "^0.28.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
     "node-sass": "^4.11.0",
+    "popper.js": "^1.15.0",
     "react": "^16.8.6",
     "sass-loader": "^7.0.1"
   },
-  "dependencies": {
-    "materialize-social": "^1.0.3"
-  }
+  "dependencies": {},
+  "name": "projetAnnuel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lolerki/projet_annuel.git",
+  "author": "Virgil <virgilmeaup@hotmail.fr>",
+  "license": "MIT"
 }
