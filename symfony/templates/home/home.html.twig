@@ -50,7 +50,7 @@
                     </p>
                 </article>
                 <article class="col l6 white-text">
-                    <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/chamber-music.jpg') }}"></a>
+                  {#  <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/chamber-music.jpg') }}"></a>#}
                 </article>
             </div>
         </div>
@@ -60,7 +60,7 @@
             <h2 class="titlehun typosizequarante right-align">Vous etes un artiste professionel?</h2>
             <div class="row">
                 <article class="col l6">
-                    <a href="#six!"><img class="imagehomeleft" src="{{ asset('build/medias/music-guitar.jpg') }}"></a>
+                   {# <a href="#six!"><img class="imagehomeleft" src="{{ asset('build/medias/music-guitar.jpg') }}"></a>#}
                 </article>
                 <article class="col l6">
                     <p class="typotext typosizequize">
@@ -81,7 +81,7 @@
                     </p>
                 </article>
                 <article class="col l6 white-text">
-                    <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/musician-2.jpg') }}"></a>
+                   {# <a href="#six!"><img class="imagehomeright" src="{{ asset('build/medias/musician-2.jpg') }}"></a> #}
                 </article>
             </div>
         </div>
@@ -91,13 +91,12 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $(document).ready(function () {
-            $('.carousel').carousel();
-            autoplay();
-            function autoplay() {
-                $('.carousel').carousel('next');
-                setTimeout(autoplay, 4500);
-            }
+        $(document).ready(function() {
+            $('[data-toggle="popover"]').popover();
         });
+
+        $('#myCarousel').on('slide.bs.carousel', function () {
+            // do something…
+        })
     </script>
 {% endblock %}

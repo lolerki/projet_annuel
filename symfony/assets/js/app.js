@@ -5,19 +5,16 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-// any CSS you require will output into a single css file (app.scss in this case)
-require('../scss/app.scss');
-
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
 
+// create global $ and jQuery variables
+global.$ = global.jQuery = $;
+
+// any CSS you require will output into a single css file (app.scss in this case)
+require('../scss/app.scss');
+
+
+
 //require('./materialize.js');
 require('bootstrap');
-
-$(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
-});
-
-$('#myCarousel').on('slide.bs.carousel', function () {
-    // do something…
-})

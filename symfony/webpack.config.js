@@ -1,5 +1,9 @@
 var Encore = require('@symfony/webpack-encore');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+var webpack = require('webpack');
+
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+}
 
 Encore
     // directory where compiled assets will be stored
@@ -55,11 +59,17 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery({
+/*    .autoProvidejQuery({
         $: 'jquery',
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
-    })
+    })*/
+
+    .addPlugin(new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    }))
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     .enableReactPreset()
