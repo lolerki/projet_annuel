@@ -59,11 +59,7 @@ Encore
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-/*    .autoProvidejQuery({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-    })*/
+    .autoProvidejQuery()
 
     .addPlugin(new webpack.ProvidePlugin({
         $: 'jquery',
