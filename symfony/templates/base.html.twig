@@ -13,45 +13,50 @@
         {% endblock %}
     </head>
     <body class="noScroll">
-    <div class="navbar-fixed">
-        <nav class="transparent bgblur">
-            <div class="nav-wrapper">
-                <a href="{{ path('app_index') }}" class="brand-logo mleft typologo">SOOONR</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a class='dropdown-trigger' href='#!' data-target='dropdown2'>{{ 'booking'|trans }}</a></li>
-                        <li><a href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
-                        <li><a href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
-                        <li><a class='dropdown-trigger' href='#!' data-target='dropdownfirst'><i class="material-icons" color="white-text">person</i></a></li>
-                    {% else %}
-                        <li><a class='dropdown-trigger' href='#!' data-target='dropdown2'>{{ 'booking'|trans }}</a></li>
-                        <li><a href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
-                        <li><a href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
-                        <li><a href="{{ path('app_login') }}" class="white-text">{{ 'menu.login'|trans }}</a></li>
-                    {% endif %}
 
-                </ul>
-                <!-- Dropdown Structure -->
-                <ul id='dropdownfirst' class='dropdown-content dropdownmenu bgblur'>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <li><a href="{{ path('app_booking') }}" class="white-text">{{ 'bonjour'|trans }} {{ app.user.email }}</a></li>
-                        <li><a href="{{ path('app_profil') }}" class="white-text">{{ 'profil'|trans }} </a></li>
-                        <li><a href="{{ path('app_logout') }}" class="white-text"><i class="material-icons">lock</i>{{ 'menu.logout'|trans }}</a></li>
-                    {% else %}
-                        test
-                    {% endif %}
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('app_index') }}">Sooonr</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <ul id='dropdown2' class='dropdown-content dropdownmenu2 bgblur'>
-                    <li><a href="{{ path('app_bookingartists') }}" class="white-text">{{ 'bookingartists'|trans }}</a></li>
-                    <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item"><a class="nav-link" href='#!'>{{ 'booking'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a></li>
+                {% endif %}
 
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
     {% block body %}{% endblock %}
+
     <footer class="page-footer transparent z-depth-3">
         <div class="container">
             <div class="row">
