@@ -19,10 +19,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', null, [
-                'label' => 'label.email'
+                'label' => 'label.email',
+                'attr' => ['class' => 'form-control', 'placeholder' => 'Adresse email'],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'attr' => ['class' => 'form-control'],
                 'first_options'  => array('label' => 'label.password'),
                 'second_options' => array('label' => 'label.new_password_confirm'),
                 // instead of being set onto the object directly,
@@ -41,13 +43,6 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('recaptcha', EWZRecaptchaType::class, array(
                 'language' => 'en',
-                'attr'        => array(
-                    'options' => array(
-                        'theme' => 'light',
-                        'type'  => 'image',
-                        'size'  => 'normal'
-                    )
-                ),
                 'mapped'      => false,
                 'constraints' => array(
                     new RecaptchaTrue()

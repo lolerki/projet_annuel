@@ -48,12 +48,6 @@ class Profile
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"profile_post_collection","profile_get_item","profile_put_item"})
-     */
-    private $biography;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
      * @Groups({"profile_get_collection","profile_post_collection","profile_get_item","profile_put_item"})
      */
     private $about;
@@ -79,18 +73,6 @@ class Profile
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBiography(): ?string
-    {
-        return $this->biography;
-    }
-
-    public function setBiography(?string $biography): self
-    {
-        $this->biography = $biography;
-
-        return $this;
     }
 
     public function getAbout(): ?string

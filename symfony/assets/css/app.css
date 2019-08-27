@@ -1,8 +1,8 @@
 body {
-    background: linear-gradient(to bottom right, #67b26f, #4ca2cd);
+ /*   background: linear-gradient(to bottom right, #67b26f, #4ca2cd);
     display: flex;
     min-height: 100vh;
-    flex-direction: column;
+    flex-direction: column;*/
 }
 
 main {
@@ -34,9 +34,6 @@ main {
     padding-bottom: 20px !important;
 }
 
-.bgblur{
-    background: linear-gradient(to bottom right, #67b26f, #4ca2cd);
-}
 
 .typologo{
     font-family: 'Sancreek', cursive;
@@ -70,10 +67,6 @@ main {
     font-size: 50px;
 }
 
-.imagecaroussel{
-    width: 100%!important;
-}
-
 .imagehomeright{
     width: 49vw;
     height: 60vh;
@@ -87,31 +80,6 @@ main {
     position: absolute;
     left: -2vw;
     border-radius: 5px;
-}
-
-.cah2{
-    position: absolute;
-    top: 0;
-    left: 20px;
-}
-
-.heightquatrevingt{
-    height: 80vh;
-}
-
-.heightsoixante{
-    height: 60vh;
-    overflow: hidden;
-}
-
-.colorWhite{
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-.colorBlack{
-    color: #000000;
-    border-color: #000000;
 }
 
 .button-line {
@@ -138,42 +106,6 @@ main {
     background-color: rgba(128, 128, 128, 0.5);
 }
 
-.noScroll{
-    /*overflow-x: none !important;*/
-}
-
-.scrollhor{
-    overflow-x: scroll;
-}
-
-.dropdownmenu{
-    width: 300px!important;
-    margin-right: 0!important;
-    position: absolute!important;
-    top: 64px!important;
-}
-
-.dropdownmenu>li:first-child{
-    padding-left: 5px;
-    line-height: 50px;
-}
-
-.dropdownmenu2{
-    width: 50%!important;
-    position: absolute!important;
-    top: 64px!important;
-    left: 50%!important;
-}
-
-/* Css card grid style */
-
-.cards-container {
-    column-break-inside: avoid;
-}
-.cards-container .card {
-    display: inline-block;
-    overflow: visible;
-}
 
 @media only screen and (max-width: 600px) {
     .cards-container {
@@ -196,138 +128,3 @@ main {
         column-count: 3;
     }
 }
-.text-center {
-    text-align: center;
-}
-
-
-/* Css page event */
-
-@import url("https://fonts.googleapis.com/css?family=Pacifico");
-
-body {
-    background-color: #f0f0f0;
-}
-h4, h5 {
-font-family: 'Pacifico', cursive;
-}
-
-h4 {
-    color : #40a8a7;
-    /* Turquesa oscuro: color : #0D8080;*/
-}
-
-h5 {
-    /*color : #40a8a7;*/
-    color : #FF9900;
-}
-
-nav .nav-wrapper form, nav .nav-wrapper form .input-field{
-    height: 100%;
-}
-
-.card-info, .card__meta a {
-    color: #3299BB !important;
-    display: inline-flex;
-    vertical-align: middle;
-    line-height: 2;
-    font-size: 1rem;
-}
-.card__meta i.small {
-    font-size: 1.5rem;
-}
-.card .card-content .card-title {
-    line-height: 34px;
-}
-.card__date {
-    background: #08c;
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    color: #fff;
-    text-align: center;
-    line-height: 13px;
-    font-weight: bold;
-    padding-top: 7px;
-}
-.card__date__day {
-    display: block;
-    font-size: 14px;
-}
-.card__date__month {
-    display: block;
-    font-size: 10px;
-    text-transform: uppercase;
-}
-
-.card .card-content .card-title {
-    color: #0D8080 !important;
-    line-height: 18px;
-}
-
-.card .card-title {
-
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.card .card-content p{
-    color: #1E1E1E;
-    font-size: 13px;
-}
-
-.collapsible{
-    background: #fff;
-}
-
-.card-row {
-    margin-bottom: 4px;
-    margin-top: 4px;
-}
-.card-action i {
-    vertical-align: text-bottom;
-    font-size: 21px;
-}
-
-
-
-.collapsible-header {
-    background-color: #3299BB;
-    color: #fff;
-}
-
-.filter-container ul {
-    padding: 1rem 2rem;
-}
-
-.filter-container ul li {
-    display: block;
-    padding: 16px 0 0;
-}
-
-.search-title-filter {
-    background-color: #3299BB;
-    color: #fff;
-}
-
-nav  {
-    background-color: #40a8a7;
-    border-color: #E7E7E7;
-
-}
-
-nav ul>li>a, nav .brand-logo  {
-    color: #fff;
-}
-
-nav .brand-logo {
-    font-size: 1.4em !important;
-}
-
-#container {
-    padding: 20px 10px;
-}
-

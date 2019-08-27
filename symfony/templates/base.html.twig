@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Evenement <span class="sr-only">(current)</span></a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item"><a class="nav-link" href='#!'>{{ 'booking'|trans }}</a></li>
@@ -48,23 +48,19 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </nav>
 
     {% block body %}{% endblock %}
 
-    <footer class="page-footer transparent z-depth-3">
+    <footer class="gray">
         <div class="container">
             <div class="row">
                 <div class="col l2 s12">
-                    <h5 class="white-text typologo">SOOONR</h5>
+                    <h5>SOOONR</h5>
                 </div>
                 <div class="col l3 offset-l1 s12">
-                    <h5 class="white-text">Liens rapides</h5>
+                    <h5 >Liens rapides</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-4"href="{{ path('app_mentions-legales') }}">Mentions Légales</a></li>
                         <li><a class="grey-text text-lighten-4 "href="{{ path('app_cgv') }}">CGV</a></li>
@@ -73,28 +69,23 @@
                     </ul>
                 </div>
                 <div class="col l3  s12">
-                    <h5 class="white-text">Nos services</h5>
+                    <h5>Nos services</h5>
                     <ul>
                         <li><a href="{{ path('app_bookingartists') }}" class="white-text">{{ 'bookingartists'|trans }}</a></li>
                         <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
                     </ul>
                 </div>
                 <div class="col l3 s12">
-                    <h5 class="white-text">Contacts</h5>
+                    <h5 >Contacts</h5>
                     <div class="col-sm-6">
-                        <div class="sub-title">UK Office</div>
-                        <address>The Ministry<br>
-                            79-81 Borough Road<br>
-                            London<br>
-                            SE1 1DN<br>
-                            <a href="tel:442073787321">+44 207 378 7321</a></address>
+                        contact@sooon.fr
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
             <div class="container center">
-                © 2019 Tous droits réservés <span class="typologo">SOOONR</span>
+                © 2019 Tous droits réservés <span >SOOONR</span>
             </div>
         </div>
     </footer>

@@ -74,16 +74,6 @@ class HomeController extends AbstractController
 
 
     /**
-     * @Route("/lists-events", name="app_bookingevent")
-     */
- /*   public function bookingEventAction(EventsRepository $eventsRepository): Response
-    {
-        return $this->render('home/events.html.twig',[
-            'events' => $eventsRepository->findAll(),
-        ]);
-    }*/
-
-    /**
      * @Route("/about", name="app_about")
      */
     public function aboutAction(): Response
@@ -94,11 +84,11 @@ class HomeController extends AbstractController
     /**
      * @Route("/profil", name="app_profil")
      */
-    public function profilAction(DemandsRepository $demandsRepository): Response
+    public function profilAction(): Response
     {
         return $this->render('home/profil.html.twig',
             [
-                'demands' => $demandsRepository->findAll(),
+
             ]);
     }
 }
