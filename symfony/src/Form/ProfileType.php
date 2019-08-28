@@ -35,8 +35,8 @@ class ProfileType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('firstname', TextType::class, [
-                'label' => 'first name',
+            ->add('pseudo', TextType::class, [
+                'label' => 'Pseudo / Non de scène',
                 'attr' => [
                     'class' => 'form-control',
                 ],

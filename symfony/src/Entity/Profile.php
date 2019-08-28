@@ -65,14 +65,9 @@ class Profile
     private $id_user;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string", length=20, nullable=true)
-     */
-    private $lastName;
+    private $pseudo;
 
     public function getId(): ?int
     {
@@ -115,26 +110,14 @@ class Profile
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getPseudo(): ?string
     {
-        return $this->firstName;
+        return $this->pseudo;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setPseudo(string $pseudo): self
     {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(?string $lastName): self
-    {
-        $this->lastName = $lastName;
+        $this->pseudo = $pseudo;
 
         return $this;
     }
