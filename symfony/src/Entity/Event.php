@@ -90,6 +90,28 @@ class Event
      */
     private $idUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="idEvent")
+     */
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="idEvent")
+     */
+    private $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvent", mappedBy="idEvent")
+     */
+    private $participationEvents;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+        $this->participationEvents = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -175,6 +197,99 @@ class Event
     public function setIdUser(?user $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setIdEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getIdEvent() === $this) {
+                $like->setIdEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setIdEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getIdEvent() === $this) {
+                $note->setIdEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationEvent[]
+     */
+    public function getParticipationEvents(): Collection
+    {
+        return $this->participationEvents;
+    }
+
+    public function addParticipationEvent(ParticipationEvent $participationEvent): self
+    {
+        if (!$this->participationEvents->contains($participationEvent)) {
+            $this->participationEvents[] = $participationEvent;
+            $participationEvent->setIdEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationEvent(ParticipationEvent $participationEvent): self
+    {
+        if ($this->participationEvents->contains($participationEvent)) {
+            $this->participationEvents->removeElement($participationEvent);
+            // set the owning side to null (unless already changed)
+            if ($participationEvent->getIdEvent() === $this) {
+                $participationEvent->setIdEvent(null);
+            }
+        }
 
         return $this;
     }

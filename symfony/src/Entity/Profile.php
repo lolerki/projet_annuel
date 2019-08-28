@@ -59,16 +59,20 @@ class Profile
     private $stage_name;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"profile_get_collection","profile_post_collection","profile_get_item","profile_put_item"})
-     */
-    private $price;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\user", cascade={"persist", "remove"})
      * @Groups({"profile_get_collection","profile_post_collection","profile_get_item"})
      */
     private $id_user;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $lastName;
 
     public function getId(): ?int
     {
@@ -99,18 +103,6 @@ class Profile
         return $this;
     }
 
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    public function setPrice($price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     public function getIdUser(): ?user
     {
         return $this->id_user;
@@ -119,6 +111,30 @@ class Profile
     public function setIdUser(?user $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): self
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }

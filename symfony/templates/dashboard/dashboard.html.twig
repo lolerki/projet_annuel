@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard !{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <h1>Mon compte</h1>
+
+        <div class="row">
+
+            <a href="{{ path('event') }}" class="custom-card">
+                <div class="col-md-5">
+                    <div class="card mb-3" style="width: 30rem; display: inline-block">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://icon-icons.com/icons2/632/PNG/128/event-planner_icon-icons.com_58034.png"
+                                     class="bd-placeholder-img" width="100%">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Event</h5>
+                                    <p class="card-text">Créer, modifier vos événement, consulté les événements au
+                                        quelle vous participé.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="custom-card">
+                <div class="col-md-5">
+                    <div class="card mb-3" style="width: 30rem; display: inline-block">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+
+                                <img src="https://icon-icons.com/icons2/911/PNG/128/user-profile-1_icon-icons.com_71301.png"
+                                     class="bd-placeholder-img" width="100%">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Profile</h5>
+                                    <p class="card-text">Modifier votre profile (Biographie, photo de profil..)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{{ path('user_change_password') }}" class="custom-card">
+                <div class="col-md-5">
+                    <div class="card mb-3" style="width: 30rem; display: inline-block">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+
+                                <img src="https://cdn.icon-icons.com/icons2/1189/PNG/512/1490793807-user-interface17_82344.png"
+                                     class="bd-placeholder-img" width="100%" height="150">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Changer de mot de passe</h5>
+                                    <p class="card-text">Changer le mot de passe de votre compte</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{{ path('user_edit') }}" class="custom-card">
+                <div class="col-md-5">
+                    <div class="card mb-3" style="width: 30rem; display: inline-block">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+
+                                <img src="https://cdn.icon-icons.com/icons2/1189/PNG/512/1490793807-user-interface17_82344.png"
+                                     class="bd-placeholder-img" width="100%" height="150">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Paramètre de sécurité</h5>
+                                    <p class="card-text">Modifier votre identifiant de connexion</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

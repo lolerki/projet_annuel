@@ -38,10 +38,15 @@ class ChangePasswordType extends AbstractType
                 'label' => 'label.current_password',
                 'attr' => [
                     'autocomplete' => 'off',
+                    'class' => 'form-control'
                 ],
             ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'attr' => [
+                    'autocomplete' => 'off',
+                    'class' => 'form-control'
+                ],
                 'constraints' => [
                     new NotBlank(),
                     new Length([

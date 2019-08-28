@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}{% endblock %}</title>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Sancreek&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sancreek&display=swap" rel="stylesheet">
 
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('css/app') }}
-            {{ encore_entry_link_tags('css/style') }}
-        {% endblock %}
-    </head>
-    <body class="noScroll">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+        {{ encore_entry_link_tags('css/style') }}
+    {% endblock %}
+</head>
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ path('app_index') }}">Sooonr</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ path('app_index') }}">Sooonr</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="container">
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -26,72 +29,73 @@
                     <a class="nav-link" href="#">Evenement <span class="sr-only">(current)</span></a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li class="nav-item"><a class="nav-link" href='#!'>{{ 'booking'|trans }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('dashboard') }}">Dashbord</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_about') }}">{{ 'about'|trans }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_contact') }}">{{ 'title.contact'|trans }}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a>
+                    </li>
                 {% endif %}
 
+                <div class=" my-2 my-lg-0">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            User
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('profile_edit') }}">Voir mon profile</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    </li>
+
+                </div>
+
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    {% block body %}{% endblock %}
+{% block body %}{% endblock %}
 
-    <footer class="gray">
-        <div class="container">
-            <div class="row">
-                <div class="col l2 s12">
-                    <h5>SOOONR</h5>
-                </div>
-                <div class="col l3 offset-l1 s12">
-                    <h5 >Liens rapides</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-4"href="{{ path('app_mentions-legales') }}">Mentions Légales</a></li>
-                        <li><a class="grey-text text-lighten-4 "href="{{ path('app_cgv') }}">CGV</a></li>
-                        <li><a href="#!" class="grey-text text-lighten-4">Inscription</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">FAQS</a></li>
-                    </ul>
-                </div>
-                <div class="col l3  s12">
-                    <h5>Nos services</h5>
-                    <ul>
-                        <li><a href="{{ path('app_bookingartists') }}" class="white-text">{{ 'bookingartists'|trans }}</a></li>
-                        <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
-                    </ul>
-                </div>
-                <div class="col l3 s12">
-                    <h5 >Contacts</h5>
-                    <div class="col-sm-6">
-                        contact@sooon.fr
-                    </div>
+<footer class="gray">
+    <div class="container">
+        <div class="row">
+            <div class="col l2 s12">
+                <h5>SOOONR</h5>
+            </div>
+            <div class="col l3 offset-l1 s12">
+                <h5>Liens rapides</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-4" href="{{ path('app_mentions-legales') }}">Mentions
+                            Légales</a></li>
+                    <li><a class="grey-text text-lighten-4 " href="{{ path('app_cgv') }}">CGV</a></li>
+                    <li><a href="#!" class="grey-text text-lighten-4">Inscription</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">FAQS</a></li>
+                </ul>
+            </div>
+            <div class="col l3  s12">
+                <h5>Nos services</h5>
+                <ul>
+
+                    <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5>Contacts</h5>
+                <div class="col-sm-6">
+                    contact@sooon.fr
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container center">
-                © 2019 Tous droits réservés <span >SOOONR</span>
-            </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container center">
+            © 2019 Tous droits réservés <span>SOOONR</span>
         </div>
-    </footer>
-        {% block javascripts %}
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            {{ encore_entry_script_tags('js/app') }}
-        {% endblock %}
-    </body>
+    </div>
+</footer>
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}
+</body>
 </html>

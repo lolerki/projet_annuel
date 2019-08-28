@@ -5,12 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Demands;
-use App\Repository\DemandsRepository;
-//use App\Entity\Events;
-use App\Form\EventsType;
-//use App\Repository\EventsRepository;
-
 
 
 /**
@@ -27,7 +21,6 @@ class HomeController extends AbstractController
      */
     public function indexAction(): Response
     {
-
 
         return $this->render('home/home.html.twig');
     }
@@ -57,39 +50,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/booking", name="app_booking")
-     */
-    public function bookingAction(): Response
-    {
-        return $this->render('home/booking.html.twig');
-    }
-
-    /**
-     * @Route("/artists", name="app_bookingartists")
-     */
-    public function bookingArtistsAction(): Response
-    {
-        return $this->render('home/artists.html.twig');
-    }
-
-
-    /**
      * @Route("/about", name="app_about")
      */
     public function aboutAction(): Response
     {
         return $this->render('home/about.html.twig');
-    }
-
-    /**
-     * @Route("/profil", name="app_profil")
-     */
-    public function profilAction(): Response
-    {
-        return $this->render('home/profil.html.twig',
-            [
-
-            ]);
     }
 }
 

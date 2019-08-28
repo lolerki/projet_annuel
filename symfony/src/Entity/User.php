@@ -63,12 +63,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_get_collection","user_post_collection","user_put_item"})
-     */
-    private $firstName;
-
-    /**
      * @ORM\Column(type="json")
      * @Groups({"user_get_collection","user_post_collection","user_get_item","user_put_item"})
      */
@@ -105,10 +99,28 @@ class User implements UserInterface
      */
     private $events;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="idUser")
+     */
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="idUser")
+     */
+    private $notes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvent", mappedBy="idUser")
+     */
+    private $participationEvents;
+
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
         $this->events = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->notes = new ArrayCollection();
+        $this->participationEvents = new ArrayCollection();
     }
 
 
@@ -137,17 +149,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(string $firstName): self
-    {
-        $this->firstName = $firstName;
-        return $this;
     }
 
     /**
@@ -238,22 +239,6 @@ class User implements UserInterface
     }
 
     /**
-     * Generates the magic method
-     *
-     */
-    public function __toString(){
-        // to show the name of the Category in the select
-        //return $this->firstName;
-        if(is_null($this->firstName)) {
-            return 'NULL';
-        }
-        return $this->firstName;
-
-        // to show the id of the Category in the select
-        // return $this->id;
-    }
-
-    /**
      * @return Collection|Event[]
      */
     public function getEvents(): Collection
@@ -283,5 +268,99 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getIdUser() === $this) {
+                $like->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes[] = $note;
+            $note->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->notes->contains($note)) {
+            $this->notes->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getIdUser() === $this) {
+                $note->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationEvent[]
+     */
+    public function getParticipationEvents(): Collection
+    {
+        return $this->participationEvents;
+    }
+
+    public function addParticipationEvent(ParticipationEvent $participationEvent): self
+    {
+        if (!$this->participationEvents->contains($participationEvent)) {
+            $this->participationEvents[] = $participationEvent;
+            $participationEvent->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationEvent(ParticipationEvent $participationEvent): self
+    {
+        if ($this->participationEvents->contains($participationEvent)) {
+            $this->participationEvents->removeElement($participationEvent);
+            // set the owning side to null (unless already changed)
+            if ($participationEvent->getIdUser() === $this) {
+                $participationEvent->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }
