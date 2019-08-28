@@ -18,21 +18,21 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/", name="app_index")
+     * @Route("/home", name="test")
      */
     public function indexAction(): Response
     {
 
   //      $user = $this->getUser();
 
-        $events = $this->getDoctrine()
-            ->getRepository(Event::class)->findAll();
+        $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
 
-        dump($events);
+
 
         return $this->render('home/home.html.twig', [
             'events' => $events
         ]);
+
     }
 
     /**
