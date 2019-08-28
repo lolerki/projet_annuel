@@ -17,8 +17,8 @@ class ProfileController extends AbstractController
      */
     public function indexAction(Request $request): Response
     {
-        $profile = $this->getUser();
-        $form = $this->createForm(ProfileType::class, $profile);
+      //  $profile = $this->getUser();
+        $form = $this->createForm(ProfileType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -28,8 +28,20 @@ class ProfileController extends AbstractController
 
             //   return $this->redirectToRoute('user_edit');
         }
-        return $this->render('profile/edit.html.twi', [
+        return $this->render('profile/edit.html.twig', [
             'form' => $form->createView(),
+        ]);
+
+    }
+
+    /**
+     * @Route("/profile/show", name="profile_show")
+     */
+    public function showAction(Request $request): Response
+    {
+
+        return $this->render('profile/show.html.twig', [
+
         ]);
 
     }

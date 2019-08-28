@@ -9,10 +9,12 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Defines the custom form field type used to change user's password.
@@ -57,5 +59,15 @@ class EventType extends AbstractType
                 ],
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Event::class,
+        ]);
     }
 }
