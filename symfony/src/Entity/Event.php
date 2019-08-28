@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use phpDocumentor\Reflection\Types\Integer;
+use phpDocumentor\Reflection\Types\String_;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -105,11 +107,18 @@ class Event
      */
     private $participationEvents;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $statut;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
+        $this->createAt = new \DateTime('now');
+        $this->statut = '1';
     }
 
     public function getId(): ?int
@@ -290,6 +299,18 @@ class Event
                 $participationEvent->setIdEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?int
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(int $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

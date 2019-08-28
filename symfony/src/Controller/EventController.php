@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,18 +20,28 @@ class EventController extends AbstractController
     public function indexAction(Request $request): Response
     {
 
-        $form = $this->createForm(EventType::class);
+     //   $myevents = ;
+
+        $user = $this->getUser();
+
+        $event = new Event();
+
+        $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-        //    $this->getDoctrine()->getManager()->flush();
-        //    $this->addFlash('success', 'user.updated_successfully');
+            $entityManager = $this->getDoctrine()->getManager();
+            $event->setIdUser($user);
+            $entityManager->persist($event);
+            $entityManager->flush();
 
          //   return $this->redirectToRoute('user_edit');
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
+         //   'events' => ,
+            'user' => $user
         ]);
     }
 }

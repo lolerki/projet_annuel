@@ -12,6 +12,8 @@ namespace App\Form\Type;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,19 +36,25 @@ class EventType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
-            ->add('date', DateType::class, [
+            ->add('dateEvent', DateType::class, [
                 'label' => 'Date',
-                'attr' => [
-                    'class' => 'form-control',
+                'widget' => 'single_text',
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ],
+                'attr' => [
+                    'class' => 'js-datepicker',
+                   // 'class' => 'form-control',
+                ],
+                "data" => new \DateTime()
             ])
-            ->add('linkgoogle', TextType::class, [
+            ->add('linkgoogle', UrlType::class, [
                 'label' => 'Lien google map',
                 'attr' => [
                     'class' => 'form-control',

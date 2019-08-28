@@ -28,6 +28,7 @@
         "symfony/lts": "^4@dev",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
+        "symfony/profiler-pack": "^1.0",
         "symfony/security-bundle": "4.1.*",
         "symfony/serializer": "4.1.*",
         "symfony/swiftmailer-bundle": "^3.2",
@@ -42,8 +43,7 @@
         "api-platform/schema-generator": "^2.1",
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "symfony/dotenv": "4.1.*",
-        "symfony/maker-bundle": "^1.11",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/maker-bundle": "^1.11"
     },
     "config": {
         "preferred-install": {

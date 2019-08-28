@@ -11,6 +11,7 @@ namespace App\Form;
 use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -29,8 +30,14 @@ class ProfileType extends AbstractType
         $builder
             //  ->add('imageFile', VichImageType::class, [
             //  ]);
-            ->add('about', TextType::class, [
+            ->add('about', TextareaType::class, [
                 'label' => 'Description',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('stage_name', TextType::class, [
+                'label' => 'Profession',
                 'attr' => [
                     'class' => 'form-control',
                 ],
