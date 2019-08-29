@@ -15,7 +15,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{ path('app_index') }}">Sooonr</a>
+    <a class="navbar-brand" href="{{ path('app_home') }}">Sooonr</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,18 +36,19 @@
                 {% endif %}
 
                 <div class=" my-2 my-lg-0">
-
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            User
+                            {{ app.user.username }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('profile_show') }}">Voir mon profile</a>
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                            <a class="dropdown-item" href="{{ path('profile_show') }}">Consulter mon profile</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                         </div>
                     </li>
-
+                    {% endif %}
                 </div>
+
 
             </ul>
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -19,7 +20,6 @@ class ProfileController extends AbstractController
     public function indexAction(Request $request): Response
     {
         $user = $this->getUser();
-
         $profile = new Profile();
 
         $form = $this->createForm(ProfileType::class, $profile);
@@ -35,7 +35,7 @@ class ProfileController extends AbstractController
         }
         return $this->render('profile/new.html.twig', [
             'form' => $form->createView(),
-            'user' => $user,
+            'user' => $user
         ]);
 
     }
@@ -46,8 +46,28 @@ class ProfileController extends AbstractController
     public function showAction(Request $request): Response
     {
 
-        return $this->render('profile/show.html.twig', [
+        $user = $this->getUser();
 
+        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+
+        return $this->render('profile/show.html.twig', [
+            'profile' => $profile
+        ]);
+
+    }
+
+    /**
+     * @Route("/profile/{id}", name="profile_view")
+     */
+    public function profileViewAction($id): Response
+    {
+
+        $user = $profile = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
+
+        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+
+        return $this->render('profile/show.html.twig', [
+            'profile' => $profile
         ]);
 
     }

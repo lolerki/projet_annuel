@@ -3,17 +3,20 @@
 {% block title %}Sooonr - Profil{% endblock %}
 
 {% block body %}
-     <div class="container">
+    <div class="container">
 
-     <div class="row">
-          <div class="col-md-2">
+        <h1>{{ profile.pseudo }}</h1>
 
-          </div>
-          <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-2">
+                Image du profile
+            </div>
+            <div class="col-md-9">
+                Description : {{ profile.about }}
+                Profession : {{ profile.stageName }}
+            </div>
+        </div>
 
-          </div>
-     </div>
-
-     </div>
+    </div>
 
 {% endblock %}

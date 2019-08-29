@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\ParticipationEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +21,16 @@ class EventController extends AbstractController
     public function indexAction(Request $request): Response
     {
 
-     //   $myevents = ;
-
         $user = $this->getUser();
-
         $event = new Event();
 
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
+
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user));
+
+        $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -40,8 +43,46 @@ class EventController extends AbstractController
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
-         //   'events' => ,
-            'user' => $user
+            'events' => $events,
+            'user' => $user,
+            'myevents' => $myEvents
         ]);
     }
+
+
+    /**
+     * @Route("/event/{id}", name="event_show")
+     */
+    public function showAction($id): Response
+    {
+
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        return $this->render('event/show.html.twig', [
+            'event' => $event
+        ]);
+    }
+
+
+    /**
+     * @Route("/event/participe/{id}", name="event_participe")
+     */
+    public function newAction($id): Response
+    {
+
+        $user = $this->getUser();
+        $participer = new ParticipationEvent();
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $participer->setIdUser($user);
+        $participer->setIdEvent($event);
+        $entityManager->persist($participer);
+        $entityManager->flush();
+
+        return $this->render('event/show.html.twig', [
+            'event' => $event
+        ]);
+    }
+
 }

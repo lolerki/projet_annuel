@@ -95,7 +95,7 @@ class FacebookAuthenticator extends SocialAuthenticator
         }
 
         // redirect to some "app_index" route - of wherever you want
-        return new RedirectResponse($this->urlGenerator->generate('app_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
