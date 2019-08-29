@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Event;
+use App\Entity\Like;
 
 
 /**
@@ -30,6 +31,46 @@ class HomeController extends AbstractController
             'events' => $events
         ]);
 
+    }
+
+    /**
+     * @Route("/like/{id}", name="event_like")
+     */
+    public function likeAction($id): Response
+    {
+
+        $user = $this->getUser();
+
+        $like = new Like();
+
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+        //$rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $event, 'idUser' => $user));
+
+        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findAll();
+
+        dump($rechercheLike);
+
+        die();
+
+        if ($rechercheLike != null) {
+
+            $message = "";
+
+            return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+
+        } else {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $like->setIdUser($user);
+            $like->setIdEvent($event);
+            $entityManager->persist($like);
+            $entityManager->flush();
+
+            $message = "";
+
+            return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+
+        }
     }
 
     /**

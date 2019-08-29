@@ -5,6 +5,9 @@
 {% block body %}
     <div class="container">
 
+        <div class="alert alert-success" style="display:none;" id="notif" role="alert">
+
+        </div>
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
@@ -13,15 +16,26 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text">{{ event.description }}</p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt"></i></p>
                         <p class="card-text">
+                        <div class="row">
+                            <small class="text-muted">
+                                <button type="button" class="btn btn-default like" aria-label="Left Align"
+                                        id="{{ event.id }}">
+                                    <i class="far fa-bookmark"></i>
+                                    {# <i class="fas fa-bookmark"></i>#}
+                                </button>
+                            </small>
+
                             {% if participe == null %}
-                                <button class="btn btn-info participe" id="{{ event.id }}">Participé à l'événement
-                                </button>
+                                <div id="button">
+                                    <button class="btn btn-default participe" id="{{ event.id }}"><i class="fas fa-check"></i> Participe
+                                    </button>
+                                </div>
                             {% else %}
-                                <button class="btn btn-warning " id="{{ event.id }}">Je participe déjà a cette événment
-                                </button>
+                                <span class="badge badge-secondary">Je participe déjà à cette événment</span>
                             {% endif %}
+                        </div>
                         </p>
                     </div>
                 </div>
@@ -47,9 +61,25 @@
 
             $.post(url, formSerialize, function (response) {
 
-                /* $('#notif p').html(response['message']);
-                 $('#notif').fadeIn(500);*/
+                $('#notif ').html(response['message']);
+                $('#notif').fadeIn(500);
+                $('#button').html('<span class="badge badge-secondary">Je participe déjà à cette événment</span>');
 
+            }, "JSON");
+        });
+
+        $('.like').click(function () {
+
+            var data = $(this).attr('id');
+
+            var url = "{{ path('event_like', {'id': 'id'}) }}";
+            url = url.replace("id", data);
+
+            var formSerialize = $(this).serialize();
+
+            $.post(url, formSerialize, function (response) {
+
+                $('.like').html('<i class="fas fa-bookmark"></i>');
 
             }, "JSON");
         });

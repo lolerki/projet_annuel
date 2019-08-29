@@ -61,8 +61,6 @@ class EventController extends AbstractController
 
         $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
 
-      //  dump($recherche);die();
-
         if($recherche != null){
             $participation = true;
         }
@@ -72,6 +70,30 @@ class EventController extends AbstractController
         return $this->render('event/show.html.twig', [
             'event' => $event,
             'participe' => $participation
+        ]);
+    }
+
+    /**
+     * @Route("/event/edit/{id}", name="event_edit")
+     */
+    public function editAction(Request $request, Event $event): Response
+    {
+        $form = $this->createForm(EventType::class, $event);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($event);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_article_show');
+        }
+
+        return $this->render('Article/edit.html.twig', [
+            'event' => $event,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -93,9 +115,9 @@ class EventController extends AbstractController
         $entityManager->persist($participer);
         $entityManager->flush();
 
-        return $this->render('event/show.html.twig', [
-            'event' => $event
-        ]);
+        $message = "<i class='far fa-check-circle'></i> Vous êtes maintenant inscrit à cette événement";
+
+        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }
 
 }

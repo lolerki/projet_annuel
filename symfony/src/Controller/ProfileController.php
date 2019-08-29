@@ -19,6 +19,7 @@ class ProfileController extends AbstractController
      */
     public function indexAction(Request $request): Response
     {
+
         $user = $this->getUser();
         $profile = new Profile();
 

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
+ * @ORM\Table(name="like")
  * @ORM\Entity(repositoryClass="App\Repository\LikeRepository")
  */
 class Like
@@ -20,11 +22,13 @@ class Like
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="likes")
+     * @ORM\Column(name="id_event")
      */
     private $idEvent;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="likes")
+     * @ORM\Column(name="id_user")
      */
     private $idUser;
 

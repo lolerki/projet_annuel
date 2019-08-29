@@ -30,9 +30,9 @@
                                         <p class="card-text">{{ event.description }}</p>
                                         <p class="card-text">
                                             <small class="text-muted">
-                                                <button type="button" class="btn btn-default"
-                                                        aria-label="Left Align">
-                                                    <i class="fas fa-bookmark"></i>
+                                                <button type="button" class="btn btn-default" aria-label="Left Align">
+                                                    <i class="far fa-bookmark"></i>
+                                                   {# <i class="fas fa-bookmark"></i>#}
                                                 </button>
                                             </small>
                                         </p>
@@ -76,8 +76,22 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-        $(document).ready(function () {
-            //  $('[data-toggle="popover"]').popover();
+        $('.participe').click(function () {
+
+            var data = $(this).attr('id');
+
+            var url = "{{ path('event_participe', {'id': 'id'}) }}";
+            url = url.replace("id", data);
+
+            var formSerialize = $(this).serialize();
+
+            $.post(url, formSerialize, function (response) {
+
+                $('#notif ').html(response['message']);
+                $('#notif').fadeIn(500);
+                $('#button').html('<span class="badge badge-secondary">Je participe déjà à cette événment</span>');
+
+            }, "JSON");
         });
     </script>
 {% endblock %}

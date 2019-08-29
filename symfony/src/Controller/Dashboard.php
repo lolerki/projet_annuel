@@ -6,6 +6,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Profile;
 
 
 class Dashboard extends AbstractController
@@ -17,8 +18,19 @@ class Dashboard extends AbstractController
     public function indexAction(): Response
     {
 
+        $user = $this->getUser();
 
-        return $this->render('dashboard/dashboard.html.twig');
+        $profileExiste = false;
+
+        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+
+        if($profile != null){
+            $profileExiste = true;
+        }
+
+        return $this->render('dashboard/dashboard.html.twig', [
+            'linkProfile' => $profileExiste
+        ]);
     }
 
 }
