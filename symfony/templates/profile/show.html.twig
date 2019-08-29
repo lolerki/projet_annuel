@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-md-2">
-                Image du profile
+                <img src="{{ asset('build/avatars/' ~ profile.image) }}" width="150", hight="150">
             </div>
             <div class="col-md-9">
                 Description : {{ profile.about }}
