@@ -36,7 +36,7 @@
         "symfony/validator": "4.1.*",
         "symfony/webpack-encore-bundle": "^1.6",
         "symfony/yaml": "^4.0",
-        "vich/uploader-bundle": "1.9",
+        "vich/uploader-bundle": "1.9.1",
         "symfony/cache": "^4.0",
         "symfony/config": "^4.0",
         "symfony/debug": "^4.0",

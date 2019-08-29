@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b61a205a23ea5f68e7936439b71dff3",
+    "content-hash": "8b9f13a5256f9582187ef1911c3266de",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -6624,16 +6624,16 @@
         },
         {
             "name": "vich/uploader-bundle",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "ee27a379540b3cfc532704e1c37924c0ba67c206"
+                "reference": "4f75981df5913d6a691167186e285b3709891dd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/ee27a379540b3cfc532704e1c37924c0ba67c206",
-                "reference": "ee27a379540b3cfc532704e1c37924c0ba67c206",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/4f75981df5913d6a691167186e285b3709891dd4",
+                "reference": "4f75981df5913d6a691167186e285b3709891dd4",
                 "shasum": ""
             },
             "require": {
@@ -6714,7 +6714,7 @@
                 "file uploads",
                 "upload"
             ],
-            "time": "2019-02-18T13:25:02+00:00"
+            "time": "2019-02-19T09:32:11+00:00"
         },
         {
             "name": "webmozart/assert",

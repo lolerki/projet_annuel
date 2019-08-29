@@ -88,11 +88,11 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_article_show');
+          //  return $this->redirectToRoute('app_article_show');
         }
 
-        return $this->render('Article/edit.html.twig', [
-            'event' => $event,
+        return $this->render('event/edit.html.twig', [
+            'Event' => $event,
             'form' => $form->createView(),
         ]);
     }
@@ -116,6 +116,45 @@ class EventController extends AbstractController
         $entityManager->flush();
 
         $message = "<i class='far fa-check-circle'></i> Vous êtes maintenant inscrit à cette événement";
+
+        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+    }
+
+    /**
+     * @Route("/event/delete/{id}", name="event_delete")
+     */
+    public function deleteAction($id): Response
+    {
+
+        $user = $this->getUser();
+
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id, 'idUser' => $user));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $event->setStatut('2');
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        $message = "événement supprimer";
+
+        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+    }
+
+    /**
+     * @Route("/event/participe/delete/{id}", name="event_participe_delete")
+     */
+    public function deleteParticipeAction($id): Response
+    {
+
+        $user = $this->getUser();
+
+        $participe = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($participe);
+        $entityManager->flush();
+
+        $message = "participation supprimer";
 
         return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }

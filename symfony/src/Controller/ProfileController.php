@@ -73,4 +73,33 @@ class ProfileController extends AbstractController
 
     }
 
+    /**
+     * @Route("/myprofile/edit/{id}", name="profile_edit")
+     */
+    public function editAction(Request $request, Profile $profile): Response
+    {
+
+        $form = $this->createForm(ProfileType::class, $profile);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($profile);
+            $entityManager->flush();
+
+            //  return $this->redirectToRoute('app_article_show');
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'profile' => $profile,
+            'form' => $form->createView(),
+        ]);
+
+    }
+
+
+
+
 }

@@ -13,6 +13,7 @@ use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -54,6 +55,12 @@ class EventType extends AbstractType
                 ],
                 "data" => new \DateTime()
             ])
+            ->add('address', TextType::class, [
+                'label' => 'Adresse',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('linkgoogle', UrlType::class, [
                 'label' => 'Lien google map',
                 'attr' => [
@@ -61,11 +68,12 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('price', TextType::class, [
-                'label' => 'Prix d\'entré',
+                'label' => 'Prix d\'entrée',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
+            ->add('save', SubmitType::class)
         ;
     }
 

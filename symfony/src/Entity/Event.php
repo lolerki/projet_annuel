@@ -112,6 +112,11 @@ class Event
      */
     private $statut;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -311,6 +316,18 @@ class Event
     public function setStatut(int $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

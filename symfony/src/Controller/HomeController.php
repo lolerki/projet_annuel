@@ -44,13 +44,8 @@ class HomeController extends AbstractController
         $like = new Like();
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
-        //$rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $event, 'idUser' => $user));
 
-        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findAll();
-
-        dump($rechercheLike);
-
-        die();
+        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $event, 'idUser' => $user));
 
         if ($rechercheLike != null) {
 
