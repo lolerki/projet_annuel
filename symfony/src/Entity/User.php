@@ -121,6 +121,7 @@ class User implements UserInterface
         $this->likes = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
+        $this->facebookId = '';
     }
 
 
@@ -210,7 +211,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFacebookId(): string
+    public function getFacebookId(): ?string
     {
         return $this->facebookId;
     }
