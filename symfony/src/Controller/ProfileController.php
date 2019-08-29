@@ -57,7 +57,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{id}", name="profile_view")
+     * @Route("/profile/show/{id}", name="profile_view")
      */
     public function profileViewAction($id): Response
     {

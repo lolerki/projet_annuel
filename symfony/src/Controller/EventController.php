@@ -55,11 +55,23 @@ class EventController extends AbstractController
      */
     public function showAction($id): Response
     {
+        $user = $this->getUser();
+
+        $participation = false;
+
+        $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+
+      //  dump($recherche);die();
+
+        if($recherche != null){
+            $participation = true;
+        }
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
         return $this->render('event/show.html.twig', [
-            'event' => $event
+            'event' => $event,
+            'participe' => $participation
         ]);
     }
 
@@ -71,6 +83,7 @@ class EventController extends AbstractController
     {
 
         $user = $this->getUser();
+
         $participer = new ParticipationEvent();
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
