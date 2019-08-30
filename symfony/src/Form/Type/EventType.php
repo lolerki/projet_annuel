@@ -12,11 +12,14 @@ namespace App\Form\Type;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Defines the custom form field type used to change user's password.
@@ -30,6 +33,8 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('imageFile', VichImageType::class, [
+            ])
             ->add('title', TextType::class, [
                 'label' => 'Nom de l\'évenement',
                 'attr' => [
@@ -54,6 +59,18 @@ class EventType extends AbstractType
                 ],
                 "data" => new \DateTime()
             ])
+            ->add('time', TimeType::class, [
+                'label' => 'heure',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Adresse',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('linkgoogle', UrlType::class, [
                 'label' => 'Lien google map',
                 'attr' => [
@@ -61,11 +78,12 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('price', TextType::class, [
-                'label' => 'Prix d\'entré',
+                'label' => 'Prix d\'entrée',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
+            ->add('save', SubmitType::class)
         ;
     }
 

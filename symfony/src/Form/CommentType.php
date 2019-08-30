@@ -8,18 +8,16 @@
 
 namespace App\Form;
 
-use App\Entity\Profile;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Defines the form used to edit an user.
  */
-class ProfileType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,22 +26,8 @@ class ProfileType extends AbstractType
     {
 
         $builder
-              ->add('imageFile', VichImageType::class, [
-              ])
-            ->add('about', TextareaType::class, [
-                'label' => 'Description',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
-            ->add('stage_name', TextType::class, [
-                'label' => 'Profession',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
-            ->add('pseudo', TextType::class, [
-                'label' => 'Pseudo / Non de scène',
+            ->add('comment', TextareaType::class, [
+                'label' => 'Commentaire',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -56,7 +40,7 @@ class ProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Profile::class,
+            'data_class' => Comment::class,
         ]);
     }
 }

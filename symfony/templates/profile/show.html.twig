@@ -6,14 +6,21 @@
     <div class="container">
 
         <h1>{{ profile.pseudo }}</h1>
-
+<hr/>
         <div class="row">
-            <div class="col-md-2">
-                Image du profile
+            <div class="col-lg-2 pull-lg-2 text-xs-center">
+                <img src="{{ asset('build/avatars/' ~ profile.image) }}" class="m-x-auto img-fluid img-circle">
             </div>
             <div class="col-md-9">
-                Description : {{ profile.about }}
-                Profession : {{ profile.stageName }}
+
+                <h6>Description</h6>
+                <p>
+                    {{ profile.about }}
+                </p>
+                <h6>Profession</h6>
+                <p>
+                    {{ profile.stageName }}
+                </p>
             </div>
         </div>
 

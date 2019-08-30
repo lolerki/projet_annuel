@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Nunito" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Sancreek&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cc7f6d118e.js"></script>
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('css/app') }}
@@ -22,40 +23,45 @@
     </button>
 
     <div class="container">
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Evenement <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-calendar-week"></i> Evenement
+                        <span class="sr-only">(current)</span></a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('dashboard') }}">Dashbord</a></li>
+
                 {% else %}
                     <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a>
                     </li>
                 {% endif %}
 
-                <div class=" my-2 my-lg-0">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ app.user.username }}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item dropdown ml-aut">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> {{ app.user.username }}
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('profile_show') }}">Consulter mon profile</a>
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                        <div class="dropdown-menu dropdown-menu-righ" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('dashboard') }}"><i class="fas fa-cog"></i> Tableau
+                                de bord</a>
+                            <a class="dropdown-item" href="{{ path('profile_show') }}"><i class="far fa-id-badge"></i>
+                                Voir mon profil</a>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i>
+                                Déconnexion</a>
                         </div>
                     </li>
-                    {% endif %}
-                </div>
-
+                {% endif %}
 
             </ul>
         </div>
     </div>
 </nav>
+<div class="padding-top">
 
-{% block body %}{% endblock %}
+    {% block body %}{% endblock %}
+
+</div>
 
 <footer class="gray">
     <div class="container">
