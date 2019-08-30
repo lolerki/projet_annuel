@@ -98,8 +98,7 @@
                                 <div class="row">
                                     <div class="col-md-10">
                                         <a class="float-left"
-                                           href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
-                                                Akash</strong></a>
+                                           href="{{ path('profile_view', {id: comment.idUser.id }) }}"><strong>{{ comment.idUser.email }}</strong></a>
                                     </div>
                                     <div class="col-md-2">
                                         {{ comment.createAt.date|date('d/m/Y') }}

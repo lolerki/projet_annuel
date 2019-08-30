@@ -73,11 +73,19 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/mentions-legales", name="app_mentions-legales")
+     * @Route("/mentions-legales", name="app_mentions_legales")
      */
     public function mentionLegaleAction(): Response
     {
         return $this->render('home/mentionslegales.html.twig');
+    }
+
+    /**
+     * @Route("/help", name="help")
+     */
+    public function aideAction(): Response
+    {
+        return $this->render('home/help.html.twig');
     }
 
     /**

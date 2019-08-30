@@ -30,9 +30,14 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
+        //EVENT créer par l'utilisateur
         $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user, 'statut' => 1));
 
+        //event participé
         $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
+
+        //event like
+        $likes = $this->getDoctrine()->getRepository(Like::class)->findBy(array('idUser' => $user));
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -46,6 +51,7 @@ class EventController extends AbstractController
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
             'events' => $events,
+            'likes' => $likes,
             'user' => $user,
             'myevents' => $myEvents
         ]);
