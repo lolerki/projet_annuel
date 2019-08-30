@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-
+        {% if is_granted('ROLE_USER') %}
         <h1>Modifier l'événement</h1>
 
         {{ form(form) }}
@@ -14,7 +14,7 @@
             <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
         </button>
         {{ form_end(form) }}
-
+        {% endif %}
     </div>
 
 {% endblock %}

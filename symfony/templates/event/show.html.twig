@@ -16,24 +16,36 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.address }}</p>
-                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text"><i
-                                    class="far fa-user"></i> {{ event.idUser.email }}</a>
-                        <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
-                        </p>
-                        <p class="card-text"><i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
+                        <p class="card-text">
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}</div>
+                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">
+                            <i class="far fa-user"></i> {{ event.idUser.email }}
+                        </a>
+                        <div>
+                            <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
+                        </div>
+                        <div>
+                            <i class="fas fa-tag"></i>
+                            {% if event.price == 0 %}
+                                Gratuit
+                            {% else %}
+                                {{ event.price }} €
+                            {% endif %}
+                        </div>
+                        <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
                         <p class="card-text">
                         <div class="row">
                             <small class="text-muted">
                                 <button type="button" class="btn btn-default" aria-label="Left Align">
                                     {% if like == null %}
                                     <div class="like" id="{{ event.id }}">
-                                        <i class="far fa-bookmark"></i>
+                                        <i class="far fa-bookmark"></i> Mettre de côté
                                     </div>
                                 </button>
                                 {% else %}
                                     <div class="delete" id="{{ event.id }}">
-                                        <i class="fas fa-bookmark"></i>
+                                        <i class="fas fa-bookmark"></i> Retirer
                                     </div>
                                 {% endif %}
                                 </button>
@@ -57,42 +69,51 @@
         <h6>Description de l'événement</h6>
         <p>{{ event.description }}</p>
         <hr/>
+        {% if is_granted('ROLE_USER') %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+            </button>
+            {{ form_end(form) }}
 
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
-        </button>
-        {{ form_end(form) }}
+            <hr/>
+        {% endif %}
 
-        <hr/>
-
-        {% for comment in comments %}
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="m-x-auto img-fluid img-circle">
-                        </div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <a class="float-left"
-                                       href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
-                                            Akash</strong></a>
-                                </div>
-                                <div class="col-md-2">
-                                    {{ comment.createAt.date|date('d/m/Y') }}
-                                </div>
-                                <div class="col-md-12">{{ comment.comment }}</div>
+        {% if comments is null %}
+            <div class="alert alert-primary" role="alert">
+                Aucun commentaire
+            </div>
+        {% else %}
+            {% for comment in comments %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                                     class="m-x-auto img-fluid img-circle">
                             </div>
-                        </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <a class="float-left"
+                                           href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
+                                                Akash</strong></a>
+                                    </div>
+                                    <div class="col-md-2">
+                                        {{ comment.createAt.date|date('d/m/Y') }}
+                                    </div>
+                                    <div class="col-md-12">{{ comment.comment }}</div>
+                                </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
+
 
     </div>
 
@@ -120,7 +141,7 @@
             }, "JSON");
         });
 
-        $('.like').click(function () {
+        $('body').on('click', '.like', function () {
 
             var data = $(this).attr('id');
 
@@ -131,16 +152,32 @@
 
             $.post(url, formSerialize, function (response) {
 
-
-                $('.like').html('<i class="fas fa-bookmark delete"></i>');
-                $('.like').removeClass('like');
+                $('.like').html('<i class="fas fa-bookmark"></i> Retirer');
+                $('#' + data).removeClass('like');
+                $('#' + data).addClass('delete');
 
             }, "JSON");
         });
 
-        $('.delete').click(function () {
+        //   $('.delete').click(function () {
+        $('body').on('click', '.delete', function () {
 
             console.log("coucou");
+
+            var data = $(this).attr('id');
+
+            var url = "{{ path('event_delete_like', {'id': 'id'}) }}";
+            url = url.replace("id", data);
+
+            var formSerialize = $(this).serialize();
+
+            $.post(url, formSerialize, function (response) {
+
+                $('.delete').html('<i class="far fa-bookmark"></i> Mettre de côté');
+                $('#' + data).removeClass('delete');
+                $('#' + data).addClass('like');
+
+            }, "JSON");
 
         });
     </script>

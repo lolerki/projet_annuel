@@ -29,8 +29,22 @@
                                         <a href="{{ path('event_show', {id: event.id} ) }}" class="custom-card">
                                             <h5 class="card-title">{{ event.title }}</h5>
                                         </a>
-                                        <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}</p>
-                                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.address }}</p>
+                                        <p class="card-text">
+                                        <div>
+                                            <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}
+                                        </div>
+
+                                        <i class="fas fa-tag"></i>
+                                        {% if event.price == 0 %}
+                                            Gratuit
+                                        {% else %}
+                                            {{ event.price }} €
+                                        {% endif %}
+                                        </p>
+
                                         <p class="card-text">{{ event.description }}</p>
                                     </div>
                                 </div>
@@ -42,27 +56,20 @@
 
                 <div class="col-md-3">
                     <h3>Evenement à venir</h3>
+
+                    {% for nextEvent in nextEvents %}
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
+                            <h5 class="card-title">{{ nextEvent.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
+                            <p class="card-text">{{ nextEvent.description }}</p>
+                            <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i class="far fa-eye"></i> Voir</a>
                         </div>
                     </div>
+                    {% endfor %}
+
                 </div>
             </div>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
 
         </div>
     </div>

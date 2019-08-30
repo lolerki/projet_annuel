@@ -4,20 +4,20 @@
 
 {% block body %}
     <div class="container">
-
+        {% if is_granted('ROLE_USER') %}
         <h1 class="text-center">Gestion des événements</h1><hr/>
 
         <div class="row">
             <div class="col-4">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">événements sauvgardé</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Créer un événement</a>
+                    <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Créer un événement</a>
+                    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">événements sauvgardé</a>
                     <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list" href="#list-events" role="tab" aria-controls="events">Mes événements</a>
                 </div>
             </div>
             <div class="col-8">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 
                         {% for myevent in myevents %}
 
@@ -39,7 +39,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
 
                         <h3>Crée un événement</h3>
 
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-
+        {% endif %}
     </div>
 {% endblock %}
 

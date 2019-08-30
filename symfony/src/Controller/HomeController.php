@@ -10,6 +10,7 @@ use App\Entity\Event;
 use App\Entity\Like;
 
 
+
 /**
  * @Route("/")
  *
@@ -27,11 +28,11 @@ class HomeController extends AbstractController
 
         $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('statut' => 1));
 
-        $nextEvent = $this->getDoctrine()->getRepository(Event::class)->findBy(array('statut' => 1));
+        $nextEvent =  $this->getDoctrine()->getRepository(Event::class)->findByDate();
 
         return $this->render('home/home.html.twig', [
             'events' => $events,
-            'nextEvent' => $nextEvent
+            'nextEvents' => $nextEvent
         ]);
 
     }
