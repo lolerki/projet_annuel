@@ -17,8 +17,10 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
                         <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.address }}</p>
-                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text"><i class="far fa-user"></i> {{ event.idUser.email }}</a>
-                        <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}</p>
+                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text"><i
+                                    class="far fa-user"></i> {{ event.idUser.email }}</a>
+                        <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
+                        </p>
                         <p class="card-text"><i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
                         <p class="card-text">
                         <div class="row">
@@ -74,12 +76,19 @@
                             <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="m-x-auto img-fluid img-circle">
                         </div>
                         <div class="col-md-10">
-                            <p>
-                                <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
-                            </p>
-                            <div class="clearfix"></div>
-                            <p>{{ comment.comment }}</p>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a class="float-left"
+                                       href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman
+                                            Akash</strong></a>
+                                </div>
+                                <div class="col-md-2">
+                                    {{ comment.createAt.date|date('d/m/Y') }}
+                                </div>
+                                <div class="col-md-12">{{ comment.comment }}</div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
