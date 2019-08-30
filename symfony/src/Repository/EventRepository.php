@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,22 +20,23 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // /**
-    //  * @return Address[] Returns an array of Address objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Event[] Returns an array of Event objects
+      */
+    public function findByDate()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateEvent >= :val')
+            ->andWhere('e.statut = :statut')
+            ->setParameter('val', new \DateTime('now'))
+            ->setParameter('statut', 1)
+            ->orderBy('e.id', 'ASC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Address

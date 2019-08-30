@@ -32,7 +32,7 @@
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">{{ 'menu.login'|trans }}</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}"><i class="fas fa-sign-out-alt"></i> {{ 'menu.login'|trans }}</a>
                     </li>
                 {% endif %}
 
@@ -47,7 +47,7 @@
                                 de bord</a>
                             <a class="dropdown-item" href="{{ path('profile_show') }}"><i class="far fa-id-badge"></i>
                                 Voir mon profil</a>
-                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i>
+                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-power-off"></i>
                                 Déconnexion</a>
                         </div>
                     </li>
@@ -63,42 +63,109 @@
 
 </div>
 
-<footer class="gray">
-    <div class="container">
-        <div class="row">
-            <div class="col l2 s12">
-                <h5>SOOONR</h5>
+<!-- Footer -->
+<footer class="page-footer font-small mdb-color pt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left">
+
+        <!-- Footer links -->
+        <div class="row text-center text-md-left mt-3 pb-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Sooonr</h6>
+                <p>Soonr propose une solution pour les artiste afin de dévélopper une communauté et promouvoir leurs spectable</p>
             </div>
-            <div class="col l3 offset-l1 s12">
-                <h5>Liens rapides</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-4" href="{{ path('app_mentions-legales') }}">Mentions
-                            Légales</a></li>
-                    <li><a class="grey-text text-lighten-4 " href="{{ path('app_cgv') }}">CGV</a></li>
-                    <li><a href="#!" class="grey-text text-lighten-4">Inscription</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">FAQS</a></li>
-                </ul>
+            <!-- Grid column -->
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+                <p>
+                    <a href="#!">MDBootstrap</a>
+                </p>
+                <p>
+                    <a href="#!">MDWordPress</a>
+                </p>
+                <p>
+                    <a href="#!">BrandFlow</a>
+                </p>
+                <p>
+                    <a href="#!">Bootstrap Angular</a>
+                </p>
             </div>
-            <div class="col l3  s12">
-                <h5>Nos services</h5>
-                <ul>
-                    <li><a href="" class="white-text">{{ 'evenements'|trans }}</a></li>
-                </ul>
+            <!-- Grid column -->
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+                <p>
+                    <a href="#!">Your Account</a>
+                </p>
+                <p>
+                    <a href="#!">Become an Affiliate</a>
+                </p>
+                <p>
+                    <a href="#!">Shipping Rates</a>
+                </p>
+                <p>
+                    <a href="#!">Help</a>
+                </p>
             </div>
-            <div class="col l3 s12">
-                <h5>Contacts</h5>
-                <div class="col-sm-6">
-                    contact@sooon.fr
-                </div>
+
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                <p>
+                    <i class="fas fa-home mr-3"></i> Paris, France</p>
+                <p>
+                    <i class="fas fa-envelope mr-3"></i>sooonr@gmail.com</p>
             </div>
+            <!-- Grid column -->
+
         </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container center">
-            © 2019 Tous droits réservés <span>SOOONR</span>
+        <!-- Footer links -->
+
+        <hr>
+
+        <!-- Grid row -->
+        <div class="row d-flex align-items-center">
+
+            <!-- Grid column -->
+            <div class="col-md-7 col-lg-8">
+
+                <!--Copyright-->
+                <p class="text-center text-md-left">© 2019 Copyright:
+                    <a href="{{ path('app_home') }}">
+                        <strong>Sooonr</strong>
+                    </a>
+                </p>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+
+            </div>
+            <!-- Grid column -->
+
         </div>
+        <!-- Grid row -->
+
     </div>
+    <!-- Footer Links -->
+
 </footer>
+<!-- Footer -->
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     {{ encore_entry_script_tags('js/app') }}

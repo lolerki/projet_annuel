@@ -34,7 +34,6 @@ class EventController extends AbstractController
 
         $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
 
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -94,6 +93,10 @@ class EventController extends AbstractController
         }
 
         $comment = $this->getDoctrine()->getRepository(Comment::class)->findBy(array('idEvent' => $event,));
+
+        if(empty($comment)){
+            $comment = null;
+        }
 
         return $this->render('event/show.html.twig', [
             'event' => $event,
@@ -191,6 +194,24 @@ class EventController extends AbstractController
         $message = "participation supprimer";
 
         return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+    }
+
+    /**
+     * @Route("/like/delete/{id}", name="event_delete_like")
+     */
+    public function likeDeleteAction($id): Response
+    {
+        $user = $this->getUser();
+
+        $like = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($like);
+        $entityManager->flush();
+
+        $message = "like supprimer";
+
+            return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }
 
 }

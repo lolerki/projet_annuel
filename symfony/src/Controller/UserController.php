@@ -34,7 +34,7 @@ class UserController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'user.updated_successfully');
 
-            return $this->redirectToRoute('user_edit');
+            return $this->redirectToRoute('app_home');
         }
         return $this->render('user/edit.html.twig', [
             'user' => $user,

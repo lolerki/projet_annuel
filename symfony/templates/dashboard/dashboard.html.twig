@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container">
+        {% if is_granted('ROLE_USER') %}
 
         <h1>Mon compte</h1>
 
@@ -113,5 +114,6 @@
             </a>
 
         </div>
+        {% endif %}
     </div>
 {% endblock %}
