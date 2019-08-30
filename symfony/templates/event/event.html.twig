@@ -43,7 +43,6 @@
 
                         <h3>Crée un événement</h3>
 
-
                         {{ form_start(form) }}
                         {{ form_widget(form) }}
 
@@ -58,15 +57,15 @@
                             <div class="card mb-3">
                                 <div class="row no-gutters">
                                     <div class="col-md-4">
-                                        <img src="" class="card-img">
+                                        <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ event.title }}</h5>
                                             <p class="card-text">{{ event.description }}</p>
                                             <p class="card-text">
-                                                <button class="btn btn-danger">Annuler l'événement</button>
-                                                <button class="btn btn-info">Modifier l'événement</button>
+                                                <a href="{{ path('event_delete', {id: event.id}) }}" class="btn btn-danger" id="{{ event.id }}">Annuler l'événement</a>
+                                                <a href="{{ path('event_edit', {id: event.id}) }}" class="btn btn-info">Modifier l'événement</a>
                                             </p>
                                         </div>
                                     </div>
@@ -91,6 +90,22 @@
                 minDate: -4,
                 format: 'yyyy-mm-dd',
             });
+        });
+        $('.cancel').click(function () {
+
+            var data = $(this).attr('id');
+
+            var url = "{{ path('event_delete', {'id': 'id'}) }}";
+            url = url.replace("id", data);
+
+            var formSerialize = $(this).serialize();
+
+            $.post(url, formSerialize, function (response) {
+
+
+                $('.').html('');
+
+            }, "JSON");
         });
     </script>
 {% endblock %}

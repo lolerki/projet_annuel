@@ -25,10 +25,13 @@ class HomeController extends AbstractController
     public function indexAction(): Response
     {
 
-        $events = $this->getDoctrine()->getRepository(Event::class)->findAll();
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('statut' => 1));
+
+        $nextEvent = $this->getDoctrine()->getRepository(Event::class)->findBy(array('statut' => 1));
 
         return $this->render('home/home.html.twig', [
-            'events' => $events
+            'events' => $events,
+            'nextEvent' => $nextEvent
         ]);
 
     }

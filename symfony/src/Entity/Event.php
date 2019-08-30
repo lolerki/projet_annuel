@@ -134,6 +134,16 @@ class Event
      */
     private $imageFile;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $time;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="idEvent")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -141,6 +151,7 @@ class Event
         $this->participationEvents = new ArrayCollection();
         $this->createAt = new \DateTime('now');
         $this->statut = '1';
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -389,6 +400,49 @@ class Event
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(\DateTimeInterface $time): self
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setIdEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getIdEvent() === $this) {
+                $comment->setIdEvent(null);
+            }
+        }
+
+        return $this;
     }
 
 }

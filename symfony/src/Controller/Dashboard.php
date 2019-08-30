@@ -29,7 +29,8 @@ class Dashboard extends AbstractController
         }
 
         return $this->render('dashboard/dashboard.html.twig', [
-            'linkProfile' => $profileExiste
+            'linkProfile' => $profileExiste,
+            'idProfile' => $profile
         ]);
     }
 

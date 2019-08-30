@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\Type\EventType;
+use App\Form\CommentType;
+use App\Entity\Like;
+use App\Entity\Comment;
 
 
 class EventController extends AbstractController
@@ -27,7 +30,7 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
-        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user));
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user, 'statut' => 1));
 
         $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
 
@@ -53,23 +56,51 @@ class EventController extends AbstractController
     /**
      * @Route("/event/{id}", name="event_show")
      */
-    public function showAction($id): Response
+    public function showAction(Request $request, $id): Response
     {
         $user = $this->getUser();
 
+        $newComment = new Comment();
+        $form = $this->createForm(CommentType::class, $newComment);
+        $form->handleRequest($request);
+
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $newComment->setIdEvent($event);
+            $newComment->setIdUser($user);
+            $entityManager->persist($newComment);
+            $entityManager->flush();
+
+            //  return $this->redirectToRoute('app_article_show');
+        }
+
         $participation = false;
+        $termine = false;
+        $like = false;
 
         $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+
+        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+
+        if($rechercheLike != null){
+            $like = true;
+        }
 
         if($recherche != null){
             $participation = true;
         }
 
-        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->findBy(array('idEvent' => $event,));
 
         return $this->render('event/show.html.twig', [
             'event' => $event,
-            'participe' => $participation
+            'comments' => $comment,
+            'participe' => $participation,
+            'like' => $like,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -135,9 +166,12 @@ class EventController extends AbstractController
         $entityManager->persist($event);
         $entityManager->flush();
 
-        $message = "événement supprimer";
+        return $this->redirectToRoute('event');
 
-        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+     //   $message = "événement supprimer";
+
+      //  return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+
     }
 
     /**

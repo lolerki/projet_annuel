@@ -11,25 +11,36 @@
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="" class="card-img">
+                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text"><i class="fas fa-map-marker-alt"></i></p>
+                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> {{ event.address }}</p>
+                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text"><i class="far fa-user"></i> {{ event.idUser.email }}</a>
+                        <p class="card-text"><i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}</p>
+                        <p class="card-text"><i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
                         <p class="card-text">
                         <div class="row">
                             <small class="text-muted">
-                                <button type="button" class="btn btn-default like" aria-label="Left Align"
-                                        id="{{ event.id }}">
-                                    <i class="far fa-bookmark"></i>
-                                    {# <i class="fas fa-bookmark"></i>#}
+                                <button type="button" class="btn btn-default" aria-label="Left Align">
+                                    {% if like == null %}
+                                    <div class="like" id="{{ event.id }}">
+                                        <i class="far fa-bookmark"></i>
+                                    </div>
+                                </button>
+                                {% else %}
+                                    <div class="delete" id="{{ event.id }}">
+                                        <i class="fas fa-bookmark"></i>
+                                    </div>
+                                {% endif %}
                                 </button>
                             </small>
 
                             {% if participe == null %}
                                 <div id="button">
-                                    <button class="btn btn-default participe" id="{{ event.id }}"><i class="fas fa-check"></i> Participe
+                                    <button class="btn btn-default participe" id="{{ event.id }}">
+                                        <i class="fas fa-check"></i> Participe
                                     </button>
                                 </div>
                             {% else %}
@@ -41,6 +52,38 @@
                 </div>
             </div>
         </div>
+        <h6>Description de l'événement</h6>
+        <p>{{ event.description }}</p>
+        <hr/>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
+        </button>
+        {{ form_end(form) }}
+
+        <hr/>
+
+        {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="m-x-auto img-fluid img-circle">
+                        </div>
+                        <div class="col-md-10">
+                            <p>
+                                <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+                            </p>
+                            <div class="clearfix"></div>
+                            <p>{{ comment.comment }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
 
     </div>
 
@@ -79,9 +122,17 @@
 
             $.post(url, formSerialize, function (response) {
 
-                $('.like').html('<i class="fas fa-bookmark"></i>');
+
+                $('.like').html('<i class="fas fa-bookmark delete"></i>');
+                $('.like').removeClass('like');
 
             }, "JSON");
+        });
+
+        $('.delete').click(function () {
+
+            console.log("coucou");
+
         });
     </script>
 {% endblock %}

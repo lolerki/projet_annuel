@@ -114,6 +114,11 @@ class User implements UserInterface
      */
     private $participationEvents;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="idUser")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
@@ -121,6 +126,7 @@ class User implements UserInterface
         $this->likes = new ArrayCollection();
         $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -362,5 +368,35 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getIdUser() === $this) {
+                $comment->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
 
 }
