@@ -11,6 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 
+/**
+ * Require ROLE_USER for *every* controller method in this class.
+ *
+ * @IsGranted("ROLE_USER")
+ */
 class ProfileController extends AbstractController
 {
 

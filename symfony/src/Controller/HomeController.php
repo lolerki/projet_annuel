@@ -89,14 +89,6 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/cgv", name="app_cgv")
-     */
-    public function cgvAction(): Response
-    {
-        return $this->render('home/cgv.html.twig');
-    }
-
-    /**
      * @Route("/contact", name="app_contact")
      */
     public function contactAction(): Response
