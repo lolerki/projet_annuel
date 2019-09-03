@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Serializable;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
@@ -40,7 +41,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\ProfileRepository")
  * @Vich\Uploadable
  */
-class Profile
+class Profile implements Serializable
 {
     /**
      * @ORM\Id()
@@ -62,12 +63,6 @@ class Profile
     private $stage_name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\user", cascade={"persist", "remove"})
-     * @Groups({"profile_get_collection","profile_post_collection","profile_get_item"})
-     */
-    private $id_user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
@@ -87,6 +82,17 @@ class Profile
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="profile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idUser;
+
+    public function __toString()
+    {
+        return $this->getPseudo();
+    }
 
 
     public function getId(): ?int
@@ -114,18 +120,6 @@ class Profile
     public function setStageName(?string $stage_name): self
     {
         $this->stage_name = $stage_name;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?user
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?user $id_user): self
-    {
-        $this->id_user = $id_user;
 
         return $this;
     }
@@ -182,5 +176,36 @@ class Profile
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->image,
+
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+
+            ) = unserialize($serialized);
     }
 }

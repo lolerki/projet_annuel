@@ -11,6 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 
+/**
+ * Require ROLE_USER for *every* controller method in this class.
+ *
+ * @IsGranted("ROLE_USER")
+ */
 class ProfileController extends AbstractController
 {
 
@@ -22,6 +27,10 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
         $profile = new Profile();
+
+        if($user->getProfile() != null){
+            return $this->redirectToRoute('profile_edit', ['id' => $user->getProfile()->getId()]);
+        }
 
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
@@ -35,8 +44,7 @@ class ProfileController extends AbstractController
 
         }
         return $this->render('profile/new.html.twig', [
-            'form' => $form->createView(),
-            'user' => $user
+            'form' => $form->createView()
         ]);
 
     }
@@ -49,7 +57,11 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+        if($user->getProfile() == null){
+            return $this->redirectToRoute('profile_new');
+        }
+
+        $profile = $this->getUser()->getProfile();
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile
@@ -63,9 +75,13 @@ class ProfileController extends AbstractController
     public function profileViewAction($id): Response
     {
 
-        $user = $profile = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+        $profile = $user->getProfile();
+
+        if ($user->getProfile() == null) {
+            return $this->redirectToRoute('app_home');
+        }
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile
@@ -98,8 +114,6 @@ class ProfileController extends AbstractController
         ]);
 
     }
-
-
 
 
 }

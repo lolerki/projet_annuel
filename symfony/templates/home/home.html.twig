@@ -21,29 +21,35 @@
                     {% for event in events %}
                         <div class="card mb-3">
                             <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img">
+                                <div class="col-md-5">
+                                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img" height="220">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <div class="card-body">
-                                        <a href="{{ path('event_show', {id: event.id} ) }}" class="custom-card">
-                                            <h5 class="card-title">{{ event.title }}</h5>
-                                        </a>
-                                        <p class="card-text">
+
+                                            <a href="{{ path('event_show', {id: event.id} ) }}" class="custom-card">
+                                                <h5 class="card-title">{{ event.title }}</h5>
+                                            </a>
+
                                         <div>
                                             <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
                                         </div>
+
                                         <div>
                                             <i class="fas fa-map-marker-alt"></i> {{ event.address }}
                                         </div>
 
-                                        <i class="fas fa-tag"></i>
-                                        {% if event.price == 0 %}
-                                            Gratuit
-                                        {% else %}
-                                            {{ event.price }} €
-                                        {% endif %}
-                                        </p>
+                                        <div>
+                                            <i class="fas fa-tag"></i>
+                                            {% if event.price == 0 %}
+                                                Gratuit
+                                            {% else %}
+                                                {{ event.price }} €
+                                            {% endif %}</div>
+                                        <div>
+                                            <i class="fas fa-users"></i>
+                                        </div>
+
 
                                         <p class="card-text">{{ event.description }}</p>
                                     </div>
@@ -58,14 +64,15 @@
                     <h3>Evenement à venir</h3>
 
                     {% for nextEvent in nextEvents %}
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ nextEvent.title }}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
-                            <p class="card-text">{{ nextEvent.description }}</p>
-                            <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i class="far fa-eye"></i> Voir</a>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ nextEvent.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
+                                <p class="card-text">{{ nextEvent.description }}</p>
+                                <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i
+                                            class="far fa-eye"></i> Voir</a>
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
 
                 </div>

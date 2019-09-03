@@ -30,9 +30,14 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
+        //EVENT créer par l'utilisateur
         $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user, 'statut' => 1));
 
+        //event participé
         $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
+
+        //event like
+        $likes = $this->getDoctrine()->getRepository(Like::class)->findBy(array('idUser' => $user));
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -46,6 +51,7 @@ class EventController extends AbstractController
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
             'events' => $events,
+            'likes' => $likes,
             'user' => $user,
             'myevents' => $myEvents
         ]);
@@ -57,11 +63,22 @@ class EventController extends AbstractController
      */
     public function showAction(Request $request, $id): Response
     {
-        $user = $this->getUser();
 
+        $user = $this->getUser();
         $newComment = new Comment();
         $form = $this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
+
+        $inscription = true;
+        $participation = false;
+        $termine = false;
+        $like = false;
+
+        $myEvent = $this->getDoctrine()->getRepository(Event::class)->findEventByUser($user->getId(), $id);
+
+        if($myEvent != null){
+            $inscription = false;
+        }
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
@@ -75,10 +92,6 @@ class EventController extends AbstractController
 
             //  return $this->redirectToRoute('app_article_show');
         }
-
-        $participation = false;
-        $termine = false;
-        $like = false;
 
         $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
 
@@ -102,6 +115,8 @@ class EventController extends AbstractController
             'event' => $event,
             'comments' => $comment,
             'participe' => $participation,
+            'inscrire' => $inscription,
+            'termine' => $termine,
             'like' => $like,
             'form' => $form->createView(),
         ]);

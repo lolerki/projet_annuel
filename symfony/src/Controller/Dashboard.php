@@ -6,9 +6,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Profile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
+ /**
+  * Require ROLE_USER for *every* controller method in this class.
+  *
+  * @IsGranted("ROLE_USER")
+  */
 class Dashboard extends AbstractController
 {
 
@@ -19,18 +23,21 @@ class Dashboard extends AbstractController
     {
 
         $user = $this->getUser();
+        $userProfile = $user->getProfile();
+
+        if($userProfile == null){
+            return $this->redirectToRoute('profile_new');
+        }
 
         $profileExiste = false;
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
-
-        if($profile != null){
+        if($userProfile != null){
             $profileExiste = true;
         }
 
         return $this->render('dashboard/dashboard.html.twig', [
             'linkProfile' => $profileExiste,
-            'idProfile' => $profile
+            'idProfile' => $userProfile
         ]);
     }
 

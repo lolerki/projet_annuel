@@ -73,7 +73,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/mentions-legales", name="app_mentions-legales")
+     * @Route("/mentions-legales", name="app_mentions_legales")
      */
     public function mentionLegaleAction(): Response
     {
@@ -81,11 +81,11 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/cgv", name="app_cgv")
+     * @Route("/help", name="help")
      */
-    public function cgvAction(): Response
+    public function aideAction(): Response
     {
-        return $this->render('home/cgv.html.twig');
+        return $this->render('home/help.html.twig');
     }
 
     /**

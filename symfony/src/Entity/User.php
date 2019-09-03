@@ -119,6 +119,11 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Profile", mappedBy="idUser", cascade={"persist", "remove"})
+     */
+    private $profile;
+
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
@@ -129,6 +134,10 @@ class User implements UserInterface
         $this->comments = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
 
     public function getId(): ?int
     {
@@ -394,6 +403,23 @@ class User implements UserInterface
             if ($comment->getIdUser() === $this) {
                 $comment->setIdUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(Profile $profile): self
+    {
+        $this->profile = $profile;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $profile->getIdUser()) {
+            $profile->setIdUser($this);
         }
 
         return $this;
