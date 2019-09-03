@@ -34,6 +34,8 @@
                             {% endif %}
                         </div>
                         <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
+
+                        {% if inscrire == true %}
                         <p class="card-text">
                         <div class="row">
                             <small class="text-muted">
@@ -62,6 +64,11 @@
                             {% endif %}
                         </div>
                         </p>
+                        {% else %}
+                            <a href="" class="btn btn-info">Modifier l'événement</a>
+                        {% endif %}
+
+
                     </div>
                 </div>
             </div>

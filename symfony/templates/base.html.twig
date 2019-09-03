@@ -30,12 +30,11 @@
                         <span class="sr-only">(current)</span></a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}"><i class="fas fa-sign-out-alt"></i> {{ 'menu.login'|trans }}</a>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}"><i
+                                    class="fas fa-sign-out-alt"></i> {{ 'menu.login'|trans }}</a>
                     </li>
                 {% endif %}
-
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item dropdown ml-aut">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -43,6 +42,11 @@
                             <i class="fas fa-user-circle"></i> {{ app.user.username }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-righ" aria-labelledby="navbarDropdown">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('easyadmin') }}"><i
+                                            class="fas fa-unlock-alt"></i> Administration</a>
+                                <div class="dropdown-divider"></div>
+                            {% endif %}
                             <a class="dropdown-item" href="{{ path('dashboard') }}"><i class="fas fa-cog"></i> Tableau
                                 de bord</a>
                             <a class="dropdown-item" href="{{ path('profile_show') }}"><i class="far fa-id-badge"></i>
@@ -53,7 +57,6 @@
                         </div>
                     </li>
                 {% endif %}
-
             </ul>
         </div>
     </div>
@@ -76,7 +79,8 @@
             <!-- Grid column -->
             <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                 <h6 class="text-uppercase mb-4 font-weight-bold">Sooonr</h6>
-                <p>Soonr propose une solution pour les artiste afin de dévélopper une communauté et promouvoir leurs spectable</p>
+                <p>Soonr propose une solution pour les artiste afin de dévélopper une communauté et promouvoir leurs
+                    spectable</p>
             </div>
             <!-- Grid column -->
 

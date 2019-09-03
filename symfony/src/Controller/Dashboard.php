@@ -23,10 +23,13 @@ class Dashboard extends AbstractController
     {
 
         $user = $this->getUser();
+        $userProfile = $user->getProfile();
+
+        if($userProfile == null){
+            return $this->redirectToRoute('profile_new');
+        }
 
         $profileExiste = false;
-
-        $userProfile = $user->getProfile();
 
         if($userProfile != null){
             $profileExiste = true;
