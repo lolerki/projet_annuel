@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Serializable;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
@@ -40,7 +41,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\ProfileRepository")
  * @Vich\Uploadable
  */
-class Profile
+class Profile implements Serializable
 {
     /**
      * @ORM\Id()
@@ -81,6 +82,12 @@ class Profile
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="profile", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idUser;
 
 
     public function getId(): ?int
@@ -164,5 +171,36 @@ class Profile
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(User $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->image,
+
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+
+            ) = unserialize($serialized);
     }
 }

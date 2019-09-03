@@ -120,9 +120,9 @@ class User implements UserInterface
     private $comments;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Profile", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Profile", mappedBy="idUser", cascade={"persist", "remove"})
      */
-    private $idProfile;
+    private $profile;
 
     public function __construct()
     {
@@ -404,14 +404,19 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getIdProfile(): ?Profile
+    public function getProfile(): ?Profile
     {
-        return $this->idProfile;
+        return $this->profile;
     }
 
-    public function setIdProfile(?Profile $idProfile): self
+    public function setProfile(Profile $profile): self
     {
-        $this->idProfile = $idProfile;
+        $this->profile = $profile;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $profile->getIdUser()) {
+            $profile->setIdUser($this);
+        }
 
         return $this;
     }

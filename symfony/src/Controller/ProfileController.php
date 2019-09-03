@@ -26,8 +26,11 @@ class ProfileController extends AbstractController
     {
 
         $user = $this->getUser();
-
         $profile = new Profile();
+
+        if($user->getProfile() != null){
+            return $this->redirectToRoute('profile_edit', ['id' => $user->getProfile()->getId()]);
+        }
 
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
@@ -35,10 +38,9 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
+            $profile->setIdUser($user);
             $entityManager->persist($profile);
             $entityManager->flush();
-
-
 
         }
         return $this->render('profile/new.html.twig', [
@@ -55,7 +57,11 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id' => $user->getIdProfile()->getId()));
+        if($user->getProfile() == null){
+            return $this->redirectToRoute('profile_new');
+        }
+
+        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id' => $user->getProfile()->getId()));
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile

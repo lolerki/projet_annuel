@@ -6,9 +6,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use App\Entity\Profile;
 
  /**
   * Require ROLE_USER for *every* controller method in this class.
@@ -28,15 +26,15 @@ class Dashboard extends AbstractController
 
         $profileExiste = false;
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+        $userProfile = $user->getProfile();
 
-        if($profile != null){
+        if($userProfile != null){
             $profileExiste = true;
         }
 
         return $this->render('dashboard/dashboard.html.twig', [
             'linkProfile' => $profileExiste,
-            'idProfile' => $profile
+            'idProfile' => $userProfile
         ]);
     }
 
