@@ -8,19 +8,19 @@
         <div class="alert alert-success" style="display:none;" id="notif" role="alert">
 
         </div>
-        <div class="card mb-3">
+        <div class="card mb-5">
             <div class="row no-gutters">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
                         <p class="card-text">
                         <div>
                             <i class="fas fa-map-marker-alt"></i> {{ event.address }}</div>
                         <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">
-                            <i class="far fa-user"></i> {{ event.idUser.email }}
+                            <i class="far fa-user"></i> {{ event.idUser.idProfile.pseudo }}
                         </a>
                         <div>
                             <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
@@ -98,7 +98,7 @@
                                 <div class="row">
                                     <div class="col-md-10">
                                         <a class="float-left"
-                                           href="{{ path('profile_view', {id: comment.idUser.id }) }}"><strong>{{ comment.idUser.email }}</strong></a>
+                                           href="{{ path('profile_view', {id: comment.idUser.id }) }}"><strong>{{ comment.idUser.idProfile.pseudo }}</strong></a>
                                     </div>
                                     <div class="col-md-2">
                                         {{ comment.createAt.date|date('d/m/Y') }}

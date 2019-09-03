@@ -26,6 +26,7 @@ class ProfileController extends AbstractController
     {
 
         $user = $this->getUser();
+
         $profile = new Profile();
 
         $form = $this->createForm(ProfileType::class, $profile);
@@ -34,14 +35,14 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
-            $profile->setIdUser($user);
             $entityManager->persist($profile);
             $entityManager->flush();
 
+
+
         }
         return $this->render('profile/new.html.twig', [
-            'form' => $form->createView(),
-            'user' => $user
+            'form' => $form->createView()
         ]);
 
     }
@@ -54,7 +55,7 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id' => $user->getIdProfile()->getId()));
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile
@@ -68,9 +69,13 @@ class ProfileController extends AbstractController
     public function profileViewAction($id): Response
     {
 
-        $user = $profile = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id_user' => $user));
+        $profile = $user->getIdProfile();
+
+        if ($user->getIdProfile() == null) {
+            return $this->redirectToRoute('app_home');
+        }
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile
@@ -103,8 +108,6 @@ class ProfileController extends AbstractController
         ]);
 
     }
-
-
 
 
 }

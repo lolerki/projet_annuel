@@ -119,6 +119,11 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Profile", cascade={"persist", "remove"})
+     */
+    private $idProfile;
+
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
@@ -395,6 +400,18 @@ class User implements UserInterface
                 $comment->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdProfile(): ?Profile
+    {
+        return $this->idProfile;
+    }
+
+    public function setIdProfile(?Profile $idProfile): self
+    {
+        $this->idProfile = $idProfile;
 
         return $this;
     }

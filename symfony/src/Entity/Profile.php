@@ -62,12 +62,6 @@ class Profile
     private $stage_name;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\user", cascade={"persist", "remove"})
-     * @Groups({"profile_get_collection","profile_post_collection","profile_get_item"})
-     */
-    private $id_user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
@@ -114,18 +108,6 @@ class Profile
     public function setStageName(?string $stage_name): self
     {
         $this->stage_name = $stage_name;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?user
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(?user $id_user): self
-    {
-        $this->id_user = $id_user;
 
         return $this;
     }
