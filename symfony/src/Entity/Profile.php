@@ -89,6 +89,11 @@ class Profile implements Serializable
      */
     private $idUser;
 
+    public function __toString()
+    {
+        return $this->getPseudo();
+    }
+
 
     public function getId(): ?int
     {
