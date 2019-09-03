@@ -61,7 +61,7 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile_new');
         }
 
-        $profile = $this->getDoctrine()->getRepository(Profile::class)->findOneBy(array('id' => $user->getProfile()->getId()));
+        $profile = $this->getUser()->getProfile();
 
         return $this->render('profile/show.html.twig', [
             'profile' => $profile
@@ -77,9 +77,9 @@ class ProfileController extends AbstractController
 
         $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(array('id' => $id));
 
-        $profile = $user->getIdProfile();
+        $profile = $user->getProfile();
 
-        if ($user->getIdProfile() == null) {
+        if ($user->getProfile() == null) {
             return $this->redirectToRoute('app_home');
         }
 

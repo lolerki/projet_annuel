@@ -29,7 +29,8 @@ class ProfileType extends AbstractType
 
         $builder
               ->add('imageFile', VichImageType::class, [
-                  'required' => false
+                  'required' => false,
+
               ])
             ->add('about', TextareaType::class, [
                 'label' => 'Description',

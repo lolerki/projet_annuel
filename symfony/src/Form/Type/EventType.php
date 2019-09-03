@@ -83,7 +83,6 @@ class EventType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('save', SubmitType::class)
         ;
     }
 

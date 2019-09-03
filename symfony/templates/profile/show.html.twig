@@ -5,6 +5,9 @@
 {% block body %}
     <div class="container">
 
+
+       <a href="{{ path('profile_edit', {id: app.user.profile.id} ) }}" class="btn btn-info">Modifier</a>
+
         <h1>{{ profile.pseudo }}</h1>
         <hr/>
         <div class="row">
