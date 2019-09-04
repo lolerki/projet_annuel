@@ -11,16 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 
-/**
- * Require ROLE_USER for *every* controller method in this class.
- *
- * @IsGranted("ROLE_USER")
- */
 class ProfileController extends AbstractController
 {
 
     /**
      * @Route("/profile/new", name="profile_new")
+     * @IsGranted("ROLE_USER")
      */
     public function indexAction(Request $request): Response
     {
@@ -42,6 +38,8 @@ class ProfileController extends AbstractController
             $entityManager->persist($profile);
             $entityManager->flush();
 
+            return $this->redirectToRoute('profile_show');
+
         }
         return $this->render('profile/new.html.twig', [
             'form' => $form->createView()
@@ -51,6 +49,7 @@ class ProfileController extends AbstractController
 
     /**
      * @Route("/profile/show", name="profile_show")
+     * @IsGranted("ROLE_USER")
      */
     public function showAction(Request $request): Response
     {
@@ -90,7 +89,8 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/myprofile/edit/{id}", name="profile_edit")
+     * @Route("/dashboard/profile/edit/{id}", name="profile_edit")
+     * @IsGranted("ROLE_USER")
      */
     public function editAction(Request $request, Profile $profile): Response
     {
@@ -105,7 +105,7 @@ class ProfileController extends AbstractController
             $entityManager->persist($profile);
             $entityManager->flush();
 
-            //  return $this->redirectToRoute('app_article_show');
+              return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('profile/edit.html.twig', [

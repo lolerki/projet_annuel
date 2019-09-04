@@ -15,7 +15,11 @@ use App\Form\CommentType;
 use App\Entity\Like;
 use App\Entity\Comment;
 
-
+/**
+ * Require ROLE_USER for *every* controller method in this class.
+ *
+ * @IsGranted("ROLE_USER")
+ */
 class EventController extends AbstractController
 {
     /**
@@ -71,8 +75,8 @@ class EventController extends AbstractController
 
         $inscription = true;
         $participation = false;
-        $termine = false;
         $like = false;
+        $finish = false;
 
         $myEvent = $this->getDoctrine()->getRepository(Event::class)->findEventByUser($user->getId(), $id);
 
@@ -81,6 +85,11 @@ class EventController extends AbstractController
         }
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        //vérification si event termine
+        if($event->getDateEvent() <= new \DateTime('now') ){
+            $finish = true;
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -116,7 +125,7 @@ class EventController extends AbstractController
             'comments' => $comment,
             'participe' => $participation,
             'inscrire' => $inscription,
-            'termine' => $termine,
+            'finish' => $finish,
             'like' => $like,
             'form' => $form->createView(),
         ]);

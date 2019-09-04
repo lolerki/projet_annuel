@@ -5,8 +5,11 @@
 {% block body %}
     <div class="container">
 
-
-      {# <a href="{{ path('profile_edit', {id: app.user.profile.id} ) }}" class="btn btn-info">Modifier</a>#}
+        {% if app.user.profile.id is defined %}
+            {% if profile.id == app.user.profile.id %}
+                <a href="{{ path('profile_edit', {id: profile.id} ) }}" class="btn btn-info">Modifier</a>
+            {% endif %}
+        {% endif %}
 
         <h1>{{ profile.pseudo }}</h1>
         <hr/>
