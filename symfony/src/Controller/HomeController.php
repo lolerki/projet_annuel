@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     public function indexAction(): Response
     {
 
-        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('statut' => 1));
+        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(['statut' => 1], ['id' => 'desc']);
 
         $nextEvent =  $this->getDoctrine()->getRepository(Event::class)->findByDate();
 
@@ -47,9 +47,9 @@ class HomeController extends AbstractController
 
         $like = new Like();
 
-        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(['id' => $id]);
 
-        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $event, 'idUser' => $user));
+        $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(['idEvent' => $event, 'idUser' => $user]);
 
         if ($rechercheLike != null) {
 

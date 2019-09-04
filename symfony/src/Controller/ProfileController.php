@@ -42,6 +42,8 @@ class ProfileController extends AbstractController
             $entityManager->persist($profile);
             $entityManager->flush();
 
+            return $this->redirectToRoute('profile_show');
+
         }
         return $this->render('profile/new.html.twig', [
             'form' => $form->createView()

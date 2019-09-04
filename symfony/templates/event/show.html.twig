@@ -11,7 +11,7 @@
         <div class="card mb-5">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img">
+                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img" height="300">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
@@ -36,39 +36,44 @@
                         <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
 
                         {% if inscrire == true %}
-                        <p class="card-text">
-                        <div class="row">
-                            <small class="text-muted">
-                                <button type="button" class="btn btn-default" aria-label="Left Align">
-                                    {% if like == null %}
-                                    <div class="like" id="{{ event.id }}">
-                                        <i class="far fa-bookmark"></i> Mettre de côté
-                                    </div>
-                                </button>
-                                {% else %}
-                                    <div class="delete" id="{{ event.id }}">
-                                        <i class="fas fa-bookmark"></i> Retirer
-                                    </div>
-                                {% endif %}
-                                </button>
-                            </small>
+                            <p class="card-text">
+                            <div class="row">
+                                {% if finish == false %}
+                                    <small class="text-muted">
+                                        {% if like == null %}
+                                        <button type="button" class="btn btn-default" aria-label="Left Align">
 
-                            {% if participe == null %}
-                                <div id="button">
-                                    <button class="btn btn-default participe" id="{{ event.id }}">
-                                        <i class="fas fa-check"></i> Participe
-                                    </button>
-                                </div>
-                            {% else %}
-                                <span class="badge badge-secondary">Je participe déjà à cette événment</span>
-                            {% endif %}
-                        </div>
-                        </p>
+                                            <div class="like" id="{{ event.id }}">
+                                                <i class="far fa-bookmark"></i> Mettre de côté
+                                            </div>
+                                        </button>
+                                        {% else %}
+                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                            <div class="delete" id="{{ event.id }}">
+                                                <i class="fas fa-bookmark"></i> Retirer
+                                            </div>
+                                            {% endif %}
+                                        </button>
+                                    </small>
+
+                                    {% if participe == null %}
+                                        <div id="button">
+                                            <button class="btn btn-default participe" id="{{ event.id }}">
+                                                <i class="fas fa-check"></i> Participe
+                                            </button>
+                                        </div>
+                                    {% else %}
+                                        <span class="badge badge-secondary">Je participe déjà à cette événment</span>
+                                    {% endif %}
+
+                                {% else %}
+                                    <span class="badge badge-danger">Evénement terminé</span>
+                                {% endif %}
+                            </div>
+                            </p>
                         {% else %}
                             <a href="" class="btn btn-info">Modifier l'événement</a>
                         {% endif %}
-
-
                     </div>
                 </div>
             </div>
