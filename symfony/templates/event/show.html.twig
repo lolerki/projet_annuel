@@ -79,7 +79,7 @@
             </div>
         </div>
         <h6>Description de l'événement</h6>
-        <p>{{ event.description }}</p>
+        <p>{{ event.description|raw  }}</p>
         <hr/>
         {% if is_granted('ROLE_USER') %}
             {{ form_start(form) }}
@@ -115,7 +115,7 @@
                                     <div class="col-md-2">
                                         {{ comment.createAt.date|date('d/m/Y') }}
                                     </div>
-                                    <div class="col-md-12">{{ comment.comment }}</div>
+                                    <div class="col-md-12">{{ comment.comment|raw  }}</div>
                                 </div>
                             </div>
 

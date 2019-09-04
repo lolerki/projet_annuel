@@ -20,6 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 /**
  * Defines the custom form field type used to change user's password.
@@ -39,13 +40,13 @@ class EventType extends AbstractType
                 'label' => 'Nom de l\'évenement',
                 'attr' => [
                     'class' => 'form-control',
-                ],
+                ]
             ])
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'label' => 'Description',
                 'attr' => [
                     'class' => 'form-control',
-                ],
+                ]
             ])
             ->add('dateEvent', DateType::class, [
                 'label' => 'Date',
@@ -54,8 +55,7 @@ class EventType extends AbstractType
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ],
                 'attr' => [
-                    'class' => 'js-datepicker',
-                   // 'class' => 'form-control',
+                    'class' => 'js-datepicker form-control',
                 ],
                 "data" => new \DateTime()
             ])
