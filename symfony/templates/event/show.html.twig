@@ -35,35 +35,38 @@
                         </div>
                         <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
 
+
                         {% if inscrire == true %}
                             <p class="card-text">
                             <div class="row">
                                 {% if finish == false %}
-                                    <small class="text-muted">
-                                        {% if like == null %}
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                                    {% if app.user is not null %}
+                                        <small class="text-muted">
+                                            {% if like == null %}
+                                            <button type="button" class="btn btn-default" aria-label="Left Align">
 
-                                            <div class="like" id="{{ event.id }}">
-                                                <i class="far fa-bookmark"></i> Mettre de côté
-                                            </div>
-                                        </button>
-                                        {% else %}
-                                        <button type="button" class="btn btn-default" aria-label="Left Align">
-                                            <div class="delete" id="{{ event.id }}">
-                                                <i class="fas fa-bookmark"></i> Retirer
-                                            </div>
-                                            {% endif %}
-                                        </button>
-                                    </small>
-
-                                    {% if participe == null %}
-                                        <div id="button">
-                                            <button class="btn btn-default participe" id="{{ event.id }}">
-                                                <i class="fas fa-check"></i> Participe
+                                                <div class="like" id="{{ event.id }}">
+                                                    <i class="far fa-bookmark"></i> Mettre de côté
+                                                </div>
                                             </button>
-                                        </div>
-                                    {% else %}
-                                        <span class="badge badge-secondary">Je participe déjà à cette événment</span>
+                                            {% else %}
+                                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                                <div class="delete" id="{{ event.id }}">
+                                                    <i class="fas fa-bookmark"></i> Retirer
+                                                </div>
+                                                {% endif %}
+                                            </button>
+                                        </small>
+
+                                        {% if participe == null %}
+                                            <div id="button">
+                                                <button class="btn btn-default participe" id="{{ event.id }}">
+                                                    <i class="fas fa-check"></i> Participe
+                                                </button>
+                                            </div>
+                                        {% else %}
+                                            <span class="badge badge-secondary">Je participe déjà à cette événment</span>
+                                        {% endif %}
                                     {% endif %}
 
                                 {% else %}
@@ -74,12 +77,13 @@
                         {% else %}
                             <a href="" class="btn btn-info">Modifier l'événement</a>
                         {% endif %}
+
                     </div>
                 </div>
             </div>
         </div>
         <h6>Description de l'événement</h6>
-        <p>{{ event.description }}</p>
+        <p>{{ event.description|raw }}</p>
         <hr/>
         {% if is_granted('ROLE_USER') %}
             {{ form_start(form) }}
@@ -115,7 +119,7 @@
                                     <div class="col-md-2">
                                         {{ comment.createAt.date|date('d/m/Y') }}
                                     </div>
-                                    <div class="col-md-12">{{ comment.comment }}</div>
+                                    <div class="col-md-12">{{ comment.comment|raw }}</div>
                                 </div>
                             </div>
 
@@ -124,7 +128,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-
 
     </div>
 
@@ -170,7 +173,6 @@
             }, "JSON");
         });
 
-        //   $('.delete').click(function () {
         $('body').on('click', '.delete', function () {
 
             console.log("coucou");
