@@ -15,15 +15,12 @@ use App\Form\CommentType;
 use App\Entity\Like;
 use App\Entity\Comment;
 
-/**
- * Require ROLE_USER for *every* controller method in this class.
- *
- * @IsGranted("ROLE_USER")
- */
+
 class EventController extends AbstractController
 {
     /**
      * @Route("/event", name="event")
+     * @IsGranted("ROLE_USER")
      */
     public function indexAction(Request $request): Response
     {
@@ -50,7 +47,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-         //   return $this->redirectToRoute('user_edit');
+            //   return $this->redirectToRoute('user_edit');
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
@@ -78,16 +75,21 @@ class EventController extends AbstractController
         $like = false;
         $finish = false;
 
-        $myEvent = $this->getDoctrine()->getRepository(Event::class)->findEventByUser($user->getId(), $id);
+        if ($user != null) {
 
-        if($myEvent != null){
-            $inscription = false;
+            $myEvent = $this->getDoctrine()->getRepository(Event::class)->findEventByUser($user->getId(), $id);
+
+            if ($myEvent != null) {
+                $inscription = false;
+            }
+
         }
+
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
         //vérification si event termine
-        if($event->getDateEvent() <= new \DateTime('now') ){
+        if ($event->getDateEvent() <= new \DateTime('now')) {
             $finish = true;
         }
 
@@ -106,17 +108,17 @@ class EventController extends AbstractController
 
         $rechercheLike = $this->getDoctrine()->getRepository(Like::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
 
-        if($rechercheLike != null){
+        if ($rechercheLike != null) {
             $like = true;
         }
 
-        if($recherche != null){
+        if ($recherche != null) {
             $participation = true;
         }
 
         $comment = $this->getDoctrine()->getRepository(Comment::class)->findBy(array('idEvent' => $event,));
 
-        if(empty($comment)){
+        if (empty($comment)) {
             $comment = null;
         }
 
@@ -133,6 +135,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/event/edit/{id}", name="event_edit")
+     * @IsGranted("ROLE_USER")
      */
     public function editAction(Request $request, Event $event): Response
     {
@@ -146,7 +149,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-          //  return $this->redirectToRoute('app_article_show');
+            //  return $this->redirectToRoute('app_article_show');
         }
 
         return $this->render('event/edit.html.twig', [
@@ -158,6 +161,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/event/participe/{id}", name="event_participe")
+     * @IsGranted("ROLE_USER")
      */
     public function newAction($id): Response
     {
@@ -180,6 +184,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/event/delete/{id}", name="event_delete")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteAction($id): Response
     {
@@ -195,14 +200,15 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event');
 
-     //   $message = "événement supprimer";
+        //   $message = "événement supprimer";
 
-      //  return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+        //  return new Response(json_encode(array('message' => $message, 'result' => 'success')));
 
     }
 
     /**
      * @Route("/event/participe/delete/{id}", name="event_participe_delete")
+     * @IsGranted("ROLE_USER")
      */
     public function deleteParticipeAction($id): Response
     {
@@ -222,6 +228,7 @@ class EventController extends AbstractController
 
     /**
      * @Route("/like/delete/{id}", name="event_delete_like")
+     * @IsGranted("ROLE_USER")
      */
     public function likeDeleteAction($id): Response
     {
@@ -235,7 +242,7 @@ class EventController extends AbstractController
 
         $message = "like supprimer";
 
-            return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }
 
 }
