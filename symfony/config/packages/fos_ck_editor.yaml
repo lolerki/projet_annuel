@@ -2,4 +2,4 @@ fos_ck_editor:
   configs:
     my_config:
       #toolbar: [ ["Source", "-", "Save"], ["Maximize"] ]
-      toolbar: [ [ 'Bold','Italic','Underline','Strike' ], [ 'NumberedList','BulletedList','-','Outdent','Indent','-','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ], [ 'Link','Unlink' ], [ 'pbckcode', 'Table' ], '/', [ 'Styles', 'Format' ], [ 'TextColor','BGColor' ], [ 'RemoveFormat' ], [ 'Maximize' ] ]
+      toolbar: [ [ 'Bold','Italic','Underline','Strike' ], [ 'NumberedList','BulletedList''-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ], [ 'Link','Unlink' ], [ 'pbckcode', 'Table' ], '/',  [ 'RemoveFormat' ], [ 'Maximize' ] ]
