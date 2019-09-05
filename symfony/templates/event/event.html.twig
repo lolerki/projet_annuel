@@ -78,8 +78,10 @@
 
                             <h3>Crée un événement</h3>
 
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
+                            <div class="form-group">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                            </div>
 
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
