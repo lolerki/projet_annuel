@@ -6,11 +6,12 @@
     <div class="container">
         <div class="col-md-12">
 
-
-            <form class="form-inline col-md-12">
-                <input class="form-control col-md-8" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success col-md-3" type="submit">Recherche</button>
-            </form>
+            <div class="mb-3">
+                <form class="form-inline col-md-12">
+                    <input class="form-control col-md-8" type="search" placeholder="Recherche d'événement" aria-label="Search">
+                    <button class="btn btn-outline-secondary col-md-4" type="submit">Recherche</button>
+                </form>
+            </div>
 
             <div class="row">
 
@@ -30,9 +31,9 @@
                                 <div class="col-md-7">
                                     <div class="card-body">
 
-                                            <a href="{{ path('event_show', {id: event.id} ) }}" class="custom-card">
-                                                <h5 class="card-title">{{ event.title }}</h5>
-                                            </a>
+                                        <a href="{{ path('event_show', {id: event.id} ) }}" class="custom-card">
+                                            <h5 class="card-title">{{ event.title }}</h5>
+                                        </a>
 
                                         <div>
                                             <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
@@ -71,7 +72,9 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{ nextEvent.title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> {{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted"><i
+                                            class="far fa-calendar-alt"></i> {{ nextEvent.dateEvent.date|date('d/m/Y') }}
+                                </h6>
                                 <p class="card-text">{{ nextDescription|raw }}</p>
                                 <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i
                                             class="far fa-eye"></i> Voir plus</a>
