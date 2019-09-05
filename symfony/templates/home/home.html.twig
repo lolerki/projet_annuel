@@ -19,6 +19,9 @@
                     <h3>Nouveau événement</h3>
 
                     {% for event in events %}
+
+                        {% set description = (event.description|length > 110 ? event.description|slice(0, 110)|striptags ~ '…' : event.description) %}
+
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
@@ -48,13 +51,12 @@
                                             {% endif %}
                                         </div>
 
-                                        {% set description = (event.description|length > 110 ? event.description|slice(0, 110)|striptags() ~ '…' : event.description) %}
-
-                                        <p class="card-text">{{ description }}</p>
+                                        <p class="card-text">{{ description|raw }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     {% endfor %}
 
                 </div>
@@ -63,11 +65,14 @@
                     <h3>Evenement à venir</h3>
 
                     {% for nextEvent in nextEvents %}
+
+                        {% set nextDescription = (nextEvent.description|length > 50 ? nextEvent.description|slice(0, 50)|striptags ~ '…' : nextEvent.description) %}
+
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{ nextEvent.title }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> {{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
-                                <p class="card-text">{{ ( nextEvent.description|length > 50 ? nextEvent.description|slice(0, 50)|striptags() ~ '…' : nextEvent.description )  }}</p>
+                                <p class="card-text">{{ nextDescription|raw }}</p>
                                 <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i
                                             class="far fa-eye"></i> Voir plus</a>
                             </div>
