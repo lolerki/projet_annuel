@@ -45,13 +45,12 @@
                                                 Gratuit
                                             {% else %}
                                                 {{ event.price }} €
-                                            {% endif %}</div>
-                                        <div>
-                                            <i class="fas fa-users"></i>
+                                            {% endif %}
                                         </div>
 
+                                        {% set description = (event.description|length > 110 ? event.description|slice(0, 110)|striptags() ~ '…' : event.description) %}
 
-                                        <p class="card-text">{{ (event.description|length > 100 ? event.description|slice(0, 100) ~ '…' : event.description)  }}</p>
+                                        <p class="card-text">{{ description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +66,10 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{ nextEvent.title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
-                                <p class="card-text">{{ (nextEvent.description|length > 50 ? nextEvent.description|slice(0, 50) ~ '…' : nextEvent.description)  }}</p>
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="far fa-calendar-alt"></i> {{ nextEvent.dateEvent.date|date('d/m/Y') }}</h6>
+                                <p class="card-text">{{ ( nextEvent.description|length > 50 ? nextEvent.description|slice(0, 50)|striptags() ~ '…' : nextEvent.description )  }}</p>
                                 <a href="{{ path('event_show', {id: nextEvent.id }) }}" class="btn btn-info"><i
-                                            class="far fa-eye"></i> Voir</a>
+                                            class="far fa-eye"></i> Voir plus</a>
                             </div>
                         </div>
                     {% endfor %}
