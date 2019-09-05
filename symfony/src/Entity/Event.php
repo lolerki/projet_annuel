@@ -130,7 +130,7 @@ class Event
     private $updatedAt;
 
     /**
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="event", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
