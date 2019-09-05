@@ -12,6 +12,7 @@ use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -39,13 +40,20 @@ class ProfileType extends AbstractType
                 ],
             ])
             ->add('stage_name', TextType::class, [
-                'label' => 'Profession',
+                'label' => 'Profession *',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('pseudo', TextType::class, [
-                'label' => 'Pseudo / Non de scène',
+                'label' => 'Pseudo / Non de scène *',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('paypal', UrlType::class, [
+                'label' => 'Lien paypal',
+                'required' => false,
                 'attr' => [
                     'class' => 'form-control',
                 ],

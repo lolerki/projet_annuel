@@ -58,7 +58,6 @@ class EventController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/event/{id}", name="event_show")
      */
@@ -84,7 +83,6 @@ class EventController extends AbstractController
             }
 
         }
-
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 

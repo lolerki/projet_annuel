@@ -89,6 +89,11 @@ class Profile implements Serializable
      */
     private $idUser;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $paypal;
+
     public function __toString()
     {
         return $this->getPseudo();
@@ -207,5 +212,17 @@ class Profile implements Serializable
             $this->id,
 
             ) = unserialize($serialized);
+    }
+
+    public function getPaypal(): ?string
+    {
+        return $this->paypal;
+    }
+
+    public function setPaypal(?string $paypal): self
+    {
+        $this->paypal = $paypal;
+
+        return $this;
     }
 }
