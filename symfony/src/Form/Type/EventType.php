@@ -69,6 +69,7 @@ class EventType extends AbstractType
                 'label' => 'Adresse',
                 'attr' => [
                     'class' => 'form-control',
+                    'autocomplete' => 'disabled'
                 ],
             ])
             ->add('linkgoogle', UrlType::class, [

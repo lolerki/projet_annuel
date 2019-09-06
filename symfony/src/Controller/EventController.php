@@ -14,10 +14,20 @@ use App\Form\Type\EventType;
 use App\Form\CommentType;
 use App\Entity\Like;
 use App\Entity\Comment;
+use Algolia\SearchBundle\IndexManagerInterface;
 
 
 class EventController extends AbstractController
 {
+
+    protected $indexManager;
+
+    public function __construct(IndexManagerInterface $indexingManager)
+    {
+        $this->indexManager = $indexingManager;
+    }
+
+
     /**
      * @Route("/event", name="event")
      * @IsGranted("ROLE_USER")

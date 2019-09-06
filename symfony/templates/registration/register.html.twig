@@ -19,10 +19,16 @@
             {{ form_row(registrationForm.plainPassword.second) }}
         </div>
 
-        {{ form_widget(registrationForm.recaptcha) }}
+        <div class="form-group row">
+            {{ form_row(registrationForm.artist) }}
+        </div>
+
 
         <button class="btn-lg">{{ 'register'|trans }}</button>
+
+        {{ form_widget(registrationForm.recaptcha) }}
         {{ form_end(registrationForm) }}
+
     </div>
 {% endblock %}
 

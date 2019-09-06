@@ -79,7 +79,7 @@
                             <h3>Crée un événement</h3>
 
                             <div class="form-group">
-                                {{ form_start(form) }}
+                                {{ form_start(form, { 'attr': {'autocomplete': 'off'} }) }}
                                 {{ form_widget(form) }}
                             </div>
 
@@ -128,7 +128,6 @@
         $(document).ready(function () {
             // you may need to change this code if you are not using Bootstrap Datepicker
             $('.js-datepicker').datepicker({
-                minDate: -4,
                 format: 'yyyy-mm-dd',
             });
         });
@@ -145,6 +144,17 @@
 
 
             }, "JSON");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
+    <input type="search" id="address-input" placeholder="Where are we going?" />
+
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
+    <script>
+        var placesAutocomplete = places({
+            appId: 'plZZG88IK9Q9',
+            apiKey: '6f32587b09aa36145e77716e3687992f',
+            container: document.querySelector('#event_address')
         });
     </script>
 {% endblock %}
