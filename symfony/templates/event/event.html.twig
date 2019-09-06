@@ -147,14 +147,21 @@
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
-    <input type="search" id="address-input" placeholder="Where are we going?" />
-
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
     <script>
         var placesAutocomplete = places({
             appId: 'plZZG88IK9Q9',
             apiKey: '6f32587b09aa36145e77716e3687992f',
             container: document.querySelector('#event_address')
+        });
+
+        addressPlacesInstance.on('change', function resultSelected(e) {
+            document.querySelector('#dynamic-form-address').value = e.suggestion.name || '';
+            document.querySelector('#dynamic-form-city').value = e.suggestion.city || '';
+            document.querySelector('#dynamic-form-zip').value = e.suggestion.postcode || '';
+            document.querySelector('#dynamic-form-country').value = e.suggestion.country || '';
+
+            console.log(e);
         });
     </script>
 {% endblock %}

@@ -77,12 +77,6 @@ class Event
     private $dateEvent;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event_get_collection","event_post_collection","event_get_item","event_put_item"})
-     */
-    private $linkGoogle;
-
-    /**
      * @ORM\Column(type="integer")
      * @Groups({"event_get_collection","event_post_collection","event_get_item","event_put_item"})
      */
@@ -209,18 +203,6 @@ class Event
     public function setDateEvent(\DateTimeInterface $dateEvent): self
     {
         $this->dateEvent = $dateEvent;
-
-        return $this;
-    }
-
-    public function getLinkGoogle(): ?string
-    {
-        return $this->linkGoogle;
-    }
-
-    public function setLinkGoogle(?string $linkGoogle): self
-    {
-        $this->linkGoogle = $linkGoogle;
 
         return $this;
     }

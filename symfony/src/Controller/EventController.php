@@ -57,7 +57,8 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            //   return $this->redirectToRoute('user_edit');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()] );
+
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
@@ -108,8 +109,6 @@ class EventController extends AbstractController
             $newComment->setIdUser($user);
             $entityManager->persist($newComment);
             $entityManager->flush();
-
-            //  return $this->redirectToRoute('app_article_show');
         }
 
         $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
