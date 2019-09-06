@@ -27,6 +27,7 @@ class CommentType extends AbstractType
 
         $builder
             ->add('comment', CKEditorType::class, [
+                'config_name' => 'comment',
                 'label' => 'Écrire un commentaire',
                 'attr' => [
                     'class' => 'form-control',
