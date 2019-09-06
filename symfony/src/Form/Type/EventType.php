@@ -11,11 +11,9 @@ namespace App\Form\Type;
 
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -69,7 +67,7 @@ class EventType extends AbstractType
                 'label' => 'Adresse',
                 'attr' => [
                     'class' => 'form-control',
-                    'autocomplete' => 'disabled'
+                    'autocomplete' => 'off'
                 ],
             ])
             ->add('price', TextType::class, [
@@ -77,6 +75,16 @@ class EventType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
+            ])
+            ->add('lat', HiddenType::class, [
+                'attr' => array(
+                    'value' => 0
+                )
+            ])
+            ->add('lng', HiddenType::class, [
+                'attr' => array(
+                    'value' => 0
+                )
             ])
         ;
     }

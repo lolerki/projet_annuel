@@ -30,11 +30,13 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($faker->text)
                 ->setDateEvent($faker->dateTimeInInterval($startDate = '-5 days', $interval = '+ 7 days', $timezone = null) )
                 ->setPrice($faker->numberBetween($min = 0, $max = 200))
-                ->setLinkGoogle('https://www.google.com')
                 ->setIdUser($user)
                 ->setImage('iStock-667709450.jpg')
                 ->setAddress($faker->streetAddress)
+                ->setLat('48.8295')
+                ->setLng('2.5706')
                 ->setTime($time);
+
 
             $manager->persist($event);
 

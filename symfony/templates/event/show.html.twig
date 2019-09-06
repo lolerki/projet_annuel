@@ -8,7 +8,7 @@
         <div class="alert alert-success" style="display:none;" id="notif" role="alert">
 
         </div>
-        <div class="card mb-5">
+        <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-5">
                     <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img" height="300">
@@ -82,8 +82,12 @@
                 </div>
             </div>
         </div>
+
         <h6>Description de l'événement</h6>
         <p>{{ event.description|raw }}</p>
+
+        <div id="map"></div>
+
         <hr/>
         {% if is_granted('ROLE_USER') %}
 
@@ -138,8 +142,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-
     <script>
+
         $('.participe').click(function () {
 
             var data = $(this).attr('id');
@@ -178,8 +182,6 @@
 
         $('body').on('click', '.delete', function () {
 
-            console.log("coucou");
-
             var data = $(this).attr('id');
 
             var url = "{{ path('event_delete_like', {'id': 'id'}) }}";
@@ -197,4 +199,23 @@
 
         });
     </script>
+    <script>
+
+        function initMap() {
+            var myLatLng = {lat: {{ event.lat }}, lng: {{ event.lng }} };
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2D7u7x3nTdwZtSGWHnfy67ourR6Cqwdw&callback=initMap"
+            async defer></script>
 {% endblock %}
