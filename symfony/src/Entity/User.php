@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -120,11 +119,6 @@ class User implements UserInterface
      */
     private $profile;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $artist;
-
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
@@ -132,7 +126,6 @@ class User implements UserInterface
         $this->likes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->artist = 0;
     }
 
     public function __toString()
@@ -391,18 +384,6 @@ class User implements UserInterface
         if ($this !== $profile->getIdUser()) {
             $profile->setIdUser($this);
         }
-
-        return $this;
-    }
-
-    public function getArtist(): ?bool
-    {
-        return $this->artist;
-    }
-
-    public function setArtist(bool $artist): self
-    {
-        $this->artist = $artist;
 
         return $this;
     }
