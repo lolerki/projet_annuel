@@ -33,7 +33,8 @@
                                 {{ event.price }} €
                             {% endif %}
                         </div>
-                        <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
+                        <i class="far fa-clock"></i> {{ event.time.date|date('H:i') }}
+                        </p>
 
 
                         {% if inscrire == true %}
@@ -75,7 +76,8 @@
                             </div>
                             </p>
                         {% else %}
-                            <a href="" class="btn btn-info">Modifier l'événement</a>
+                            <a href="{{ path('event_edit', {id: event.id }) }}" class="btn btn-info">Modifier
+                                l'événement</a>
                         {% endif %}
 
                     </div>
@@ -113,7 +115,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
                                      class="m-x-auto img-fluid img-circle">
                             </div>
@@ -135,7 +137,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-
     </div>
 
 {% endblock %}
@@ -198,6 +199,7 @@
             }, "JSON");
 
         });
+
     </script>
     <script>
 

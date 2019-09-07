@@ -94,11 +94,6 @@ class Event
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="idEvent")
-     */
-    private $notes;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvent", mappedBy="idEvent")
      */
     private $participationEvents;
@@ -152,7 +147,6 @@ class Event
     public function __construct()
     {
         $this->likes = new ArrayCollection();
-        $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
         $this->createAt = new \DateTime('now');
         $this->statut = '1';
@@ -266,37 +260,6 @@ class Event
             // set the owning side to null (unless already changed)
             if ($like->getIdEvent() === $this) {
                 $like->setIdEvent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setIdEvent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getIdEvent() === $this) {
-                $note->setIdEvent(null);
             }
         }
 

@@ -106,11 +106,6 @@ class User implements UserInterface
     private $likes;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="idUser")
-     */
-    private $notes;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvent", mappedBy="idUser")
      */
     private $participationEvents;
@@ -135,7 +130,6 @@ class User implements UserInterface
         $this->createAt = new \DateTime('now');
         $this->events = new ArrayCollection();
         $this->likes = new ArrayCollection();
-        $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->artist = 0;
@@ -316,37 +310,6 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($like->getIdUser() === $this) {
                 $like->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getIdUser() === $this) {
-                $note->setIdUser(null);
             }
         }
 
