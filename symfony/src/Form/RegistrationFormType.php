@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,9 +25,8 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'attr' => ['class' => 'form-control'],
-                'first_options'  => array('label' => 'label.password'),
-                'second_options' => array('label' => 'label.new_password_confirm'),
+                'first_options'  => ['label' => 'label.password', 'attr' => ['class' => 'form-control'],],
+                'second_options' => ['label' => 'label.new_password_confirm', 'attr' => ['class' => 'form-control'],],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'constraints' => [
@@ -41,13 +41,22 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('recaptcha', EWZRecaptchaType::class, array(
+            ->add('artist', ChoiceType::class, [
+                'choices'  => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+                'label' => 'Etes vous un artiste ?',
+                'attr' => ['class' => 'form-control'],
+                'mapped' => false
+            ])
+            ->add('recaptcha', EWZRecaptchaType::class, [
                 'language' => 'en',
                 'mapped'      => false,
-                'constraints' => array(
+                'constraints' => [
                     new RecaptchaTrue()
-                )
-            ));
+                ]
+            ]);
         ;
     }
 

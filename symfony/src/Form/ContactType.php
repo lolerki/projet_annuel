@@ -8,19 +8,20 @@
 
 namespace App\Form;
 
-use App\Entity\Profile;
+use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichImageType;
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 
 /**
  * Defines the form used to edit an user.
  */
-class ProfileType extends AbstractType
+class ContactType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,29 +30,36 @@ class ProfileType extends AbstractType
     {
 
         $builder
-              ->add('imageFile', VichImageType::class, [
-                  'label' => 'Photo de profile',
-                  'required' => false,
-
-              ])
-            ->add('about', TextareaType::class, [
-                'label' => 'Description',
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
-            ->add('pseudo', TextType::class, [
-                'label' => 'Nom',
+            ->add('object', TextType::class, [
+                'label' => 'Object',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
-            ->add('paypal', UrlType::class, [
-                'label' => 'Lien paypal',
-                'required' => false,
+            ->add('email', EmailType::class, [
+                'label' => 'Adresse email',
                 'attr' => [
                     'class' => 'form-control',
                 ],
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('recaptcha', EWZRecaptchaType::class, [
+                'language' => 'en',
+                'mapped'      => false,
+                'constraints' => [
+                    new RecaptchaTrue()
+                ]
             ]);
     }
 
@@ -61,7 +69,7 @@ class ProfileType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Profile::class,
+            'data_class' => Contact::class,
         ]);
     }
 }

@@ -14,10 +14,20 @@ use App\Form\Type\EventType;
 use App\Form\CommentType;
 use App\Entity\Like;
 use App\Entity\Comment;
+use Algolia\SearchBundle\IndexManagerInterface;
 
 
 class EventController extends AbstractController
 {
+
+    protected $indexManager;
+
+    public function __construct(IndexManagerInterface $indexingManager)
+    {
+        $this->indexManager = $indexingManager;
+    }
+
+
     /**
      * @Route("/event", name="event")
      * @IsGranted("ROLE_USER")
@@ -47,7 +57,8 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            //   return $this->redirectToRoute('user_edit');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()] );
+
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
@@ -57,7 +68,6 @@ class EventController extends AbstractController
             'myevents' => $myEvents
         ]);
     }
-
 
     /**
      * @Route("/event/{id}", name="event_show")
@@ -85,7 +95,6 @@ class EventController extends AbstractController
 
         }
 
-
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
         //vérification si event termine
@@ -100,8 +109,6 @@ class EventController extends AbstractController
             $newComment->setIdUser($user);
             $entityManager->persist($newComment);
             $entityManager->flush();
-
-            //  return $this->redirectToRoute('app_article_show');
         }
 
         $recherche = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
@@ -171,10 +178,14 @@ class EventController extends AbstractController
         $participer = new ParticipationEvent();
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
+        $placeRetante = $event->getNbPlace() -1;
+
         $entityManager = $this->getDoctrine()->getManager();
         $participer->setIdUser($user);
         $participer->setIdEvent($event);
+        $event->setNbPlace($placeRetante);
         $entityManager->persist($participer);
+        $entityManager->persist($event);
         $entityManager->flush();
 
         $message = "<i class='far fa-check-circle'></i> Vous êtes maintenant inscrit à cette événement";
@@ -221,7 +232,7 @@ class EventController extends AbstractController
         $entityManager->remove($participe);
         $entityManager->flush();
 
-        $message = "participation supprimer";
+        $message = '<i class="fas fa-info-circle"></i> Votre participation a été annulé';
 
         return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }

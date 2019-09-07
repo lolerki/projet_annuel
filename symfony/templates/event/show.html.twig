@@ -5,46 +5,57 @@
 {% block body %}
     <div class="container">
 
-        <div class="alert alert-success" style="display:none;" id="notif" role="alert">
+        <div class="alert alert-success" style="display:none;" id="notif" role="alert"></div>
 
-        </div>
-        <div class="card mb-5">
+        <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{{ asset('build/avatars/' ~ event.image) }}" class="card-img" height="300">
+                    <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img" height="300">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                        <p class="card-text">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}</div>
-                        <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">
-                            <i class="far fa-user"></i> {{ event.idUser.Profile.pseudo }}
-                        </a>
-                        <div>
-                            <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
-                        </div>
-                        <div>
-                            <i class="fas fa-tag"></i>
-                            {% if event.price == 0 %}
-                                Gratuit
-                            {% else %}
-                                {{ event.price }} €
-                            {% endif %}
-                        </div>
-                        <i class="far fa-clock"></i> {{ event.time.date|date('H:i:s') }}</p>
 
+                        <h5 class="card-title">{{ event.title }}</h5>
+
+                        <p class="card-text">
+                            <div id="address">
+                                <i class="fas fa-map-marker-alt"></i> {{ event.address }}
+                            </div>
+                            <div>
+                                <i class="fas fa-walking"></i> {{ event.transport }}
+                            </div>
+                            <div>
+                                <i class="far fa-user"></i> <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">{{ event.idUser.Profile.pseudo }}</a>
+                    </div>
+                        <div id="date">
+                                <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
+                            </div>
+                            <div id="price">
+                                <i class="fas fa-tag"></i>
+                                {% if event.price == 0 %}
+                                    Gratuit
+                                {% else %}
+                                    {{ event.price }} €
+                                {% endif %}
+                            </div>
+                            <div id="time">
+                                <i class="far fa-clock"></i> De {{ event.time.date|date('H:i') }}
+                                à {{ event.timeEnd.date|date('H:i') }}
+                            </div>
+                            <div id="place">
+                                <i class="fas fa-users"></i> {{ event.nbPlace }} Places restantes
+                            </div>
+                        </p>
 
                         {% if inscrire == true %}
-                            <p class="card-text">
-                            <div class="row">
-                                {% if finish == false %}
-                                    {% if app.user is not null %}
+                            <p |class="card-text">
+
+                            {% if finish == false %}
+                                {% if app.user is not null %}
+                                    <div class="row">
                                         <small class="text-muted">
                                             {% if like == null %}
                                             <button type="button" class="btn btn-default" aria-label="Left Align">
-
                                                 <div class="like" id="{{ event.id }}">
                                                     <i class="far fa-bookmark"></i> Mettre de côté
                                                 </div>
@@ -58,6 +69,7 @@
                                             </button>
                                         </small>
 
+
                                         {% if participe == null %}
                                             <div id="button">
                                                 <button class="btn btn-default participe" id="{{ event.id }}">
@@ -67,27 +79,38 @@
                                         {% else %}
                                             <span class="badge badge-secondary">Je participe déjà à cette événment</span>
                                         {% endif %}
-                                    {% endif %}
-
-                                {% else %}
-                                    <span class="badge badge-danger">Evénement terminé</span>
+                                    </div>
                                 {% endif %}
-                            </div>
+
+                            {% else %}
+
+                                <span class="badge badge-danger">Evénement terminé</span>
+
+                            {% endif %}
+
                             </p>
                         {% else %}
-                            <a href="" class="btn btn-info">Modifier l'événement</a>
+                            <a href="{{ path('event_edit', {id: event.id }) }}" class="btn btn-info">Modifier
+                                l'événement</a>
                         {% endif %}
 
                     </div>
                 </div>
             </div>
         </div>
+
         <h6>Description de l'événement</h6>
         <p>{{ event.description|raw }}</p>
+
+        <div id="map"></div>
+
         <hr/>
         {% if is_granted('ROLE_USER') %}
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+
+            <div class="form-group">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+            </div>
 
             <button type="submit" class="btn btn-primary">
                 <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
@@ -106,7 +129,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
                                      class="m-x-auto img-fluid img-circle">
                             </div>
@@ -128,15 +151,14 @@
                 </div>
             {% endfor %}
         {% endif %}
-
     </div>
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-
     <script>
+
         $('.participe').click(function () {
 
             var data = $(this).attr('id');
@@ -146,11 +168,19 @@
 
             var formSerialize = $(this).serialize();
 
+            $('#button').addClass('spinner-border');
+            $('#button').html('<span class="sr-only">Loading...</span>');
+
             $.post(url, formSerialize, function (response) {
+
+                $('#button').removeClass('spinner-border');
+
+                var places = {{ event.nbPlace }} -1;
 
                 $('#notif ').html(response['message']);
                 $('#notif').fadeIn(500);
                 $('#button').html('<span class="badge badge-secondary">Je participe déjà à cette événment</span>');
+                $('#place').html('<i class="fas fa-users"></i> ' + places + ' Places restantes');
 
             }, "JSON");
         });
@@ -175,8 +205,6 @@
 
         $('body').on('click', '.delete', function () {
 
-            console.log("coucou");
-
             var data = $(this).attr('id');
 
             var url = "{{ path('event_delete_like', {'id': 'id'}) }}";
@@ -193,5 +221,28 @@
             }, "JSON");
 
         });
+
     </script>
+    <script>
+
+        function initMap() {
+            var myLatLng = {lat: {{ event.lat }}, lng: {{ event.lng }} };
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                center: myLatLng
+            });
+
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+    </script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v4.0&appId=372602230261536&autoLogAppEvents=1"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2D7u7x3nTdwZtSGWHnfy67ourR6Cqwdw&callback=initMap"
+            async defer></script>
 {% endblock %}

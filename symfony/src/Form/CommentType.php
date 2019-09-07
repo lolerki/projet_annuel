@@ -9,8 +9,8 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,10 +26,12 @@ class CommentType extends AbstractType
     {
 
         $builder
-            ->add('comment', TextareaType::class, [
-                'label' => 'Commentaire',
+            ->add('comment', CKEditorType::class, [
+                'config_name' => 'comment',
+                'label' => 'Écrire un commentaire',
                 'attr' => [
                     'class' => 'form-control',
+                    'autocomplete' => 'off',
                 ],
             ]);
     }

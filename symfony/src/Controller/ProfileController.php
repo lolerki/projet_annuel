@@ -24,7 +24,7 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
         $profile = new Profile();
 
-        if($user->getProfile() != null){
+        if ($user->getProfile() != null) {
             return $this->redirectToRoute('profile_edit', ['id' => $user->getProfile()->getId()]);
         }
 
@@ -56,7 +56,7 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        if($user->getProfile() == null){
+        if ($user->getProfile() == null) {
             return $this->redirectToRoute('profile_new');
         }
 
@@ -101,11 +101,18 @@ class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if ($profile->getPaypal() != null) {
+
+                $linkPaypalParams = explode('=', $profile->getPaypal());
+                $idPaypal = explode('&', $linkPaypalParams[2]);
+                $profile->setPaypal($idPaypal[0]);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($profile);
             $entityManager->flush();
 
-              return $this->redirectToRoute('profile_show');
+            return $this->redirectToRoute('profile_show');
         }
 
         return $this->render('profile/edit.html.twig', [

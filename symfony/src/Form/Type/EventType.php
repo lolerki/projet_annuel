@@ -11,11 +11,11 @@ namespace App\Form\Type;
 
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,11 +35,16 @@ class EventType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de présentation',
+                'attr' => [
+                    'class' => 'form-control-file'
+                ]
             ])
             ->add('title', TextType::class, [
-                'label' => 'Nom de l\'évenement',
+                'label' => 'Titre de l\'évenement',
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Atelier découverte - peinture sur céramique'
                 ]
             ])
             ->add('description', CKEditorType::class, [
@@ -60,7 +65,13 @@ class EventType extends AbstractType
                 "data" => new \DateTime()
             ])
             ->add('time', TimeType::class, [
-                'label' => 'heure',
+                'label' => 'Heure de début',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('timeEnd', TimeType::class, [
+                'label' => 'Heure de fin',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -69,10 +80,45 @@ class EventType extends AbstractType
                 'label' => 'Adresse',
                 'attr' => [
                     'class' => 'form-control',
+                    'autocomplete' => 'off'
                 ],
             ])
-            ->add('linkgoogle', UrlType::class, [
-                'label' => 'Lien google map',
+            ->add('transport', TextType::class, [
+                'label' => 'Comment vous trouver',
+                'attr' => [
+                    'class' => 'form-control',
+                    'autocomplete' => 'off',
+                    'placeholder' => 'Metro ligne 9'
+                ],
+
+            ])
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Théâtre' => 'Théâtre',
+                    'Cinéma' => 'Cinéma',
+                    'Danse' => 'Danse',
+                    'Chant' => 'Chant',
+                    'Musique' => 'Musique',
+                    'Interpretation' => 'Interpretation',
+                    'Doublage' => 'Doublage',
+                    'Peinture' => 'Peinture',
+                    'Dessin' => 'Dessin',
+                    'Sculpture' => 'Sculpture',
+                    'Gravure' => 'Gravure',
+                    'Performances' => 'Performances',
+                    'Audio Visuelle' => 'Audio Visuelle',
+                    'Artifices' => 'Artifices',
+                    'Spectacle' => 'Spectacle',
+                    'Mime' => 'Mime',
+                    'Autre' => 'Autre',
+                ],
+                'label' => 'Type d\'événement *',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('nbPlace', IntegerType::class, [
+                'label' => 'Nombre de place',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -81,9 +127,19 @@ class EventType extends AbstractType
                 'label' => 'Prix d\'entrée',
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Mettez 0 si l\'événement est gratuit'
                 ],
             ])
-        ;
+            ->add('lat', HiddenType::class, [
+                'attr' => array(
+                    'value' => 0
+                )
+            ])
+            ->add('lng', HiddenType::class, [
+                'attr' => array(
+                    'value' => 0
+                )
+            ]);
     }
 
     /**

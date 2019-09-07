@@ -77,12 +77,6 @@ class Event
     private $dateEvent;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event_get_collection","event_post_collection","event_get_item","event_put_item"})
-     */
-    private $linkGoogle;
-
-    /**
      * @ORM\Column(type="integer")
      * @Groups({"event_get_collection","event_post_collection","event_get_item","event_put_item"})
      */
@@ -98,11 +92,6 @@ class Event
      * @ORM\OneToMany(targetEntity="App\Entity\Like", mappedBy="idEvent")
      */
     private $likes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="idEvent")
-     */
-    private $notes;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvent", mappedBy="idEvent")
@@ -130,7 +119,7 @@ class Event
     private $updatedAt;
 
     /**
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="event", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
@@ -145,10 +134,39 @@ class Event
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lng;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $timeEnd;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbPlace;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $transport;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
-        $this->notes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
         $this->createAt = new \DateTime('now');
         $this->statut = '1';
@@ -213,18 +231,6 @@ class Event
         return $this;
     }
 
-    public function getLinkGoogle(): ?string
-    {
-        return $this->linkGoogle;
-    }
-
-    public function setLinkGoogle(?string $linkGoogle): self
-    {
-        $this->linkGoogle = $linkGoogle;
-
-        return $this;
-    }
-
     public function getPrice(): ?int
     {
         return $this->price;
@@ -274,37 +280,6 @@ class Event
             // set the owning side to null (unless already changed)
             if ($like->getIdEvent() === $this) {
                 $like->setIdEvent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes[] = $note;
-            $note->setIdEvent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->notes->contains($note)) {
-            $this->notes->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getIdEvent() === $this) {
-                $note->setIdEvent(null);
             }
         }
 
@@ -447,6 +422,78 @@ class Event
                 $comment->setIdEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?string
+    {
+        return $this->lat;
+    }
+
+    public function setLat(string $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?string
+    {
+        return $this->lng;
+    }
+
+    public function setLng(string $lng): self
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getTimeEnd(): ?\DateTimeInterface
+    {
+        return $this->timeEnd;
+    }
+
+    public function setTimeEnd(\DateTimeInterface $timeEnd): self
+    {
+        $this->timeEnd = $timeEnd;
+
+        return $this;
+    }
+
+    public function getNbPlace(): ?int
+    {
+        return $this->nbPlace;
+    }
+
+    public function setNbPlace(int $nbPlace): self
+    {
+        $this->nbPlace = $nbPlace;
+
+        return $this;
+    }
+
+    public function getTransport(): ?string
+    {
+        return $this->transport;
+    }
+
+    public function setTransport(string $transport): self
+    {
+        $this->transport = $transport;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
