@@ -57,12 +57,6 @@ class Profile implements Serializable
     private $about;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"profile_get_collection","profile_post_collection","profile_get_item","profile_put_item"})
-     */
-    private $stage_name;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
@@ -113,18 +107,6 @@ class Profile implements Serializable
     public function setAbout(?string $about): self
     {
         $this->about = $about;
-
-        return $this;
-    }
-
-    public function getStageName(): ?string
-    {
-        return $this->stage_name;
-    }
-
-    public function setStageName(?string $stage_name): self
-    {
-        $this->stage_name = $stage_name;
 
         return $this;
     }

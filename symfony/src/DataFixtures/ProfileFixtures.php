@@ -22,7 +22,6 @@ class ProfileFixtures extends Fixture implements DependentFixtureInterface
         $profile = (new Profile())
             ->setAbout($faker->text)
             ->setPseudo($faker->firstName.' '.$faker->lastName)
-            ->setStageName($faker->text($maxNbChars = 10))
             ->setAbout($faker->text)
             ->setImage('download.jpeg')
             ->setIdUser($user);

@@ -154,6 +154,16 @@ class Event
      */
     private $nbPlace;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $transport;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -460,6 +470,30 @@ class Event
     public function setNbPlace(int $nbPlace): self
     {
         $this->nbPlace = $nbPlace;
+
+        return $this;
+    }
+
+    public function getTransport(): ?string
+    {
+        return $this->transport;
+    }
+
+    public function setTransport(string $transport): self
+    {
+        $this->transport = $transport;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

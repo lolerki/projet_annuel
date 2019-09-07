@@ -36,6 +36,8 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ->setLat('48.8295')
                 ->setLng('2.5706')
                 ->setNbPlace(15)
+                ->setType('Dessin')
+                ->setTransport('Métro 9, arrêt Républic')
                 ->setTime($time)
                 ->setTimeEnd($time);
 

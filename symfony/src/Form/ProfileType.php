@@ -10,7 +10,6 @@ namespace App\Form;
 
 use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -41,33 +40,8 @@ class ProfileType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('stage_name', ChoiceType::class, [
-                'choices'  => [
-                    'Théâtre' => 'Théâtre',
-                    'Cinéma' => 'Cinéma',
-                    'Danse' => 'Danse',
-                    'Chant' => 'Chant',
-                    'Musique' => 'Musique',
-                    'Interpretation' => 'Interpretation',
-                    'Doublage' => 'Doublage',
-                    'Peinture' => 'Peinture',
-                    'Dessin' => 'Dessin',
-                    'Sculpture' => 'Sculpture',
-                    'Gravure' => 'Gravure',
-                    'Performances' => 'Performances',
-                    'Audio Visuelle' => 'Audio Visuelle',
-                    'Artifices' => 'Artifices',
-                    'Spectacle' => 'Spectacle',
-                    'Mime' => 'Mime',
-                    'Autre' => 'Autre',
-                ],
-                'label' => 'Profession *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
             ->add('pseudo', TextType::class, [
-                'label' => 'Pseudo / Non de scène *',
+                'label' => 'Nom',
                 'attr' => [
                     'class' => 'form-control',
                 ],
