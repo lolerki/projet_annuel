@@ -48,6 +48,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'label' => 'Etes vous un artiste ?',
                 'attr' => ['class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [
                 'language' => 'en',
