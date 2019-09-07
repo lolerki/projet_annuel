@@ -31,6 +31,7 @@ class ProfileType extends AbstractType
 
         $builder
               ->add('imageFile', VichImageType::class, [
+                  'label' => 'Photo de profile',
                   'required' => false,
 
               ])

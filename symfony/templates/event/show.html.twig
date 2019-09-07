@@ -16,15 +16,16 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ event.title }}</h5>
                         <p class="card-text">
-                        <div>
-                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}</div>
+                        <div id="address">
+                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}
+                        </div>
                         <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">
                             <i class="far fa-user"></i> {{ event.idUser.Profile.pseudo }}
                         </a>
-                        <div>
+                        <div id="date">
                             <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
                         </div>
-                        <div>
+                        <div id="price">
                             <i class="fas fa-tag"></i>
                             {% if event.price == 0 %}
                                 Gratuit
@@ -32,7 +33,13 @@
                                 {{ event.price }} €
                             {% endif %}
                         </div>
-                        <i class="far fa-clock"></i> {{ event.time.date|date('H:i') }}
+                        <div id="time">
+                            <i class="far fa-clock"></i> De {{ event.time.date|date('H:i') }}
+                            à {{ event.timeEnd.date|date('H:i') }}
+                        </div>
+                        <div id="place">
+                            <i class="fas fa-users"></i> {{ event.nbPlace }} Places restantes
+                        </div>
                         </p>
 
 
@@ -153,11 +160,19 @@
 
             var formSerialize = $(this).serialize();
 
+            $('#button').addClass('spinner-border');
+            $('#button').html('<span class="sr-only">Loading...</span>');
+
             $.post(url, formSerialize, function (response) {
+
+                $('#button').removeClass('spinner-border');
+
+                var places = {{ event.nbPlace }} -1;
 
                 $('#notif ').html(response['message']);
                 $('#notif').fadeIn(500);
                 $('#button').html('<span class="badge badge-secondary">Je participe déjà à cette événment</span>');
+                $('#place').html('<i class="fas fa-users"></i> ' + places + ' Places restantes');
 
             }, "JSON");
         });

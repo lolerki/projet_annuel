@@ -12,6 +12,8 @@ namespace App\Form\Type;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -33,9 +35,13 @@ class EventType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de présentation',
+                'attr' => [
+                    'class' => 'form-control-file',
+                ]
             ])
             ->add('title', TextType::class, [
-                'label' => 'Nom de l\'évenement',
+                'label' => 'Titre de l\'évenement',
                 'attr' => [
                     'class' => 'form-control',
                 ]
@@ -58,7 +64,13 @@ class EventType extends AbstractType
                 "data" => new \DateTime()
             ])
             ->add('time', TimeType::class, [
-                'label' => 'heure',
+                'label' => 'Heure de début',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
+            ->add('timeEnd', TimeType::class, [
+                'label' => 'Heure de fin',
                 'attr' => [
                     'class' => 'form-control',
                 ],
@@ -68,6 +80,12 @@ class EventType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'autocomplete' => 'off'
+                ],
+            ])
+            ->add('nbPlace', IntegerType::class, [
+                'label' => 'Nombre de place',
+                'attr' => [
+                    'class' => 'form-control',
                 ],
             ])
             ->add('price', TextType::class, [

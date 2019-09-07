@@ -178,10 +178,14 @@ class EventController extends AbstractController
         $participer = new ParticipationEvent();
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
+        $placeRetante = $event->getNbPlace() -1;
+
         $entityManager = $this->getDoctrine()->getManager();
         $participer->setIdUser($user);
         $participer->setIdEvent($event);
+        $event->setNbPlace($placeRetante);
         $entityManager->persist($participer);
+        $entityManager->persist($event);
         $entityManager->flush();
 
         $message = "<i class='far fa-check-circle'></i> Vous êtes maintenant inscrit à cette événement";
@@ -228,7 +232,7 @@ class EventController extends AbstractController
         $entityManager->remove($participe);
         $entityManager->flush();
 
-        $message = "participation supprimer";
+        $message = '<i class="fas fa-info-circle"></i> Votre participation a été annulé';
 
         return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }

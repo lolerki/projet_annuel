@@ -35,7 +35,9 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ->setAddress($faker->streetAddress)
                 ->setLat('48.8295')
                 ->setLng('2.5706')
-                ->setTime($time);
+                ->setNbPlace(15)
+                ->setTime($time)
+                ->setTimeEnd($time);
 
 
             $manager->persist($event);

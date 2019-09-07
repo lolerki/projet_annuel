@@ -144,6 +144,16 @@ class Event
      */
     private $lng;
 
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $timeEnd;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nbPlace;
+
     public function __construct()
     {
         $this->likes = new ArrayCollection();
@@ -426,6 +436,30 @@ class Event
     public function setLng(string $lng): self
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function getTimeEnd(): ?\DateTimeInterface
+    {
+        return $this->timeEnd;
+    }
+
+    public function setTimeEnd(\DateTimeInterface $timeEnd): self
+    {
+        $this->timeEnd = $timeEnd;
+
+        return $this;
+    }
+
+    public function getNbPlace(): ?int
+    {
+        return $this->nbPlace;
+    }
+
+    public function setNbPlace(int $nbPlace): self
+    {
+        $this->nbPlace = $nbPlace;
 
         return $this;
     }
