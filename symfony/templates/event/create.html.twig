@@ -26,7 +26,20 @@
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
     <script>
+
+        $(document).ready(function() {
+
+            var dateToday = new Date();
+
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                defaultDate: "+1w",
+                minDate: dateToday
+            });
+        });
+
         (function () {
+
             var placesAutocomplete = places({
                 appId: 'plZZG88IK9Q9',
                 apiKey: '6f32587b09aa36145e77716e3687992f',

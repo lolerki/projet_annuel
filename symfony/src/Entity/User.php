@@ -119,6 +119,11 @@ class User implements UserInterface
      */
     private $profile;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notify", mappedBy="idUser")
+     */
+    private $notifies;
+
     public function __construct()
     {
         $this->createAt = new \DateTime('now');
@@ -126,6 +131,7 @@ class User implements UserInterface
         $this->likes = new ArrayCollection();
         $this->participationEvents = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->notifies = new ArrayCollection();
     }
 
     public function __toString()
@@ -383,6 +389,37 @@ class User implements UserInterface
         // set the owning side of the relation if necessary
         if ($this !== $profile->getIdUser()) {
             $profile->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notify[]
+     */
+    public function getNotifies(): Collection
+    {
+        return $this->notifies;
+    }
+
+    public function addNotify(Notify $notify): self
+    {
+        if (!$this->notifies->contains($notify)) {
+            $this->notifies[] = $notify;
+            $notify->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotify(Notify $notify): self
+    {
+        if ($this->notifies->contains($notify)) {
+            $this->notifies->removeElement($notify);
+            // set the owning side to null (unless already changed)
+            if ($notify->getIdUser() === $this) {
+                $notify->setIdUser(null);
+            }
         }
 
         return $this;

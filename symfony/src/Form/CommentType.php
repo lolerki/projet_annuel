@@ -31,8 +31,8 @@ class CommentType extends AbstractType
                 'label' => 'Écrire un commentaire',
                 'attr' => [
                     'class' => 'form-control',
-                    'autocomplete' => 'off',
-                ],
+                    'autocomplete' => 'off'
+                ]
             ]);
     }
 

@@ -35,13 +35,13 @@ class ProfileType extends AbstractType
 
               ])
             ->add('about', TextareaType::class, [
-                'label' => 'Description',
+                'label' => 'Description *',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('pseudo', TextType::class, [
-                'label' => 'Nom',
+                'label' => 'Nom *',
                 'attr' => [
                     'class' => 'form-control',
                 ],

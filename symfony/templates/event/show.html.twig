@@ -51,7 +51,7 @@
                         </div>
 
                         <div id="place">
-                            {% if event.nbPlace == 0 %}
+                            {% if event.nbPlace != 0 %}
                                 <i class="fas fa-users"></i> {{ event.nbPlace }} Places restantes
                             {% else %}
                                 <i class="fas fa-users"></i> Complet
@@ -85,7 +85,7 @@
                                         {# si l'utilisateur ne participe pas déjà à l'événement #}
                                         {% if participe == null %}
                                             {# vérifie s'il reste des places #}
-                                            {% if event.nbPlace == 0  %}
+                                            {% if event.nbPlace != 0  %}
                                             <div id="button">
                                                 <button class="btn btn-default participe" id="{{ event.id }}">
                                                     <i class="fas fa-check"></i> Participe
