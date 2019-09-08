@@ -70,6 +70,34 @@ class EventController extends AbstractController
     }
 
     /**
+     * @Route("/event/new", name="create_event")
+     * @IsGranted("ROLE_USER")
+     */
+    public function createAction(Request $request): Response
+    {
+
+        $user = $this->getUser();
+        $event = new Event();
+
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $event->setIdUser($user);
+            $entityManager->persist($event);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()] );
+
+        }
+        return $this->render('event/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/event/{id}", name="event_show")
      */
     public function showAction(Request $request, $id): Response

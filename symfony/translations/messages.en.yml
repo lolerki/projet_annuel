@@ -104,7 +104,17 @@ rss.description: 'Most recent posts published on the Symfony Demo blog'
 email: Email
 'please sign in': 'Please sign in'
 register: Register
-menu.login: Login
+menu.login: 'Sing in'
 social.facebook: 'Login with Facebook'
 remember: 'Remember Me'
 contact: 'Contact us'
+about: About
+bookingdj: 'Disk Jokey'
+bookingartists: Artists
+booking: Booking
+dj: Dj
+profesionnel: Profesionnel
+evenement: Events
+resumebooking: "Book world-renowned and rising music artists, DJs and celebrity talent for commercial or private events around the world. Our booking agents can help you bring top talent to audiences almost anywhere.\n\n                        If you need any help, ask us. We are happy to answer any questions you have about our talent or the booking process."
+bonjour: 'Good Morning'
+title.contact: Contact

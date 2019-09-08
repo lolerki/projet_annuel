@@ -11,10 +11,7 @@
             <div class="row">
                 <div class="col-4">
                     <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action active" id="list-profile-list"
-                           data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Créer un
-                            événement</a>
-                        <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list"
+                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
                            href="#list-home" role="tab" aria-controls="home">Mes participations</a>
                         <a class="list-group-item list-group-item-action" id="list-like-list" data-toggle="list"
                            href="#list-like" role="tab" aria-controls="home">Évenements sauvegardé</a>
@@ -24,12 +21,12 @@
                 </div>
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
 
-                            <div class="alert alert-danger" style="display:none;" id="notif" role="alert">
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel"
+                             aria-labelledby="list-home-list">
+                            <div class="alert alert-danger" style="display:none;" id="notif" role="alert"></div>
 
-                            </div>
-
+                            {#  listes des événements au quel participe l'utilisateur #}
                             {% for myevent in myevents %}
 
                                 {% set description = (myevent.idEvent.description|length > 60 ? myevent.idEvent.description|slice(0, 60)|striptags ~ '…' : myevent.idEvent.description) %}
@@ -37,26 +34,31 @@
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-5">
-                                            <img src="{{ asset('build/event/' ~ myevent.idEvent.image) }}" class="card-img" width="245" height="160">
+                                            <img src="{{ asset('build/event/' ~ myevent.idEvent.image) }}"
+                                                 class="card-img" width="245" height="160">
                                         </div>
                                         <div class="col-md-7">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ myevent.idEvent.title }}</h5>
                                                 <p class="card-text">{{ description|raw }}</p>
                                                 <p class="card-text">
-                                                    <button class="btn btn-danger cancel-participation" id="{{ myevent.idEvent.id }}">Annuler ma participation</button>
+                                                    <button class="btn btn-danger cancel-participation"
+                                                            id="{{ myevent.idEvent.id }}">Annuler ma participation
+                                                    </button>
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
 
+                            {% endfor %}
                         </div>
 
                         <div class="tab-pane fade show" id="list-like" role="tabpanel" aria-labelledby="list-like-list">
 
+                            {#  listes des événements sauvegardé par l'utilisateur #}
                             {% for like in likes %}
+                                {% set saveDescription = (like.idEvent.description|length > 60 ? like.idEvent.description|slice(0, 60)|striptags ~ '…' : like.idEvent.description) %}
 
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
@@ -67,50 +69,37 @@
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ like.idEvent.title }}</h5>
-                                                <p class="card-text">{{ like.idEvent.description|raw }}</p>
+                                                <p class="card-text">{{ saveDescription|raw }}</p>
                                                 <a href="{{ path('event_show', {id: like.idEvent.id }) }}"
-                                                   class="btn btn-info"><i class="far fa-eye"></i> Voir</a>
+                                                   class="btn btn-info"><i class="far fa-eye"></i> Voir plus</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             {% endfor %}
-
                         </div>
 
-                        <div class="tab-pane fade show active" id="list-profile" role="tabpanel"
-                             aria-labelledby="list-profile-list">
-
-                            <h3>Crée un événement</h3>
-
-                            <div class="form-group">
-                                {{ form_start(form, { 'attr': {'autocomplete': 'off'} }) }}
-                                {{ form_widget(form) }}
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-save" aria-hidden="true"></i> {{ 'action.save'|trans }}
-                            </button>
-                            {{ form_end(form) }}
-
-                        </div>
                         <div class="tab-pane fade show" id="list-events" role="tabpanel"
                              aria-labelledby="list-events-list">
-
                             <div class="alert alert-primary" role="alert">
                                 <i class="fas fa-info-circle"></i> Les événements terminé sont automatiquement archivé
                             </div>
 
+                            {#  listes des événements créer par l'utilisateur #}
                             {% for event in events %}
+                                {% set eventDescription = (event.description|length > 60 ? event.description|slice(0, 60)|striptags ~ '…' : event.description) %}
+
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-5">
-                                            <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img" width="245" height="160">
+                                            <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img"
+                                                 width="245" height="160">
                                         </div>
                                         <div class="col-md-7">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ event.title }}</h5>
-                                                <p class="card-text">{{ event.description|striptags|raw }}</p>
+                                                <p class="card-text">{{ eventDescription|raw }}</p>
                                                 <p class="card-text">
                                                     <a href="{{ path('event_delete', {id: event.id}) }}"
                                                        class="btn btn-danger" id="{{ event.id }}">Annuler
@@ -122,9 +111,11 @@
                                         </div>
                                     </div>
                                 </div>
+
                             {% endfor %}
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -134,14 +125,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/places.js@1.16.4"></script>
     <script>
-        $(document).ready(function () {
-            $('.js-datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-            });
-        });
-
         $('.cancel-participation').click(function () {
 
             var data = $(this).attr('id');
@@ -158,29 +142,5 @@
 
             }, "JSON");
         });
-    </script>
-    <script>
-        (function() {
-            var placesAutocomplete = places({
-                appId: 'plZZG88IK9Q9',
-                apiKey: '6f32587b09aa36145e77716e3687992f',
-                container: document.querySelector('#event_address'),
-                type: 'address',
-            }).configure({
-                hitsPerPage: 4
-            });
-
-            placesAutocomplete.on('change', function resultSelected(e) {
-                document.querySelector('#event_lat').value = e.suggestion.latlng.lat || '';
-                document.querySelector('#event_lng').value = e.suggestion.latlng.lng || '';
-            });
-
-            placesAutocomplete.on('reverse', function resultSelected(e) {
-                var suggestion = e.suggestions[0];
-                document.querySelector('#event_lat').value = e.suggestion.latlng.lat || '';
-                document.querySelector('#event_lng').value = e.suggestion.latlng.lng || '';
-            });
-
-        })();
     </script>
 {% endblock %}
