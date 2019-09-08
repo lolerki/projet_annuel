@@ -24,6 +24,7 @@
 
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel"
                              aria-labelledby="list-home-list">
+
                             <div class="alert alert-danger" style="display:none;" id="notif" role="alert"></div>
 
                             {#  listes des événements au quel participe l'utilisateur #}
@@ -86,11 +87,13 @@
                                 <i class="fas fa-info-circle"></i> Les événements terminé sont automatiquement archivé
                             </div>
 
+                            <div class="alert alert-danger" style="display:none;" id="notifEvent" role="alert"></div>
+
                             {#  listes des événements créer par l'utilisateur #}
                             {% for event in events %}
                                 {% set eventDescription = (event.description|length > 60 ? event.description|slice(0, 60)|striptags ~ '…' : event.description) %}
 
-                                <div class="card mb-3">
+                                <div class="card mb-3" id="{{ event.id }}">
                                     <div class="row no-gutters">
                                         <div class="col-md-5">
                                             <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img"
@@ -101,11 +104,13 @@
                                                 <h5 class="card-title">{{ event.title }}</h5>
                                                 <p class="card-text">{{ eventDescription|raw }}</p>
                                                 <p class="card-text">
-                                                    <a href="{{ path('event_delete', {id: event.id}) }}"
-                                                       class="btn btn-danger" id="{{ event.id }}">Annuler
-                                                        l'événement</a>
                                                     <a href="{{ path('event_edit', {id: event.id}) }}"
                                                        class="btn btn-info">Modifier l'événement</a>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#cancelEvent" data-title="{{ event.title }}"
+                                                            data-id="{{ event.id }}">
+                                                        Annuler l'événement
+                                                    </button>
                                                 </p>
                                             </div>
                                         </div>
@@ -121,26 +126,80 @@
             </div>
         {% endif %}
     </div>
+
+
+    <!-- Modal cancel event-->
+    <div class="modal fade" id="cancelEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Annuler un événement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button type="button" class="btn btn-danger" id="yes" data-dismiss="modal">Oui</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
+
+        //click sur annuler ma participation
         $('.cancel-participation').click(function () {
 
             var data = $(this).attr('id');
-
             var url = "{{ path('event_participe_delete', {'id': 'id'}) }}";
             url = url.replace("id", data);
-
             var formSerialize = $(this).serialize();
+            var target = $(this);
 
             $.post(url, formSerialize, function (response) {
 
                 $('#notif ').html(response['message']);
                 $('#notif').fadeIn(500);
 
+                target.parent().parent().parent().parent().parent().hide();
+
             }, "JSON");
+        });
+
+        //click sur annuler événement
+        $('#cancelEvent').on('show.bs.modal', function (event) {
+
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var title = button.data('title');
+
+            var modal = $(this);
+
+            modal.find('.modal-body').text('êtes vous sur de voulais annuler l\'événement "' + title + '" ? Une fois annuler il ne sera plus possible de revenir en arrière');
+
+            //click sur oui
+            $('#yes').click(function () {
+
+                var url = "{{ path('event_delete', {'id': 'id'}) }}";
+                url = url.replace("id", id);
+                var formSerialize = $(this).serialize();
+
+                $.post(url, formSerialize, function (response) {
+
+                    $('#notifEvent ').html(response['message']);
+                    $('#notifEvent').fadeIn(500);
+                    $('#' + id).hide();
+
+                }, "JSON");
+
+            });
+
         });
     </script>
 {% endblock %}

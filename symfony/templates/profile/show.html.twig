@@ -7,7 +7,7 @@
 
         {% if app.user.profile.id is defined %}
             {% if profile.id == app.user.profile.id %}
-                <a href="{{ path('profile_edit', {id: profile.id} ) }}" class="btn btn-info">Modifier</a>
+                <a href="{{ path('profile_edit', {id: profile.id} ) }}" class="btn btn-info float-right">Modifier</a>
             {% endif %}
         {% endif %}
 

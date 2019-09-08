@@ -57,7 +57,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_show', ['id' => $event->getId()] );
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
 
         }
         return $this->render('event/event.html.twig', [
@@ -89,7 +89,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_show', ['id' => $event->getId()] );
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
 
         }
         return $this->render('event/create.html.twig', [
@@ -184,7 +184,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            //  return $this->redirectToRoute('app_article_show');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
         }
 
         return $this->render('event/edit.html.twig', [
@@ -206,7 +206,7 @@ class EventController extends AbstractController
         $participer = new ParticipationEvent();
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
 
-        $placeRetante = $event->getNbPlace() -1;
+        $placeRetante = $event->getNbPlace() - 1;
 
         $entityManager = $this->getDoctrine()->getManager();
         $participer->setIdUser($user);
@@ -237,11 +237,9 @@ class EventController extends AbstractController
         $entityManager->persist($event);
         $entityManager->flush();
 
-        return $this->redirectToRoute('event');
+        $message = "<i class=\"far fa-trash-alt\"></i> l'événement a bien été supprimé";
 
-        //   $message = "événement supprimer";
-
-        //  return new Response(json_encode(array('message' => $message, 'result' => 'success')));
+        return new Response(json_encode(array('message' => $message, 'result' => 'success')));
 
     }
 
