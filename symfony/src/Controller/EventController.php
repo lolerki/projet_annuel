@@ -41,14 +41,14 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
-        //EVENT créer par l'utilisateur
+        //event créer par l'utilisateur
         $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user, 'statut' => 1));
 
         //event participé
         $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
 
-        //event like
-        $likes = $this->getDoctrine()->getRepository(Like::class)->findBy(array('idUser' => $user));
+        //event save
+        $aves = $this->getDoctrine()->getRepository(Like::class)->findBy(array('idUser' => $user));
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -63,7 +63,7 @@ class EventController extends AbstractController
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
             'events' => $events,
-            'likes' => $likes,
+            'likes' => $aves,
             'user' => $user,
             'myevents' => $myEvents
         ]);
@@ -78,6 +78,10 @@ class EventController extends AbstractController
 
         $user = $this->getUser();
         $event = new Event();
+
+        if($user->getProfile() == null){
+            return $this->redirectToRoute('profile_new');
+        }
 
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -205,6 +209,12 @@ class EventController extends AbstractController
 
         $participer = new ParticipationEvent();
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        if($event->getNbPlace() == 0){
+            $message = "Aucune place disponible";
+
+            return new Response(json_encode(array('message' => $message, 'result' => 'fail')));
+        }
 
         $placeRetante = $event->getNbPlace() - 1;
 

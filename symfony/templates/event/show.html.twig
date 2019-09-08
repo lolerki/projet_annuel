@@ -18,37 +18,50 @@
                         <h5 class="card-title">{{ event.title }}</h5>
 
                         <p class="card-text">
-                            <div id="address">
-                                <i class="fas fa-map-marker-alt"></i> {{ event.address }}
-                            </div>
-                            <div>
-                                <i class="fas fa-walking"></i> {{ event.transport }}
-                            </div>
-                            <div>
-                                <i class="far fa-user"></i> <a href="{{ path('profile_view', {id: event.idUser.id}) }}" class="card-text">{{ event.idUser.Profile.pseudo }}</a>
-                    </div>
+
+                        <div id="address">
+                            <i class="fas fa-map-marker-alt"></i> {{ event.address }}
+                        </div>
+
+                        <div>
+                            <i class="fas fa-walking"></i> {{ event.transport }}
+                        </div>
+
+                        <div>
+                            <i class="far fa-user"></i> <a href="{{ path('profile_view', {id: event.idUser.id}) }}"
+                                                           class="card-text">{{ event.idUser.Profile.pseudo }}</a>
+                        </div>
+
                         <div id="date">
-                                <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
-                            </div>
-                            <div id="price">
-                                <i class="fas fa-tag"></i>
-                                {% if event.price == 0 %}
-                                    Gratuit
-                                {% else %}
-                                    {{ event.price }} €
-                                {% endif %}
-                            </div>
-                            <div id="time">
-                                <i class="far fa-clock"></i> De {{ event.time.date|date('H:i') }}
-                                à {{ event.timeEnd.date|date('H:i') }}
-                            </div>
-                            <div id="place">
+                            <i class="far fa-calendar-alt"></i> {{ event.dateEvent.date|date('d/m/Y') }}
+                        </div>
+
+                        <div id="price">
+                            <i class="fas fa-tag"></i>
+                            {% if event.price == 0 %}
+                                Gratuit
+                            {% else %}
+                                {{ event.price }} €
+                            {% endif %}
+                        </div>
+
+                        <div id="time">
+                            <i class="far fa-clock"></i> De {{ event.time.date|date('H:i') }}
+                            à {{ event.timeEnd.date|date('H:i') }}
+                        </div>
+
+                        <div id="place">
+                            {% if event.nbPlace == 0 %}
                                 <i class="fas fa-users"></i> {{ event.nbPlace }} Places restantes
-                            </div>
+                            {% else %}
+                                <i class="fas fa-users"></i> Complet
+                            {% endif %}
+                        </div>
+
                         </p>
 
                         {% if inscrire == true %}
-                            <p |class="card-text">
+                            <p class="card-text">
 
                             {% if finish == false %}
                                 {% if app.user is not null %}
@@ -69,13 +82,17 @@
                                             </button>
                                         </small>
 
-
+                                        {# si l'utilisateur ne participe pas déjà à l'événement #}
                                         {% if participe == null %}
+                                            {# vérifie s'il reste des places #}
+                                            {% if event.nbPlace == 0  %}
                                             <div id="button">
                                                 <button class="btn btn-default participe" id="{{ event.id }}">
                                                     <i class="fas fa-check"></i> Participe
                                                 </button>
                                             </div>
+                                            {% endif %}
+
                                         {% else %}
                                             <span class="badge badge-secondary">Je participe déjà à cette événment</span>
                                         {% endif %}
