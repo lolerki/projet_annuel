@@ -253,8 +253,12 @@ class EventController extends AbstractController
         $user = $this->getUser();
 
         $participe = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findOneBy(array('idEvent' => $id, 'idUser' => $user));
+        $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id));
+
+        $newNbPlace = $event->getNbPlace() +1;
 
         $entityManager = $this->getDoctrine()->getManager();
+        $event->setNbPlace($newNbPlace);
         $entityManager->remove($participe);
         $entityManager->flush();
 
