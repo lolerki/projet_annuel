@@ -46,7 +46,7 @@ class RegistrationFormType extends AbstractType
                     'Oui' => true,
                     'Non' => false,
                 ],
-                'label' => 'Etes vous un artiste ?',
+                'label' => 'Etes vous un artiste ou un organisateur d\'événement ?',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false
             ])
