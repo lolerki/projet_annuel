@@ -38,7 +38,7 @@ action.create_post: 'Créer un nouvel article'
 label.save_and_create_new: 'Enregistrer et créer un nouveau'
 action.back_to_list: 'Retour à la liste des articles'
 action.publish_comment: Publier
-action.sign_in: Connectez-vous
+action.sign_in: 'Se connecter'
 action.browse_app: 'Naviguer sur l''application'
 action.browse_admin: 'Naviguer sur l''admin'
 action.edit_user: 'Modifier l''utilisateur'
@@ -102,9 +102,20 @@ info.change_password: 'Après avoir modifié votre mot de passe, vous serez déc
 rss.title: 'Blog de démo Symfony'
 rss.description: 'Derniers articles publiés sur le blog de démo Symfony'
 email: Mail
-register: Inscription
+register: 'Nous rejoindre !'
 'please sign in': Connexion
 menu.login: Connexion
 social.facebook: 'Connectez-vous avec Facebook'
 remember: 'se souvenir de moi'
-contact: 'Contactez-nous'
+contact: Contactez-nous
+about: 'À propos'
+title.bookingdj: 'Disk Jokey'
+title.bookingartists: Artists
+title.bookingevents: Événements
+booking: Booking
+dj: Dj
+profesionnel: Profesionnel
+evenement: Évenement
+resumebooking: "Réservez des artistes de la musique de renommée mondiale et émergents, des DJ et des talents de célébrités pour des événements commerciaux ou privés à travers le monde. Nos agents de réservation peuvent vous aider à attirer les meilleurs talents presque partout.\n                        Si vous avez besoin d'aide, demandez-nous. Nous sommes heureux de répondre à vos questions sur notre talent ou sur le processus de réservation."
+bonjour: Bonjour
+title.contact: Contact

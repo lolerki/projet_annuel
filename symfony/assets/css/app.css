@@ -31,9 +31,11 @@ a.custom-card:hover {
     border-style: solid;
     border-color: #263961;
 }
+
 .btn-facebook:link, .btn-facebook:visited {
     color: #fff;
 }
+
 .btn-facebook:active, .btn-facebook:hover {
     background: #263961;
     color: #fff;
@@ -46,6 +48,22 @@ a.custom-card:hover {
 
 .ghostwhite{
     background-color: ghostwhite;
+}
+
+/* Stackoverflow preview fix, please ignore */
+.navbar-nav {
+    flex-direction: row;
+}
+
+.nav-link {
+    padding-right: .5rem !important;
+    padding-left: .5rem !important;
+}
+
+/* Fixes dropdown menus placed on the right side */
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
 }
 
 @media only screen and (max-width: 600px) {

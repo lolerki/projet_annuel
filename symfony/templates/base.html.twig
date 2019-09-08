@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-calendar-week"></i> Evenement
+                    <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-list"></i> Liste des événements
                         <span class="sr-only">(current)</span></a>
                 </li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -35,9 +35,15 @@
                                     class="fas fa-sign-out-alt"></i> {{ 'menu.login'|trans }}</a>
                     </li>
                 {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('create_event') }}"><i class="far fa-calendar-plus"></i> Créer un événement
+                            <span class="sr-only">(current)</span></a>
+                    </li>
                     <li class="nav-item dropdown ml-aut">
-                        <a class="nav-link dropdown-toggle float-righ" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle float-right" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle"></i> {{ app.user.username }}
                         </a>

@@ -23,8 +23,9 @@
             {{ form_row(registrationForm.artist) }}
         </div>
 
-
-        <button class="btn-lg">{{ 'register'|trans }}</button>
+        <div class="form-group row">
+        <button class="btn-lg btn-info"> {{ 'register'|trans }}</button>
+        </div>
 
         {{ form_widget(registrationForm.recaptcha) }}
         {{ form_end(registrationForm) }}

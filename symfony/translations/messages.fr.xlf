@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="about">
                  <source>about</source>
-                 <target>A propos</target>
+                 <target>À propos</target>
             </trans-unit>
             <trans-unit id="title.bookingdj">
                 <source>title.bookingdj</source>
@@ -32,7 +32,7 @@
             </trans-unit>
             <trans-unit id="evenement">
                 <source>evenement</source>
-                <target>Evenement</target>
+                <target>Évenement</target>
             </trans-unit>
             <trans-unit id="resumebooking">
                 <source>resumebooking</source>
@@ -231,7 +231,7 @@
             </trans-unit>
             <trans-unit id="action.sign_in">
                 <source>action.sign_in</source>
-                <target>Connectez-vous</target>
+                <target>Se connecter</target>
             </trans-unit>
             <trans-unit id="action.browse_app">
                 <source>action.browse_app</source>
