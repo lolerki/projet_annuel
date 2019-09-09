@@ -31,6 +31,16 @@ class Notify
      */
     private $idUser;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $title;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +78,18 @@ class Notify
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

@@ -6,31 +6,23 @@
     <div class="container">
         <h3>Notify</h3>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small>Donec id elit non mi porta.</small>
-            </a>
+
+            {# Parcours les notifications #}
+            {% for notify in notifys %}
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
+                    <h5 class="mb-1">{{ notify.title }}</h5>
+                    <small>{{ notify.date|date('d/m/Y') }}</small>
                 </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
+                <p class="mb-1">{{ notify.content }}</p>
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small class="text-muted">3 days ago</small>
+            {% endfor %}
+            {% if notifys is null %}
+                <div class="alert alert-primary" role="alert">
+                    Aucune notification
                 </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-        </div>
+            {% endif %}
+
     </div>
 
 {% endblock %}

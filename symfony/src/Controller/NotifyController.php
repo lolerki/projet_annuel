@@ -16,11 +16,12 @@ class NotifyController extends AbstractController
      */
     public function indexAction(): Response
     {
+        $user = $this->getUser();
 
-
+        $notify = $this->getDoctrine()->getRepository(Notify::class)->findBy(['idUser' => $user]);
 
         return $this->render('notify/show.html.twig', [
-
+            'notifys' => $notify
         ]);
 
     }
