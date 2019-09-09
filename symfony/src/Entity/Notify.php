@@ -36,6 +36,11 @@ class Notify
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $read;
+
     public function __construct()
     {
         $this->date = new \DateTime('now');
@@ -90,6 +95,18 @@ class Notify
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getRead(): ?bool
+    {
+        return $this->read;
+    }
+
+    public function setRead(bool $read): self
+    {
+        $this->read = $read;
 
         return $this;
     }

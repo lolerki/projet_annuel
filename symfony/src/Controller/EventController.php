@@ -260,6 +260,7 @@ class EventController extends AbstractController
 
                 $notify->setIdUser($user);
                 $notify->setTitle($title);
+                $notify->setRead(false);
                 $notify->setContent($message);
 
                 $entityManager->persist($notify);

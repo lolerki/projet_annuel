@@ -14,5 +14,4 @@ global.$ = global.jQuery = $;
 // any CSS you require will output into a single css file (app.scss in this case)
 require('../scss/app.scss');
 
-//require('./materialize.js');
 require('bootstrap');

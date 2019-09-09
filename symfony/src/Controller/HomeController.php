@@ -121,5 +121,15 @@ class HomeController extends AbstractController
     {
         return $this->render('home/about.html.twig');
     }
+
+
+    public function testAction(): Response
+    {
+        $test = "toto";
+
+        return $this->render('base.html.twig',[
+            'test' => $test
+        ]);
+    }
 }
 
