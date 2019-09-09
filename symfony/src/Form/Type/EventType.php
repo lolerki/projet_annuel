@@ -41,20 +41,20 @@ class EventType extends AbstractType
                 ]
             ])
             ->add('title', TextType::class, [
-                'label' => 'Titre de l\'évenement',
+                'label' => 'Titre de l\'évenement *',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Atelier découverte - peinture sur céramique'
                 ]
             ])
             ->add('description', CKEditorType::class, [
-                'label' => 'Description',
+                'label' => 'Description *',
                 'attr' => [
                     'class' => 'form-control',
                 ]
             ])
             ->add('dateEvent', DateType::class, [
-                'label' => 'Date',
+                'label' => 'Date *',
                 'widget' => 'single_text',
                 'placeholder' => [
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
@@ -65,19 +65,19 @@ class EventType extends AbstractType
                 "data" => new \DateTime()
             ])
             ->add('time', TimeType::class, [
-                'label' => 'Heure de début',
+                'label' => 'Heure de début *',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('timeEnd', TimeType::class, [
-                'label' => 'Heure de fin',
+                'label' => 'Heure de fin *',
                 'attr' => [
                     'class' => 'form-control',
                 ],
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse',
+                'label' => 'Adresse *',
                 'attr' => [
                     'class' => 'form-control',
                     'autocomplete' => 'off'
@@ -118,13 +118,14 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('nbPlace', IntegerType::class, [
-                'label' => 'Nombre de place',
+                'label' => 'Nombre de place *',
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => '15'
                 ],
             ])
             ->add('price', TextType::class, [
-                'label' => 'Prix d\'entrée',
+                'label' => 'Prix d\'entrée *',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Mettez 0 si l\'événement est gratuit'

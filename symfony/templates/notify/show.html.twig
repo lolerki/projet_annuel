@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Sooonr - Notify{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h3>Notify</h3>
+        <div class="list-group">
+
+            {# Parcours les notifications #}
+            {% for notify in notifys %}
+            <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ notify.title }}</h5>
+                    <small>{{ notify.date|date('d/m/Y') }}</small>
+                </div>
+                <p class="mb-1">{{ notify.content }}</p>
+            </a>
+            {% endfor %}
+            {% if notifys is null %}
+                <div class="alert alert-primary" role="alert">
+                    Aucune notification
+                </div>
+            {% endif %}
+
+    </div>
+
+{% endblock %}

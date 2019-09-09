@@ -20,7 +20,10 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
+
         $user = new User();
+        $profile = new Profile();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -34,13 +37,18 @@ class RegistrationController extends AbstractController
             );
 
             $artist = $form->get("artist")->getData();
+            $nom = $form->get("nom")->getData();
 
             if ($artist) {
                 $user->setRoles(["ROLE_ARTIST"]);
             }
 
+            $profile->setPseudo($nom);
+            $profile->setIdUser($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
+            $entityManager->persist($profile);
             $entityManager->flush();
 
             // do anything else you need here, like send an email

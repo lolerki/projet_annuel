@@ -30,7 +30,7 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.statut = :statut')
             ->setParameter('val', new \DateTime('now'))
             ->setParameter('statut', 1)
-            ->orderBy('e.id', 'DESC')
+            ->orderBy('e.id', 'ASC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()

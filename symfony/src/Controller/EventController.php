@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\Type\EventType;
 use App\Form\CommentType;
 use App\Entity\Like;
+use App\Entity\Notify;
 use App\Entity\Comment;
 use Algolia\SearchBundle\IndexManagerInterface;
 
@@ -241,8 +242,32 @@ class EventController extends AbstractController
         $user = $this->getUser();
 
         $event = $this->getDoctrine()->getRepository(Event::class)->findOneBy(array('id' => $id, 'idUser' => $user));
+        $usersParticipes =  $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(['idEvent' => $event]);
 
         $entityManager = $this->getDoctrine()->getManager();
+
+        $message = "L'événement ".$event->getTitle()." à été annulé";
+        $title = "Annulation d'un événement";
+
+        if($usersParticipes != null){
+
+            foreach ($usersParticipes as $userParticipe){
+
+                $notify = new Notify();
+
+                //user object
+                $user = $userParticipe->getIdUser();
+
+                $notify->setIdUser($user);
+                $notify->setTitle($title);
+                $notify->setContent($message);
+
+                $entityManager->persist($notify);
+
+            }
+
+        }
+
         $event->setStatut('2');
         $entityManager->persist($event);
         $entityManager->flush();

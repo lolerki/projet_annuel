@@ -7,8 +7,8 @@ symfony.lock
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
-/assets/images/avatars/
-/assets/images/event/
+/assets/images/avatars/*
+/assets/images/event/*
 /assets/images/help/
 /node_modules/
 /public/build/
