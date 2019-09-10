@@ -45,6 +45,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+
+    public const NUM_ITEMS = 10;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

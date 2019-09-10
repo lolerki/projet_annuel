@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Repository\EventRepository;
+use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use App\Form\ContactType;
 use App\Entity\Contact;
 use App\Entity\Event;
@@ -23,16 +26,27 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/home", name="app_home")
+     * @Route("/", defaults={"page": "1"}, methods={"GET"}, name="app_home")
+     * @Route("/page/{page<[1-9]\d*>}", defaults={"_format"="html"}, methods={"GET"}, name="index_paginated")
+     * @Cache(smaxage="10")
+     *
      */
-    public function indexAction(): Response
+    public function indexAction(Request $request, int $page, EventRepository $event, TagRepository $tags): Response
     {
+
+        $tag = null;
+
+        if ($request->query->has('tag')) {
+            $tag = $tags->findOneBy(['name' => $request->query->get('tag')]);
+        }
+        $latestEvents = $event->findLatest($page, $tag);
 
         $events = $this->getDoctrine()->getRepository(Event::class)->findBy(['statut' => 1], ['id' => 'desc']);
 
         $nextEvent =  $this->getDoctrine()->getRepository(Event::class)->findByDate();
 
         return $this->render('home/home.html.twig', [
+            'paginator' => $latestEvents,
             'events' => $events,
             'nextEvents' => $nextEvent
         ]);
@@ -122,14 +136,32 @@ class HomeController extends AbstractController
         return $this->render('home/about.html.twig');
     }
 
-
-    public function testAction(): Response
+    /**
+     * @Route("/search", methods={"GET"}, name="event_search")
+     */
+    public function search(Request $request, EventRepository $events): Response
     {
-        $test = "toto";
+        if (!$request->isXmlHttpRequest()) {
+            return $this->render('home/search.html.twig');
+        }
 
-        return $this->render('base.html.twig',[
-            'test' => $test
-        ]);
+        $query = $request->query->get('q', '');
+        $limit = $request->query->get('l', 10);
+        $foundEvents = $events->findBySearchQuery($query, $limit);
+
+        $results = [];
+        foreach ($foundEvents as $event) {
+            $results[] = [
+                'title' => htmlspecialchars($event->getTitle(), ENT_COMPAT | ENT_HTML5),
+                'date' => $event->getCreateAt()->format('M d, Y'),
+        //        'author' => htmlspecialchars($event->getAuthor()->getFullName(), ENT_COMPAT | ENT_HTML5),
+                'content' => htmlspecialchars($event->getDescription(), ENT_COMPAT | ENT_HTML5),
+                'url' => $this->generateUrl('event_show', ['id' => $event->getId()]),
+            ];
+        }
+
+        return $this->json($results);
     }
+
 }
 
