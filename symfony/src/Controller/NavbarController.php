@@ -18,6 +18,10 @@ class NavbarController extends SecurityController
         $notifies = $this->getDoctrine()->getRepository(Notify::class)->findBy(array('idUser' => $user));
         $notif = false;
 
+        if($notifies == []){
+            $notif = true;
+        }
+
         foreach ($notifies as $notify){
 
             if($notify->getRead()){

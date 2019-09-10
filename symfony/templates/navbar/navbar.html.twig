@@ -21,6 +21,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
                         <li class="nav-item"><a href="{{ path('notify') }}" class="nav-link">
                                 {% if notif == true %}
                                     <i class="fas fa-bell"></i>
