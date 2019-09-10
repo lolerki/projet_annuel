@@ -41,13 +41,10 @@ class HomeController extends AbstractController
         }
         $latestEvents = $event->findLatest($page, $tag);
 
-        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(['statut' => 1], ['id' => 'desc']);
-
         $nextEvent =  $this->getDoctrine()->getRepository(Event::class)->findByDate();
 
         return $this->render('home/home.html.twig', [
             'paginator' => $latestEvents,
-            'events' => $events,
             'nextEvents' => $nextEvent
         ]);
 
