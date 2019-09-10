@@ -23,7 +23,7 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
         $time= new \DateTime();
         $time->setTime(7, 30);
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
 
             $event = (new Event())
                 ->setTitle($faker->text($maxNbChars = 50)  )
@@ -36,7 +36,6 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
                 ->setLat($faker->latitude)
                 ->setLng($faker->longitude)
                 ->setNbPlace(15)
-                ->setType('Dessin')
                 ->setTransport('Métro 9, arrêt Républic')
                 ->setTime($time)
                 ->setTimeEnd($time);
