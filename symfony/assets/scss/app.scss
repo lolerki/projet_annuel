@@ -5,3 +5,37 @@ $web-font-path: 'data:text/css;base64,';
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+
+.post-tags .label {
+  margin-right: 5px;
+}
+
+.post-metadata {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.post-tags .label-default {
+  background-color: #e9ecec;
+  color: #6d8283;
+}
+.post-tags .label-default i {
+  color: #a3b2b2;
+}
+
+.label-success {
+  background-color: #18bc9c;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
