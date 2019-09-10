@@ -21,16 +21,30 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    /**
-     * @return Event[]
-     */
     public function findByDate()
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.dateEvent >= :val')
+            ->andWhere('e.dateEvent >= :date')
             ->andWhere('e.statut = :statut')
-            ->setParameter('val', new \DateTime('now'))
+            ->setParameter('date', new \DateTime('now'))
             ->setParameter('statut', 1)
+            ->orderBy('e.id', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
+    public function findByEventDate($user)
+    {
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateEvent >= :date')
+            ->andWhere('e.idUser = :user')
+            ->andWhere('e.statut = :statut')
+            ->setParameter('date', new \DateTime('now'))
+            ->setParameter('statut', 1)
+            ->setParameter('user', $user)
             ->orderBy('e.id', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
@@ -58,8 +72,10 @@ class EventRepository extends ServiceEntityRepository
             ->innerJoin('e.idUser', 'a')
             ->leftJoin('e.tags', 't')
             ->where('e.createAt <= :now')
+            ->andWhere('e.statut = :statut')
             ->orderBy('e.createAt', 'DESC')
             ->setParameter('now', new \DateTime())
+            ->setParameter('statut', 1)
         ;
 
         if (null !== $tag) {

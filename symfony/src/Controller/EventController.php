@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\ParticipationEvent;
+use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,10 +44,10 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         //event créer par l'utilisateur
-        $events = $this->getDoctrine()->getRepository(Event::class)->findBy(array('idUser' => $user, 'statut' => 1));
+        $myEvents =  $this->getDoctrine()->getRepository(Event::class)->findByEventDate($user);
 
         //event participé
-        $myEvents = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
+        $events = $this->getDoctrine()->getRepository(ParticipationEvent::class)->findBy(array('idUser' => $user));
 
         //event save
         $aves = $this->getDoctrine()->getRepository(Like::class)->findBy(array('idUser' => $user));
@@ -63,10 +64,10 @@ class EventController extends AbstractController
         }
         return $this->render('event/event.html.twig', [
             'form' => $form->createView(),
-            'events' => $events,
+            'events' => $myEvents,
             'likes' => $aves,
             'user' => $user,
-            'myevents' => $myEvents
+            'myevents' => $events
         ]);
     }
 
