@@ -2,7 +2,7 @@ app_logout:
     path: /{_locale}/logout
 
 app_index:
-    path: /{_locale}
+    path: /{_locale}/home
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     requirements:
         _locale: '%app_locales%'

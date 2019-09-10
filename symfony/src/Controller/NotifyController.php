@@ -17,11 +17,23 @@ class NotifyController extends AbstractController
     public function indexAction(): Response
     {
         $user = $this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
 
-        $notify = $this->getDoctrine()->getRepository(Notify::class)->findBy(['idUser' => $user]);
+        $notifies = $this->getDoctrine()->getRepository(Notify::class)->findBy(['idUser' => $user]);
+
+        $notifyNotRead = $this->getDoctrine()->getRepository(Notify::class)->findBy(['idUser' => $user, 'read' => 'false']);
+
+        foreach ($notifyNotRead as $notify){
+
+            $notify->setRead(1);
+            $entityManager->persist($notify);
+
+        }
+
+        $entityManager->flush();
 
         return $this->render('notify/show.html.twig', [
-            'notifys' => $notify
+            'notifys' => $notifies
         ]);
 
     }

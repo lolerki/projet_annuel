@@ -2,8 +2,8 @@
 
 namespace App\Repository;
 
-use DateTime;
 use App\Entity\Event;
+use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -30,11 +30,12 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.statut = :statut')
             ->setParameter('val', new \DateTime('now'))
             ->setParameter('statut', 1)
-            ->orderBy('e.id', 'ASC')
+            ->orderBy('e.id', 'DESC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
+
     }
 
     public function findEventByUser($user, $event)
