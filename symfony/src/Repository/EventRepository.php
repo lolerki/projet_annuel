@@ -58,8 +58,10 @@ class EventRepository extends ServiceEntityRepository
             ->innerJoin('e.idUser', 'a')
             ->leftJoin('e.tags', 't')
             ->where('e.createAt <= :now')
+            ->andWhere('e.statut = :statut')
             ->orderBy('e.createAt', 'DESC')
             ->setParameter('now', new \DateTime())
+            ->setParameter('statut', 1)
         ;
 
         if (null !== $tag) {
