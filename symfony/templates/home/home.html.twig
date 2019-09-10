@@ -10,7 +10,7 @@
                 <div class="col-md-9">
                     <h3>Nouveau événement</h3>
 
-                    {% for event in events %}
+                    {% for event in paginator.results %}
 
                         {% set description = (event.description|length > 110 ? event.description|slice(0, 110)|striptags ~ '…' : event.description) %}
 
@@ -44,6 +44,8 @@
                                         </div>
 
                                         <p class="card-text">{{ description|raw }}</p>
+
+                                        {{ include('home/_event_tags.html.twig') }}
                                     </div>
                                 </div>
                             </div>
