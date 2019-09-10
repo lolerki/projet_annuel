@@ -15,7 +15,8 @@
                             <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{ path('event_search') }}"><i class="fas fa-search"></i> Recherche</a>
+                        <a class="nav-link" href="{{ path('event_search') }}"><i class="fas fa-search"></i>
+                            Recherche</a>
                     </li>
                 </ul>
 
@@ -31,11 +32,14 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('create_event') }}"><i class="far fa-calendar-plus"></i>
-                                Créer un événement
-                                <span class="sr-only">(current)</span></a>
-                        </li>
+                        {% if is_granted('ROLE_ARTIST') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('create_event') }}"><i
+                                            class="far fa-calendar-plus"></i>
+                                    Créer un événement
+                                    <span class="sr-only">(current)</span></a>
+                            </li>
+                        {% endif %}
 
                         <li class="nav-item dropdown ml-aut">
                             <a class="nav-link dropdown-toggle float-right" href="#" id="navbarDropdown" role="button"
