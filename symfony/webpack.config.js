@@ -23,6 +23,8 @@ Encore
      * and one CSS file (e.g. app.scss) if you JavaScript imports CSS.
      */
     .addEntry('js/app', './assets/js/app.js')
+    .addEntry('search', './assets/js/search.js')
+    .addEntry('admin', './assets/js/admin.js')
     .addStyleEntry('css/app', ['./assets/scss/app.scss'])
     .addStyleEntry('css/style', ['./assets/css/app.css'])
 
@@ -59,6 +61,10 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
+    .autoProvideVariables({
+        "window.Bloodhound": require.resolve('bloodhound-js'),
+        "jQuery.tagsinput": "bootstrap-tagsinput"
+    })
 
     .addPlugin(new webpack.ProvidePlugin({
         $: 'jquery',

@@ -10,11 +10,11 @@
 namespace App\Form\Type;
 
 use App\Entity\Event;
+use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,23 +35,16 @@ class EventType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image de présentation',
-                'attr' => [
-                    'class' => 'form-control-file'
-                ]
+                'label' => 'Image de présentation'
             ])
             ->add('title', TextType::class, [
                 'label' => 'Titre de l\'évenement *',
                 'attr' => [
-                    'class' => 'form-control',
                     'placeholder' => 'Atelier découverte - peinture sur céramique'
                 ]
             ])
             ->add('description', CKEditorType::class, [
-                'label' => 'Description *',
-                'attr' => [
-                    'class' => 'form-control',
-                ]
+                'label' => 'Description *'
             ])
             ->add('dateEvent', DateType::class, [
                 'label' => 'Date *',
@@ -60,74 +53,39 @@ class EventType extends AbstractType
                     'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ],
                 'attr' => [
-                    'class' => 'js-datepicker form-control',
+                    'class' => 'js-datepicker',
                 ],
                 "data" => new \DateTime()
             ])
             ->add('time', TimeType::class, [
-                'label' => 'Heure de début *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'label' => 'Heure de début *'
             ])
             ->add('timeEnd', TimeType::class, [
-                'label' => 'Heure de fin *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'label' => 'Heure de fin *'
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse *',
                 'attr' => [
-                    'class' => 'form-control',
                     'autocomplete' => 'off'
                 ],
             ])
             ->add('transport', TextType::class, [
                 'label' => 'Comment vous trouver',
                 'attr' => [
-                    'class' => 'form-control',
                     'autocomplete' => 'off',
                     'placeholder' => 'Metro ligne 9'
                 ],
 
             ])
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    'Théâtre' => 'Théâtre',
-                    'Cinéma' => 'Cinéma',
-                    'Danse' => 'Danse',
-                    'Chant' => 'Chant',
-                    'Musique' => 'Musique',
-                    'Interpretation' => 'Interpretation',
-                    'Doublage' => 'Doublage',
-                    'Peinture' => 'Peinture',
-                    'Dessin' => 'Dessin',
-                    'Sculpture' => 'Sculpture',
-                    'Gravure' => 'Gravure',
-                    'Performances' => 'Performances',
-                    'Audio Visuelle' => 'Audio Visuelle',
-                    'Artifices' => 'Artifices',
-                    'Spectacle' => 'Spectacle',
-                    'Mime' => 'Mime',
-                    'Autre' => 'Autre',
-                ],
-                'label' => 'Type d\'événement *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-            ])
             ->add('nbPlace', IntegerType::class, [
                 'label' => 'Nombre de place *',
                 'attr' => [
-                    'class' => 'form-control',
                     'placeholder' => '15'
                 ],
             ])
             ->add('price', TextType::class, [
                 'label' => 'Prix d\'entrée *',
                 'attr' => [
-                    'class' => 'form-control',
                     'placeholder' => 'Mettez 0 si l\'événement est gratuit'
                 ],
             ])
@@ -140,7 +98,12 @@ class EventType extends AbstractType
                 'attr' => array(
                     'value' => 0
                 )
-            ]);
+            ])
+            ->add('tags', TagsInputType::class, [
+                'label' => 'label.tags',
+                'required' => false,
+            ])
+        ;
     }
 
     /**

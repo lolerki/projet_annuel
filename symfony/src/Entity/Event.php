@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -159,9 +160,14 @@ class Event
     private $transport;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var Tag[]|ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", cascade={"persist"})
+     * @ORM\JoinTable(name="event_tag")
+     * @ORM\OrderBy({"name": "ASC"})
+     * @Assert\Count(max="4", maxMessage="post.too_many_tags")
      */
-    private $type;
+    private $tags;
 
     public function __construct()
     {
@@ -170,6 +176,7 @@ class Event
         $this->createAt = new \DateTime('now');
         $this->statut = '1';
         $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function __toString()
@@ -485,16 +492,23 @@ class Event
         return $this;
     }
 
-    public function getType(): ?string
+    public function addTag(Tag ...$tags): void
     {
-        return $this->type;
+        foreach ($tags as $tag) {
+            if (!$this->tags->contains($tag)) {
+                $this->tags->add($tag);
+            }
+        }
     }
 
-    public function setType(string $type): self
+    public function removeTag(Tag $tag): void
     {
-        $this->type = $type;
+        $this->tags->removeElement($tag);
+    }
 
-        return $this;
+    public function getTags(): Collection
+    {
+        return $this->tags;
     }
 
 }
