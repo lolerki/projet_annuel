@@ -154,8 +154,8 @@ class HomeController extends AbstractController
             $results[] = [
                 'title' => htmlspecialchars($event->getTitle(), ENT_COMPAT | ENT_HTML5),
                 'date' => $event->getCreateAt()->format('M d, Y'),
-        //        'author' => htmlspecialchars($event->getAuthor()->getFullName(), ENT_COMPAT | ENT_HTML5),
-                'content' => htmlspecialchars($event->getDescription(), ENT_COMPAT | ENT_HTML5),
+                'author' => htmlspecialchars($event->getIdUser()->getProfile()->getPseudo(), ENT_COMPAT | ENT_HTML5),
+                'description' => htmlspecialchars($event->getDescription(), ENT_COMPAT | ENT_HTML5),
                 'url' => $this->generateUrl('event_show', ['id' => $event->getId()]),
             ];
         }

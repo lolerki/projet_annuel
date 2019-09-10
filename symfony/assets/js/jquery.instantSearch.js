@@ -37,7 +37,7 @@
                        <span class="metadata"><i class="fa fa-calendar"></i> {{ date }}</span>\
                        <span class="metadata"><i class="fa fa-user"></i> {{ author }}</span>\
                     </p>\
-                    <p>{{ summary }}</p>\
+                    <p>{{ description }}</p>\
                 </article>'
     };
 
