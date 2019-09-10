@@ -26,7 +26,6 @@ Encore
     .addEntry('search', './assets/js/search.js')
     .addEntry('admin', './assets/js/admin.js')
     .addStyleEntry('css/app', ['./assets/scss/app.scss'])
-    .addStyleEntry('css/style', ['./assets/css/app.css'])
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
