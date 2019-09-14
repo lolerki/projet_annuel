@@ -15,7 +15,12 @@
         <hr/>
         <div class="row">
             <div class="col-lg-2 pull-lg-2 text-xs-center">
+                {% if profile.image == null %}
+                <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                     class="m-x-auto img-fluid rounded-circle">
+                {% else %}
                 <img src="{{ asset('uploads/avatar/' ~ profile.image) }}" class="m-x-auto img-fluid rounded-circle">
+                {% endif %}
             </div>
             <div class="col-md-9">
 
