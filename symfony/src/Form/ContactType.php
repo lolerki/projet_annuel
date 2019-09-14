@@ -37,7 +37,7 @@ class ContactType extends AbstractType
                 ],
             ])
             ->add('object', TextType::class, [
-                'label' => 'Object',
+                'label' => 'Objet',
                 'attr' => [
                     'class' => 'form-control',
                 ],

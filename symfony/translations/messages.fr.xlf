@@ -16,7 +16,7 @@
             </trans-unit>
             <trans-unit id="security">
                 <source>security</source>
-                <target>Paramètre de sécurité</target>
+                <target>Paramètres de sécurité</target>
             </trans-unit>
             <trans-unit id="next">
                 <source>next</source>
@@ -60,7 +60,7 @@
             </trans-unit>
             <trans-unit id="legal">
                 <source>legal</source>
-                <target>Mention légales</target>
+                <target>Mentions légales</target>
             </trans-unit>
             <trans-unit id="title.bookingartists">
                 <source>title.bookingartists</source>

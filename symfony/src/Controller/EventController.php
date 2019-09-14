@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Entity\ParticipationEvent;
-use App\Repository\EventRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +27,6 @@ class EventController extends AbstractController
     {
         $this->indexManager = $indexingManager;
     }
-
 
     /**
      * @Route("/event", name="event")
@@ -253,7 +251,7 @@ class EventController extends AbstractController
 
         $entityManager = $this->getDoctrine()->getManager();
 
-        $message = "L'événement ".$event->getTitle()." à été annulé";
+        $message = "L'événement ".$event->getTitle()." à été annulée";
         $title = "Annulation d'un événement";
 
         if($usersParticipes != null){
@@ -305,7 +303,7 @@ class EventController extends AbstractController
         $entityManager->remove($participe);
         $entityManager->flush();
 
-        $message = '<i class="fas fa-info-circle"></i> Votre participation a été annulé';
+        $message = '<i class="fas fa-info-circle"></i> Votre participation a été annulée';
 
         return new Response(json_encode(array('message' => $message, 'result' => 'success')));
     }

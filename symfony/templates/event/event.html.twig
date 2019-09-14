@@ -14,7 +14,7 @@
                         <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
                            href="#list-home" role="tab" aria-controls="home">Mes participations</a>
                         <a class="list-group-item list-group-item-action" id="list-like-list" data-toggle="list"
-                           href="#list-like" role="tab" aria-controls="home">Évenements sauvegardé</a>
+                           href="#list-like" role="tab" aria-controls="home">Évenements sauvegardés</a>
                         <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list"
                            href="#list-events" role="tab" aria-controls="events">Mes événements</a>
                     </div>
@@ -35,7 +35,7 @@
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-5">
-                                            <img src="{{ asset('build/event/' ~ myevent.idEvent.image) }}"
+                                            <img src="{{ asset('uploads/event/' ~ myevent.idEvent.image) }}"
                                                  class="card-img" width="245" height="160">
                                         </div>
                                         <div class="col-md-7">
@@ -64,7 +64,7 @@
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-4">
-                                            <img src="{{ asset('build/event/' ~ like.idEvent.image) }}"
+                                            <img src="{{ asset('uploads/event/' ~ like.idEvent.image) }}"
                                                  class="card-img">
                                         </div>
                                         <div class="col-md-8">
@@ -84,7 +84,7 @@
                         <div class="tab-pane fade show" id="list-events" role="tabpanel"
                              aria-labelledby="list-events-list">
                             <div class="alert alert-primary" role="alert">
-                                <i class="fas fa-info-circle"></i> Les événements terminé sont automatiquement archivé
+                                <i class="fas fa-info-circle"></i> Les événements terminés sont automatiquement archivées
                             </div>
 
                             <div class="alert alert-danger" style="display:none;" id="notifEvent" role="alert"></div>
@@ -96,7 +96,7 @@
                                 <div class="card mb-3" id="{{ event.id }}">
                                     <div class="row no-gutters">
                                         <div class="col-md-5">
-                                            <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img"
+                                            <img src="{{ asset('uploads/event/' ~ event.image) }}" class="card-img"
                                                  width="245" height="160">
                                         </div>
                                         <div class="col-md-7">
@@ -129,7 +129,7 @@
 
 
     <!-- Modal cancel event-->
-    <div class="modal fade" id="cancelEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="cancelEvent" tabindex="-1" role="dialog" aria-labelledby="cancelEvent"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -151,6 +151,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <script>
 
         //click sur annuler ma participation
@@ -173,15 +174,17 @@
         });
 
         //click sur annuler événement
-        $('#cancelEvent').on('show.bs.modal', function (event) {
+        $('#cancelEvent').on('shown.bs.modal', function (event) {
 
             var button = $(event.relatedTarget);
             var id = button.data('id');
             var title = button.data('title');
 
+            console.log(title);
+
             var modal = $(this);
 
-            modal.find('.modal-body').text('êtes vous sur de voulais annuler l\'événement "' + title + '" ? Une fois annuler il ne sera plus possible de revenir en arrière');
+            modal.find('.modal-body').text('êtes vous sur de vouloir annuler l\'événement "' + title + '" ? Une fois annuler il ne sera plus possible de revenir en arrière');
 
             //click sur oui
             $('#yes').click(function () {
@@ -192,8 +195,7 @@
 
                 $.post(url, formSerialize, function (response) {
 
-                    $('#notifEvent ').html(response['message']);
-                    $('#notifEvent').fadeIn(500);
+                    $('#notifEvent').html(response['message']).fadeIn(500);
                     $('#' + id).hide();
 
                 }, "JSON");

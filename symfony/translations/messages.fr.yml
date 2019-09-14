@@ -121,7 +121,7 @@ bonjour: Bonjour
 title.contact: Contact
 event: Événement
 help: Aide
-legal: 'Mention légales'
+legal: 'Mentions légales'
 menu.dashboard: 'Tableau de bord'
 menu.profile: 'Consulter mon profil'
 event.create: 'Créer un événement'
@@ -136,4 +136,4 @@ event.previous: __event.previous
 label.picture: 'Photo de profil'
 paypal: 'Lien paypal'
 profile: Profil
-security: 'Paramètre de sécurité'
+security: 'Paramètres de sécurité'
