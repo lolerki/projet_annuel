@@ -10,7 +10,7 @@
         <div class="card mb-3">
             <div class="row no-gutters">
                 <div class="col-md-5">
-                    <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img" height="300">
+                    <img src="{{ asset('uploads/event/' ~ event.image) }}" class="card-img" height="300">
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
@@ -61,41 +61,44 @@
                         </p>
 
                         {% if inscrire == true %}
-                            <p class="card-text">
 
                             {% if finish == false %}
+
                                 {% if app.user is not null %}
-                                    <div class="row">
-                                        <small class="text-muted">
-                                            {% if like == null %}
-                                            <button type="button" class="btn btn-default" aria-label="Left Align">
-                                                <div class="like" id="{{ event.id }}">
-                                                    <i class="far fa-bookmark"></i> Mettre de côté
-                                                </div>
-                                            </button>
-                                            {% else %}
-                                            <button type="button" class="btn btn-default" aria-label="Left Align">
-                                                <div class="delete" id="{{ event.id }}">
-                                                    <i class="fas fa-bookmark"></i> Retirer
-                                                </div>
-                                                {% endif %}
-                                            </button>
-                                        </small>
 
-                                        {# si l'utilisateur ne participe pas déjà à l'événement #}
-                                        {% if participe == null %}
-                                            {# vérifie s'il reste des places #}
-                                            {% if event.nbPlace != 0 %}
-                                                <div id="button">
-                                                    <button class="btn btn-default participe" id="{{ event.id }}">
-                                                        <i class="fas fa-check"></i> Participe
-                                                    </button>
-                                                </div>
-                                            {% endif %}
+                                    <div class="row col-md-6">
 
-                                        {% else %}
-                                            <span class="badge badge-secondary">Je participe déjà à cette événment</span>
+                                    {% if like == null %}
+                                        <button type="button" class="btn btn-light" aria-label="Left Align">
+                                            <div class="like" id="{{ event.id }}">
+                                                <i class="far fa-bookmark"></i> Mettre de côté
+                                            </div>
+                                        </button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-light" aria-label="Left Align">
+                                            <div class="delete" id="{{ event.id }}">
+                                                <i class="fas fa-bookmark"></i> Retirer
+                                            </div>
+                                        </button>
+                                    {% endif %}
+
+
+                                    {# si l'utilisateur ne participe pas déjà à l'événement #}
+                                    {% if participe == null %}
+
+                                        {# vérifie s'il reste des places #}
+                                        {% if event.nbPlace != 0 %}
+                                            <div id="button">
+                                                <button class="btn btn-light participe" id="{{ event.id }}">
+                                                    <i class="fas fa-check"></i> Participe
+                                                </button>
+                                            </div>
                                         {% endif %}
+
+                                    {% else %}
+                                        <span class="badge badge-secondary">Je participe déjà à cette événment</span>
+                                    {% endif %}
+
                                     </div>
                                 {% endif %}
 
@@ -105,7 +108,6 @@
 
                             {% endif %}
 
-                            </p>
                         {% else %}
                             <a href="{{ path('event_edit', {id: event.id }) }}" class="btn btn-info">Modifier
                                 l'événement</a>
@@ -150,7 +152,8 @@
                             <div class="col-md-1">
 
                                 {% if comment.idUser.Profile.image %}
-                                    <img src="{{ asset('build/avatars/' ~ comment.idUser.Profile.image) }}" class="m-x-auto img-fluid rounded-circle">
+                                    <img src="{{ asset('uploads/avatars/' ~ comment.idUser.Profile.image) }}"
+                                         class="m-x-auto img-fluid rounded-circle">
                                 {% else %}
                                     <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
                                          class="m-x-auto img-fluid img-circle">

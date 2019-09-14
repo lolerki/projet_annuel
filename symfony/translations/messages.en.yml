@@ -118,3 +118,22 @@ evenement: Events
 resumebooking: "Book world-renowned and rising music artists, DJs and celebrity talent for commercial or private events around the world. Our booking agents can help you bring top talent to audiences almost anywhere.\n\n                        If you need any help, ask us. We are happy to answer any questions you have about our talent or the booking process."
 bonjour: 'Good Morning'
 title.contact: Contact
+legal: 'Legal mention'
+event: Event
+help: Help
+event.list: 'Events list'
+menu.dashboard: Dashboard
+menu.profile: 'View my profile'
+event.create: 'Create an event'
+menu.dashbord: __menu.dashbord
+menu.register: __menu.register
+event.new: 'New events'
+event.next: 'Future event'
+next: Next
+previous: Previous
+event.previous: __event.previous
+picture: 'Profile picture'
+paypal: 'Link paypal'
+profile: Profile
+security: 'Security parameter'
+label.picture: 'Profile picture'

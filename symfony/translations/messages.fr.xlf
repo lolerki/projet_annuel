@@ -2,13 +2,65 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="about">
-                 <source>about</source>
-                 <target>À propos</target>
+            <trans-unit id="label.picture">
+                <source>label.picture</source>
+                <target>Photo de profil</target>
             </trans-unit>
-            <trans-unit id="title.bookingdj">
-                <source>title.bookingdj</source>
-                <target>Disk Jokey</target>
+            <trans-unit id="paypal">
+                <source>paypal</source>
+                <target>Lien paypal</target>
+            </trans-unit>
+            <trans-unit id="profile">
+                <source>profile</source>
+                <target>Profil</target>
+            </trans-unit>
+            <trans-unit id="security">
+                <source>security</source>
+                <target>Paramètre de sécurité</target>
+            </trans-unit>
+            <trans-unit id="next">
+                <source>next</source>
+                <target>Suivant</target>
+            </trans-unit>
+            <trans-unit id="previous">
+                <source>previous</source>
+                <target>Précédent</target>
+            </trans-unit>
+            <trans-unit id="event.new">
+                <source>event.new</source>
+                <target>Nouveau événement</target>
+            </trans-unit>
+            <trans-unit id="event.next">
+                <source>event.next</source>
+                <target>Événement à venir</target>
+            </trans-unit>
+            <trans-unit id="menu.dashboard">
+                <source>menu.dashboard</source>
+                <target>Tableau de bord</target>
+            </trans-unit>
+            <trans-unit id="menu.profile">
+                <source>menu.profile</source>
+                <target>Consulter mon profil</target>
+            </trans-unit>
+            <trans-unit id="event.create">
+                <source>event.create</source>
+                <target>Créer un événement</target>
+            </trans-unit>
+            <trans-unit id="event.list">
+                <source>event.list</source>
+                <target>Liste des événements</target>
+            </trans-unit>
+            <trans-unit id="event">
+                 <source>event</source>
+                 <target>Événement</target>
+            </trans-unit>
+            <trans-unit id="help">
+                <source>help</source>
+                <target>Aide</target>
+            </trans-unit>
+            <trans-unit id="legal">
+                <source>legal</source>
+                <target>Mention légales</target>
             </trans-unit>
             <trans-unit id="title.bookingartists">
                 <source>title.bookingartists</source>
@@ -17,14 +69,6 @@
             <trans-unit id="title.bookingevent">
                 <source>title.bookingevents</source>
                 <target>Événements</target>
-            </trans-unit>
-            <trans-unit id="booking">
-                <source>booking</source>
-                <target>Booking</target>
-            </trans-unit>
-            <trans-unit id="dj">
-                  <source>dj</source>
-                  <target>Dj</target>
             </trans-unit>
             <trans-unit id="profesionnel">
                 <source>profesionnel</source>
@@ -65,7 +109,7 @@
             </trans-unit>
             <trans-unit id="register">
                 <source>register</source>
-                <target>Nous rejoindre !</target>
+                <target>S'inscrire !</target>
             </trans-unit>
             <trans-unit id="menu.login">
                 <source>menu.login</source>

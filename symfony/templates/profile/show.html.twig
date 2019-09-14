@@ -7,7 +7,7 @@
 
         {% if app.user.profile.id is defined %}
             {% if profile.id == app.user.profile.id %}
-                <a href="{{ path('profile_edit', {id: profile.id} ) }}" class="btn btn-info float-right">Modifier</a>
+                <a href="{{ path('profile_edit', {id: profile.id} ) }}" class="btn btn-info float-right">{{ 'action.edit'|trans }}</a>
             {% endif %}
         {% endif %}
 
@@ -15,7 +15,7 @@
         <hr/>
         <div class="row">
             <div class="col-lg-2 pull-lg-2 text-xs-center">
-                <img src="{{ asset('build/avatars/' ~ profile.image) }}" class="m-x-auto img-fluid rounded-circle">
+                <img src="{{ asset('uploads/avatar/' ~ profile.image) }}" class="m-x-auto img-fluid rounded-circle">
             </div>
             <div class="col-md-9">
 

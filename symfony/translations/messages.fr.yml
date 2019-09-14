@@ -102,7 +102,7 @@ info.change_password: 'Après avoir modifié votre mot de passe, vous serez déc
 rss.title: 'Blog de démo Symfony'
 rss.description: 'Derniers articles publiés sur le blog de démo Symfony'
 email: Mail
-register: 'Nous rejoindre !'
+register: 'S''inscrire !'
 'please sign in': Connexion
 menu.login: Connexion
 social.facebook: 'Connectez-vous avec Facebook'
@@ -119,3 +119,21 @@ evenement: Évenement
 resumebooking: "Réservez des artistes de la musique de renommée mondiale et émergents, des DJ et des talents de célébrités pour des événements commerciaux ou privés à travers le monde. Nos agents de réservation peuvent vous aider à attirer les meilleurs talents presque partout.\n                        Si vous avez besoin d'aide, demandez-nous. Nous sommes heureux de répondre à vos questions sur notre talent ou sur le processus de réservation."
 bonjour: Bonjour
 title.contact: Contact
+event: Événement
+help: Aide
+legal: 'Mention légales'
+menu.dashboard: 'Tableau de bord'
+menu.profile: 'Consulter mon profil'
+event.create: 'Créer un événement'
+event.list: 'Liste des événements'
+menu.dashbord: __menu.dashbord
+menu.register: __menu.register
+event.new: 'Nouveau événement'
+event.next: 'Événement à venir'
+next: Suivant
+previous: Précédent
+event.previous: __event.previous
+label.picture: 'Photo de profil'
+paypal: 'Lien paypal'
+profile: Profil
+security: 'Paramètre de sécurité'

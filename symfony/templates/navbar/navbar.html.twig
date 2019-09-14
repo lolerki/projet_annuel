@@ -10,13 +10,12 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-list"></i> Liste des
-                            événements
+                        <a class="nav-link" href="{{ path('app_home') }}"><i class="fas fa-list"></i>  {{ 'event.list'|trans }}
                             <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('event_search') }}"><i class="fas fa-search"></i>
-                            Recherche</a>
+                            {{ 'menu.search'|trans }}</a>
                     </li>
                 </ul>
 
@@ -36,7 +35,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('create_event') }}"><i
                                             class="far fa-calendar-plus"></i>
-                                    Créer un événement
+                                    {{ 'event.create'|trans }}
                                     <span class="sr-only">(current)</span></a>
                             </li>
                         {% endif %}
@@ -53,15 +52,14 @@
                                     <div class="dropdown-divider"></div>
                                 {% endif %}
                                 <a class="dropdown-item" href="{{ path('dashboard') }}"><i class="fas fa-cog"></i>
-                                    Tableau
-                                    de bord</a>
+                                    {{ 'menu.dashboard'|trans }}</a>
                                 <a class="dropdown-item" href="{{ path('profile_show') }}"><i
                                             class="far fa-id-badge"></i>
-                                    Voir mon profil</a>
+                                    {{ 'menu.profile'|trans }}</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('app_logout') }}"><i
                                             class="fas fa-power-off"></i>
-                                    Déconnexion</a>
+                                    {{ 'menu.logout'|trans }}</a>
                             </div>
                         </li>
 
@@ -70,7 +68,7 @@
                                         class="fas fa-sign-out-alt"></i> {{ 'menu.login'|trans }}</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}"><i
-                                        class="fas fa-plus"></i> S'inscrire</a>
+                                        class="fas fa-plus"></i> {{ 'register'|trans }}</a>
                         </li>
                     {% endif %}
 

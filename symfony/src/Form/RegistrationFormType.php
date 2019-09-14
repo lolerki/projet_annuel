@@ -25,14 +25,13 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Adresse email'],
             ])
             ->add('nom', TextType::class, [
-                'label' => 'Nom',
-                'attr' => ['class' => 'form-control'],
+                'label' => 'label.fullname',
                 'mapped' => false
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'label.password', 'attr' => ['class' => 'form-control'],],
-                'second_options' => ['label' => 'label.new_password_confirm', 'attr' => ['class' => 'form-control'],],
+                'first_options'  => ['label' => 'label.password', ],
+                'second_options' => ['label' => 'label.new_password_confirm',],
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'constraints' => [
@@ -53,7 +52,6 @@ class RegistrationFormType extends AbstractType
                     'Non' => false,
                 ],
                 'label' => 'Etes vous un artiste ou un organisateur d\'événement ?',
-                'attr' => ['class' => 'form-control'],
                 'mapped' => false
             ])
             ->add('recaptcha', EWZRecaptchaType::class, [
