@@ -29,29 +29,19 @@ class ProfileType extends AbstractType
     {
 
         $builder
-              ->add('imageFile', VichImageType::class, [
-                  'label' => 'Photo de profile',
-                  'required' => false,
-
-              ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Photo de profile',
+                'required' => false,
+            ])
             ->add('about', TextareaType::class, [
-                'label' => 'Description *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'label' => 'Description'
             ])
             ->add('pseudo', TextType::class, [
-                'label' => 'Nom *',
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'label' => 'label.fullname'
             ])
             ->add('paypal', UrlType::class, [
-                'label' => 'Lien paypal',
-                'required' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+                'label' => 'paypal',
+                'required' => false
             ]);
     }
 

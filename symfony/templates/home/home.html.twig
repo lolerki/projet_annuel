@@ -9,7 +9,7 @@
             <div class="row">
 
                 <div class="col-md-9">
-                    <h3>Nouveau événement</h3>
+                    <h3>{{ 'event.new'|trans }}</h3>
 
                     {% for event in paginator.results %}
 
@@ -18,7 +18,7 @@
                         <div class="card mb-3">
                             <div class="row no-gutters">
                                 <div class="col-md-5">
-                                    <img src="{{ asset('build/event/' ~ event.image) }}" class="card-img rounded-left" height="220">
+                                    <img src="{{ asset('uploads/event/' ~ event.image) }}" class="card-img rounded-left" height="220">
                                 </div>
                                 <div class="col-md-7">
                                     <div class="card-body">
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <h3>Événement à venir</h3>
+                    <h3>{{ 'event.next'|trans }}</h3>
 
                     {% for nextEvent in nextEvents %}
 
@@ -73,7 +73,7 @@
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         {% if paginator.hasPreviousPage %}
-                            <li class="prev"><a class="page-link" href="{{ path('index_paginated', {page: paginator.previousPage}) }}" rel="previous"><i class="fa fw fa-long-arrow-left"></i> Previous</a></li>
+                            <li class="prev"><a class="page-link" href="{{ path('index_paginated', {page: paginator.previousPage}) }}" rel="previous"><i class="fa fw fa-long-arrow-left"></i> {{ 'event.previous'|trans }}</a></li>
                         {% else %}
                             <li class="prev disabled page-item" ><span><i class="fa fw fa-arrow-left page-link"></i></span></li>
                         {% endif %}
@@ -87,7 +87,7 @@
                         {% endfor %}
 
                         {% if paginator.hasNextPage %}
-                            <li class="prev"><a class="page-link" href="{{ path('index_paginated', {page: paginator.nextPage}) }}" rel="next">Next <i class="fa fw fa-arrow-right"></i></a></li>
+                            <li class="prev"><a class="page-link" href="{{ path('index_paginated', {page: paginator.nextPage}) }}" rel="next">{{ 'next'|trans }} <i class="fa fw fa-arrow-right"></i></a></li>
                         {% else %}
                             <li class="next disabled page-item"><span> <i class="fa fw fa-arrow-right page-link"></i></span></li>
                         {% endif %}

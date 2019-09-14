@@ -90,6 +90,12 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $image = $form->get("imageFile")->getData();
+
+            if($image == null){
+                $event->setImage('iStock-667709450.jpg');
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $event->setIdUser($user);
             $entityManager->persist($event);

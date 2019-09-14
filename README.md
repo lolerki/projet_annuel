@@ -29,8 +29,8 @@ Now it has mocked support for MySQL databases.
 # Quick start
 
 ```
-$ git clone https://github.com/lolerki/soonr.git
-$ cd soorn
+$ git clone https://github.com/lolerki/projet_annuel.git
+$ cd projet_annuel
 $ docker-compose up -d --build
 ```
 Wait for containers to start, then to [http://localhost:8080](http://localhost:8080)
@@ -46,7 +46,7 @@ For a better integration of Docker to PHPStorm, use the [documentation](https://
 
 # Directory structure
 ```
-soonr
+projet_annuel
 ├── h2-proxy
 │   └── conf.d
 ├── helm

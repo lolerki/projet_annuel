@@ -35,7 +35,8 @@ class EventType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image de présentation'
+                'label' => 'Image de présentation',
+                'required' => false
             ])
             ->add('title', TextType::class, [
                 'label' => 'Titre de l\'évenement *',
@@ -100,7 +101,10 @@ class EventType extends AbstractType
                 )
             ])
             ->add('tags', TagsInputType::class, [
-                'label' => 'label.tags',
+                'label' => 'Type d\'événement',
+                'attr' => [
+                    'placeholder' => 'Musique, Théâtre, Cinéma, Danse'
+                ],
                 'required' => false,
             ])
         ;

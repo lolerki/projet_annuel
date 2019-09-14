@@ -2,9 +2,69 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="label.picture">
+                <source>label.picture</source>
+                <target>Profile picture</target>
+            </trans-unit>
+            <trans-unit id="paypal">
+                <source>paypal</source>
+                <target>Link paypal</target>
+            </trans-unit>
+            <trans-unit id="profile">
+                <source>profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="security">
+                <source>security</source>
+                <target>Security parameter</target>
+            </trans-unit>
+            <trans-unit id="next">
+                <source>next</source>
+                <target>Next</target>
+            </trans-unit>
+            <trans-unit id="previous">
+                <source>previous</source>
+                <target>Previous</target>
+            </trans-unit>
+            <trans-unit id="event.new">
+                <source>event.new</source>
+                <target>New events</target>
+            </trans-unit>
+            <trans-unit id="event.next">
+                <source>event.next</source>
+                <target>Future event</target>
+            </trans-unit>
+            <trans-unit id="event.list">
+                <source>event.list</source>
+                <target>Events list</target>
+            </trans-unit>
+            <trans-unit id="menu.dashboard">
+                <source>menu.dashboard</source>
+                <target>Dashboard</target>
+            </trans-unit>
+            <trans-unit id="menu.profile">
+                <source>menu.profile</source>
+                <target>View my profile</target>
+            </trans-unit>
+            <trans-unit id="event.create">
+                <source>event.create</source>
+                <target>Create an event</target>
+            </trans-unit>
             <trans-unit id="about">
                  <source>about</source>
                  <target>About</target>
+            </trans-unit>
+            <trans-unit id="legal">
+                <source>legal</source>
+                <target>Legal mention</target>
+            </trans-unit>
+            <trans-unit id="event">
+                <source>event</source>
+                <target>Event</target>
+            </trans-unit>
+            <trans-unit id="help">
+                <source>help</source>
+                <target>Help</target>
             </trans-unit>
             <trans-unit id="bookingdj">
                  <source>bookingdj</source>
